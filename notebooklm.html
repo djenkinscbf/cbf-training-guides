@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NotebookLM – CBF Staff Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Outfit', sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: #1F4A94; padding: 0; position: relative; overflow: hidden; }
+  .header-inner { padding: 36px 48px 0 48px; position: relative; z-index: 2; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+  .header-brand { display: flex; flex-direction: column; }
+  .header-org { color: #fff; font-size: 18px; font-weight: 800; line-height: 1.2; }
+  .header-org span { color: #F5BD29; }
+  .header-org-sub { color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .badge-app { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .header-title { color: #fff; font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
+  .header-title span { color: #F5BD29; }
+  .header-sub { color: rgba(255,255,255,0.82); font-size: 16px; font-weight: 400; max-width: 560px; line-height: 1.6; padding-bottom: 36px; }
+  .wave-footer { width: 100%; display: block; line-height: 0; }
+  .nav-strip { background: #fff; border-bottom: 1px solid #e0e6ef; padding: 0 48px; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+  .nav-strip a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; padding: 14px 18px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+  .nav-strip a:hover { color: #1F4A94; border-bottom-color: #1F4A94; }
+  .main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section-tag { display: inline-block; background: #e8f0fb; color: #1F4A94; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+  .section-title { font-size: 26px; font-weight: 800; color: #1F4A94; margin-bottom: 6px; }
+  .section-lead { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 28px; max-width: 640px; }
+  .section-divider { border: none; border-top: 1.5px solid #e0e6ef; margin: 48px 0; }
+  .overview-card { background: #1F4A94; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; gap: 32px; align-items: flex-start; margin-bottom: 36px; }
+  .overview-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .overview-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .overview-text p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.88); }
+  .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .fact-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; border-left: 4px solid #1F4A94; min-width: 0; }
+  .fact-card.green { border-left-color: #418344; }
+  .fact-card.teal { border-left-color: #0EBBB9; }
+  .fact-card.gold { border-left-color: #F5BD29; }
+  .fact-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 6px; }
+  .fact-value { font-size: 14px; font-weight: 600; color: #1F4A94; line-height: 1.45; word-break: break-word; }
+  .fact-card.green .fact-value { color: #418344; }
+  .fact-card.teal .fact-value { color: #0a9997; }
+  .fact-card.gold .fact-value { color: #b88a1a; }
+  .task-block { background: #fff; border: 1px solid #e0e6ef; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+  .task-header { background: #f0f4fb; padding: 18px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e0e6ef; }
+  .task-num { width: 32px; height: 32px; background: #1F4A94; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .task-title { font-size: 16px; font-weight: 700; color: #1a1a1a; flex: 1; }
+  .task-body { padding: 24px; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .step-item { display: flex; gap: 14px; align-items: flex-start; }
+  .step-dot { width: 24px; height: 24px; background: #e8f0fb; color: #1F4A94; font-size: 12px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; line-height: 1.6; color: #333; }
+  .step-text strong { color: #1F4A94; font-weight: 600; }
+  .step-text code { background: #e8f0fb; color: #1F4A94; font-family: monospace; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .note-box { background: #fffbea; border: 1px solid #f5bd29; border-left: 4px solid #F5BD29; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a5c00; line-height: 1.6; }
+  .note-box strong { color: #5a4300; }
+  .alert-box { background: #fff0f0; border: 1px solid #f5a0a0; border-left: 4px solid #e03c3c; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a1a1a; line-height: 1.6; }
+  .alert-box strong { color: #5a0000; }
+  .success-box { background: #f2f8f2; border: 1px solid #a0d5a0; border-left: 4px solid #418344; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #1a4a1a; line-height: 1.6; }
+  .info-box { background: #e8f0fb; border: 1px solid #a0bce0; border-left: 4px solid #1F4A94; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #0a2255; line-height: 1.6; }
+  .path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+  .path-step { background: #e8f0fb; color: #1F4A94; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+  .path-arrow { color: #aaa; font-size: 14px; }
+  .use-cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 32px; }
+  .use-case-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 18px; display: flex; gap: 12px; align-items: flex-start; }
+  .use-case-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+  .use-case-card h4 { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+  .use-case-card p { font-size: 12px; color: #666; line-height: 1.5; }
+  .workflow { display: flex; flex-direction: column; gap: 0; margin: 16px 0; }
+  .workflow-step { display: flex; gap: 16px; align-items: flex-start; padding: 16px; border: 1px solid #e0e6ef; border-bottom: none; background: #fff; }
+  .workflow-step:first-child { border-radius: 12px 12px 0 0; }
+  .workflow-step:last-child { border-radius: 0 0 12px 12px; border-bottom: 1px solid #e0e6ef; }
+  .workflow-num { width: 28px; height: 28px; background: #1F4A94; color: #fff; font-size: 13px; font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .workflow-content h4 { font-size: 14px; font-weight: 700; color: #1F4A94; margin-bottom: 4px; }
+  .workflow-content p { font-size: 13px; color: #555; line-height: 1.6; }
+  .prompt-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin-top: 16px; }
+  .prompt-card { background: #f0f4fb; border: 1px solid #c8d5ea; border-radius: 12px; padding: 16px; }
+  .prompt-category { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #888; margin-bottom: 8px; }
+  .prompt-text { font-size: 13px; color: #1F4A94; font-style: italic; line-height: 1.6; font-weight: 500; }
+  .prompt-text::before { content: '"'; }
+  .prompt-text::after { content: '"'; }
+  .lang-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 16px 0; }
+  .lang-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 10px; padding: 14px; text-align: center; }
+  .lang-flag { font-size: 24px; margin-bottom: 6px; }
+  .lang-name { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; }
+  .lang-note { font-size: 11px; color: #666; }
+  .notebook-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 16px 0; }
+  .notebook-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 18px; border-top: 3px solid #1F4A94; }
+  .notebook-card.green { border-top-color: #418344; }
+  .notebook-card.teal { border-top-color: #0EBBB9; }
+  .notebook-card.gold { border-top-color: #F5BD29; }
+  .notebook-title { font-size: 14px; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; }
+  .notebook-desc { font-size: 12px; color: #555; line-height: 1.5; }
+  .notebook-sources { font-size: 11px; color: #888; margin-top: 8px; font-style: italic; }
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 12px; }
+  .tip-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; }
+  .tip-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; font-size: 18px; }
+  .tip-icon.blue { background: #e8f0fb; }
+  .tip-icon.green { background: #e8f5e8; }
+  .tip-icon.gold { background: #fef7e0; }
+  .tip-icon.teal { background: #e0f7f7; }
+  .tip-card h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; color: #555; line-height: 1.6; }
+  .contact-card { background: #1F4A94; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .contact-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .contact-card p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.6; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link { background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.3); text-align: center; white-space: nowrap; }
+  .page-footer { background: #1F4A94; padding: 0; margin-top: 80px; }
+  .wave-top { width: 100%; display: block; line-height: 0; }
+  .footer-inner { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { color: #fff; font-size: 15px; font-weight: 800; }
+  .footer-brand span { color: #F5BD29; }
+  .footer-text { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 3px; }
+  .footer-series { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500; }
+  .footer-series span { color: #F5BD29; }
+  @media (max-width: 640px) {
+    .header-inner { padding: 24px 20px 0; }
+    .header-title { font-size: 28px; }
+    .main { padding: 32px 16px 60px; }
+    .nav-strip { padding: 0 16px; }
+    .overview-card { flex-direction: column; padding: 24px; }
+    .footer-inner { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="header-org">Caribbean <span>Biodiversity</span> Fund</div>
+        <div class="header-org-sub">Staff Training Series</div>
+      </div>
+      <span class="badge-app">Google Workspace</span>
+    </div>
+    <div class="header-title">NotebookLM <span>at CBF</span></div>
+    <div class="header-sub">Your complete guide to using Google's AI-powered research tool at CBF — from reviewing grantee reports to synthesising project documentation across multiple languages.</div>
+  </div>
+  <svg class="wave-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,65 480,15 720,40 C960,65 1200,15 1440,40 L1440,60 L0,60 Z" fill="#f5f7fa"/>
+  </svg>
+</div>
+
+<nav class="nav-strip">
+  <a href="#overview">Overview</a>
+  <a href="#access">Access</a>
+  <a href="#notebooks">Notebooks</a>
+  <a href="#sources">Adding Sources</a>
+  <a href="#querying">Querying</a>
+  <a href="#workflows">CBF Workflows</a>
+  <a href="#multilingual">Multilingual</a>
+  <a href="#audio">Audio Overview</a>
+  <a href="#tips">Tips</a>
+  <a href="#support">Support</a>
+</nav>
+
+<div class="main">
+
+  <section id="overview">
+    <div class="section-tag">Overview</div>
+    <h2 class="section-title">What is NotebookLM?</h2>
+    <p class="section-lead">NotebookLM is a free AI-powered research and synthesis tool from Google. It lets you upload documents — reports, PDFs, papers, meeting notes — and then ask questions, request summaries, and extract insights directly from your own source material. Unlike general AI tools, NotebookLM only answers from the documents you upload, making it highly reliable for document-heavy work like CBF's grantee report reviews.</p>
+
+    <div class="overview-card">
+      <div class="overview-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <div class="overview-text">
+        <h3>How CBF uses NotebookLM</h3>
+        <p>CBF staff use NotebookLM primarily to review grantee and project reports — uploading PDFs and asking analytical questions to extract key findings, flag gaps, and prepare for review meetings. It works across multiple languages, which is particularly valuable for CBF's Caribbean-wide portfolio where reports arrive in English, Spanish, and French. Documents must be in PDF format before uploading — this is the only preparation step required.</p>
+      </div>
+    </div>
+
+    <div class="use-cases">
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#e8f0fb;">📋</div>
+        <div><h4>Grantee report review</h4><p>Upload a grantee report and ask targeted questions about progress, indicators, and budget use</p></div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#e8f5e8;">📊</div>
+        <div><h4>Multi-document synthesis</h4><p>Load multiple project reports and ask NotebookLM to compare findings or identify common themes across them</p></div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#e0f7f7;">📅</div>
+        <div><h4>Meeting preparation</h4><p>Load board papers or project files before a meeting to generate summaries, key questions, and talking points</p></div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#fef7e0;">✍️</div>
+        <div><h4>Report drafting support</h4><p>Pull key findings and data points from source documents to inform and accelerate report writing</p></div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#fde8db;">🌍</div>
+        <div><h4>Multilingual analysis</h4><p>Ask questions in Spanish or French about documents in any language — ideal for CBF's regional portfolio</p></div>
+      </div>
+    </div>
+
+    <div class="facts-grid">
+      <div class="fact-card">
+        <div class="fact-label">Platform</div>
+        <div class="fact-value">notebooklm.google.com</div>
+      </div>
+      <div class="fact-card green">
+        <div class="fact-label">Cost</div>
+        <div class="fact-value">Free with your CBF Google account</div>
+      </div>
+      <div class="fact-card teal">
+        <div class="fact-label">Sources per notebook</div>
+        <div class="fact-value">Up to 50 sources per notebook</div>
+      </div>
+      <div class="fact-card gold">
+        <div class="fact-label">File requirement</div>
+        <div class="fact-value">Documents must be in PDF format</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="access">
+    <div class="section-tag">Getting Started</div>
+    <h2 class="section-title">Accessing NotebookLM</h2>
+    <p class="section-lead">NotebookLM is free and accessible directly through your CBF Google account — no separate installation or subscription needed.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">1</div><div class="task-title">Sign in to NotebookLM</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Go to <strong>notebooklm.google.com</strong> in any browser</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Sign in with your <strong>CBF Google account</strong> — use your <code>firstnameinitiallastname@caribbeanbiodiversityfund.org</code> address</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Your NotebookLM home screen shows all your notebooks — each notebook is a separate workspace containing its own set of documents and conversation history</div></li>
+        </ol>
+        <div class="note-box"><strong>Use your CBF account, not personal:</strong> Always access NotebookLM through your CBF Google account. This keeps CBF documents and analysis within the organisation's account ecosystem and ensures documents are not mixed with personal material.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">2</div><div class="task-title">Convert documents to PDF before uploading</div></div>
+      <div class="task-body">
+        <p style="font-size:14px;color:#555;line-height:1.6;margin-bottom:14px;">NotebookLM requires documents to be in PDF format. This is the one preparation step before you can begin. Here is how to convert from the most common formats CBF staff encounter:</p>
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text"><strong>From Google Docs:</strong> File → Download → PDF Document (.pdf)</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text"><strong>From Google Sheets or Slides:</strong> File → Download → PDF Document (.pdf)</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text"><strong>From Microsoft Word (.docx):</strong> File → Save As → PDF, or open in Google Docs and then download as PDF</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text"><strong>Already a PDF:</strong> No conversion needed — upload directly</div></li>
+        </ol>
+        <div class="info-box"><strong>Most grantee reports arrive as PDFs</strong> and can be uploaded directly without any conversion. For internal CBF documents in Google Docs format, the conversion takes under 30 seconds via File → Download → PDF.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="notebooks">
+    <div class="section-tag">Core Concepts</div>
+    <h2 class="section-title">Creating and organising notebooks</h2>
+    <p class="section-lead">A notebook is a self-contained workspace. Each notebook holds its own set of uploaded documents and its own conversation history. Think of each notebook as a dedicated research space for a specific project, report cycle, or topic area.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">3</div><div class="task-title">Create a new notebook</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">On the NotebookLM home screen, click <strong>+ New Notebook</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Give the notebook a clear, descriptive name — for example: <code>EbA_Facility_AnnualReports_2026</code> or <code>MarineConservation_GranteeReviews_Q2</code></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">The notebook opens ready for you to add sources. You will see an empty sources panel on the left and a chat panel on the right</div></li>
+        </ol>
+        <div class="note-box"><strong>Name notebooks clearly:</strong> You may build up many notebooks over time across different programmes and cycles. Including the programme area, report type, and year in the notebook name makes them easy to find and distinguishes between cycles.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;">
+      <div class="section-tag" style="margin-bottom:14px;">Suggested notebook types for CBF</div>
+      <div class="notebook-grid">
+        <div class="notebook-card">
+          <div class="notebook-title">Grantee report review</div>
+          <div class="notebook-desc">One notebook per grantee or reporting cycle. Upload all reports for that grantee to review progress and compare across periods.</div>
+          <div class="notebook-sources">Sources: Annual reports, progress reports, financial summaries</div>
+        </div>
+        <div class="notebook-card green">
+          <div class="notebook-title">Programme area research</div>
+          <div class="notebook-desc">Load scientific papers, policy documents, and CBF reports for a programme area — marine, terrestrial, climate resilience, or SIDS.</div>
+          <div class="notebook-sources">Sources: Research papers, CBF strategy docs, IUCN reports, CBD publications</div>
+        </div>
+        <div class="notebook-card teal">
+          <div class="notebook-title">Board meeting preparation</div>
+          <div class="notebook-desc">Upload board papers before each meeting to generate concise summaries, identify key decisions, and prepare informed questions.</div>
+          <div class="notebook-sources">Sources: Board pack PDFs, previous minutes, financial reports, programme updates</div>
+        </div>
+        <div class="notebook-card gold">
+          <div class="notebook-title">Project documentation</div>
+          <div class="notebook-desc">Centralise all documents for an active project — proposals, workplans, progress reports — and query across the full project history.</div>
+          <div class="notebook-sources">Sources: Project proposals, M&E reports, workplans, site visit notes</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="sources">
+    <div class="section-tag">Core Tasks</div>
+    <h2 class="section-title">Adding sources to a notebook</h2>
+    <p class="section-lead">Sources are the documents NotebookLM reads and reasons from. It will only answer questions based on what is in your sources — it does not draw on outside knowledge. This makes it highly reliable and accurate for CBF's specific documents.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">4</div><div class="task-title">Upload PDF documents</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Inside a notebook, click <strong>+ Add source</strong> in the Sources panel on the left</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Select <strong>Upload</strong> → choose your PDF file(s) from your computer or Google Drive. You can upload multiple PDFs at once</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">NotebookLM processes each document — this takes a few seconds to a minute depending on file size. A green tick appears when the source is ready</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Each source appears by filename in the Sources panel. Click any source to view an auto-generated summary NotebookLM has created from it</div></li>
+        </ol>
+        <div class="info-box"><strong>Source limit:</strong> Each notebook can hold up to 50 sources. For CBF's typical grantee review workflows — a handful of reports per cycle — you will rarely approach this limit. For large multi-country programme reviews, consider separate notebooks per region or funding cycle.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">5</div><div class="task-title">Add sources from Google Drive or web links</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>+ Add source</strong> → select <strong>Google Drive</strong> to browse and import files directly from your CBF Shared Drive — the most efficient route for reports already stored in Drive</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Select <strong>Link (URL)</strong> to add a public webpage as a source — useful for published research papers, IUCN resources, CBD reports, or CBF's own website content</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Select <strong>Copied text</strong> to paste text directly — useful for meeting notes, email summaries, or excerpts not available as a file</div></li>
+        </ol>
+        <div class="note-box"><strong>Import directly from Google Drive:</strong> Reports stored in CBF's Shared Drive can be added to NotebookLM without downloading and re-uploading. Browse to the file, select it, and it is added as a source instantly — saving time especially when working with large report libraries.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="querying">
+    <div class="section-tag">Core Tasks</div>
+    <h2 class="section-title">Querying your documents</h2>
+    <p class="section-lead">Once your sources are loaded, ask NotebookLM questions in plain language — as if consulting a knowledgeable colleague who has thoroughly read every document in the notebook. Every answer includes citations linking back to the exact source and page.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">6</div><div class="task-title">Ask questions in the chat</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Type your question in the <strong>chat panel</strong> on the right side of the notebook and press Enter</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">NotebookLM responds with an answer drawn exclusively from your uploaded sources. Every response includes <strong>inline citations</strong> — click any citation to jump directly to the relevant passage in the source document</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Ask follow-up questions to dig deeper — NotebookLM maintains the context of your conversation throughout the session</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To start a fresh line of questioning: click <strong>New conversation</strong> at the top of the chat panel. Previous conversations are saved and accessible</div></li>
+        </ol>
+        <div class="success-box"><strong>Citations are the key advantage:</strong> Unlike general AI tools, NotebookLM tells you exactly where every piece of information comes from — which document, which section. This makes it trustworthy for professional use at CBF, where accuracy and accountability in reporting matter.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">7</div><div class="task-title">Effective questions for CBF report reviews</div></div>
+      <div class="task-body">
+        <p style="font-size:14px;color:#555;line-height:1.6;margin-bottom:14px;">The quality of your questions determines the quality of the output. These question patterns are tailored to CBF's most common document review scenarios:</p>
+        <div class="prompt-grid">
+          <div class="prompt-card">
+            <div class="prompt-category">Progress & results</div>
+            <div class="prompt-text">What key results has the grantee reported against their targets? Are there any indicators that are off track?</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-category">Financial review</div>
+            <div class="prompt-text">Summarise the budget expenditure reported. Are there any significant variances between planned and actual spend?</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-category">Challenges & risks</div>
+            <div class="prompt-text">What challenges or risks has the grantee identified? What mitigation actions have they taken or proposed?</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-category">Cross-report comparison</div>
+            <div class="prompt-text">Compare the progress reported in the Year 1 and Year 2 reports. What has improved and what concerns remain?</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-category">Meeting preparation</div>
+            <div class="prompt-text">Based on these reports, generate 5 questions I should ask the grantee in our upcoming review meeting.</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-category">Executive summary</div>
+            <div class="prompt-text">Write a concise 3-paragraph summary of this report suitable for sharing with CBF senior management.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">8</div><div class="task-title">Save important responses to notes</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">When NotebookLM gives a useful response, click the <strong>Save to note</strong> button (bookmark icon) on the response — this saves it to the Notes panel</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Notes accumulate in the <strong>Notes panel</strong> — they are preserved between sessions and can be edited, formatted, and reorganised freely</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To compile your notes into a structured document: click <strong>Synthesise notes</strong> — NotebookLM weaves your saved notes into a coherent draft you can copy directly into Google Docs</div></li>
+        </ol>
+        <div class="info-box"><strong>Build your review document as you go:</strong> Save key findings, financial observations, and flagged concerns as notes throughout your review session. At the end, use Synthesise notes to generate a structured review document — significantly faster than writing from scratch after reading a long report.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="workflows">
+    <div class="section-tag">CBF Workflows</div>
+    <h2 class="section-title">Step-by-step: Reviewing a grantee report</h2>
+    <p class="section-lead">This is CBF's primary NotebookLM workflow — already in use by programme staff for reviewing grantee and project reports. Follow these steps for any structured report review.</p>
+
+    <div class="workflow">
+      <div class="workflow-step">
+        <div class="workflow-num">1</div>
+        <div class="workflow-content">
+          <h4>Prepare your PDF</h4>
+          <p>If the grantee report is not already a PDF, convert it first. In Google Docs: File → Download → PDF. For Word documents: open in Google Docs → download as PDF. Most grantee reports arrive as PDFs and can be uploaded directly without any conversion.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">2</div>
+        <div class="workflow-content">
+          <h4>Create a dedicated notebook</h4>
+          <p>Go to notebooklm.google.com → New Notebook. Name it clearly — for example: <em>EbA_Facility_GranteeX_2026_Review</em>. A dedicated notebook per grantee or reporting cycle keeps your work organised and easy to return to.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">3</div>
+        <div class="workflow-content">
+          <h4>Upload the report and any supporting documents</h4>
+          <p>Add the main report PDF. Where available, also add previous reports, the logframe, workplan, or budget summary. Multiple documents allow NotebookLM to cross-reference and identify patterns across the grantee's full reporting history.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">4</div>
+        <div class="workflow-content">
+          <h4>Start with a broad summary</h4>
+          <p>Ask: <em>"Provide a structured summary of this report covering: overall progress, key achievements, budget status, challenges, and next steps."</em> This gives you a high-level orientation of the report before diving into specific areas of concern.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">5</div>
+        <div class="workflow-content">
+          <h4>Ask targeted analytical questions</h4>
+          <p>Follow up with specific questions based on CBF's review criteria — indicator performance against logframe targets, budget variances, risk flags, environmental and social safeguards, and stakeholder engagement. Save key responses as notes as you go.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">6</div>
+        <div class="workflow-content">
+          <h4>Generate follow-up questions for the grantee</h4>
+          <p>Ask: <em>"Based on this report, what are the 5 most important clarifying questions I should raise with the grantee?"</em> This is particularly useful when preparing for a review meeting, a site visit, or a written query to the grantee.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">7</div>
+        <div class="workflow-content">
+          <h4>Compile your notes into a review document</h4>
+          <p>Once your review is complete, click Synthesise notes to generate a structured review document from your saved notes. Copy it into Google Docs, refine it, and save the final version to Zoho WorkDrive as the official programme record.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="multilingual">
+    <div class="section-tag">Multilingual Capability</div>
+    <h2 class="section-title">Working across languages</h2>
+    <p class="section-lead">One of NotebookLM's most powerful features for CBF is its multilingual capability. You can upload documents in any language and ask questions in a different language — receiving answers in your preferred language. This is particularly valuable for CBF's Caribbean-wide portfolio where documents arrive in English, Spanish, and French.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">9</div><div class="task-title">Query documents across languages</div></div>
+      <div class="task-body">
+        <p style="font-size:14px;color:#555;line-height:1.6;margin-bottom:16px;">CBF staff have found this feature especially useful when reviewing reports submitted in Spanish or French — you can ask your questions in English and receive a full response in English, or ask in Spanish and receive answers in Spanish regardless of the document's original language.</p>
+
+        <div class="lang-grid">
+          <div class="lang-card">
+            <div class="lang-flag">🇬🇧</div>
+            <div class="lang-name">English</div>
+            <div class="lang-note">Upload & query</div>
+          </div>
+          <div class="lang-card">
+            <div class="lang-flag">🇪🇸</div>
+            <div class="lang-name">Spanish</div>
+            <div class="lang-note">Upload & query</div>
+          </div>
+          <div class="lang-card">
+            <div class="lang-flag">🇫🇷</div>
+            <div class="lang-name">French</div>
+            <div class="lang-note">Upload & query</div>
+          </div>
+          <div class="lang-card">
+            <div class="lang-flag">🇳🇱</div>
+            <div class="lang-name">Dutch</div>
+            <div class="lang-note">Upload supported</div>
+          </div>
+        </div>
+
+        <ol class="steps-list" style="margin-top:16px;">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Upload a document in any language — Spanish, French, English, or Dutch — as a PDF source</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Type your question in your preferred language — NotebookLM detects the language of your question and responds accordingly</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To specify a response language explicitly: add a note such as <em>"Responde en español"</em> or <em>"Veuillez répondre en français"</em> at the end of your question</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To get an English summary of a Spanish-language report: upload the Spanish PDF and ask your question in English — NotebookLM will synthesise and respond entirely in English</div></li>
+        </ol>
+
+        <div class="success-box"><strong>Why this matters for CBF:</strong> CBF works across 14 countries in the Caribbean — reports and documents arrive in English, Spanish, and French. NotebookLM removes the language barrier from document review. A Programme Officer can review a Spanish-language grantee report in English without waiting for translation, ask pointed analytical questions, and have a structured review summary ready in minutes.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="audio">
+    <div class="section-tag">Unique Feature</div>
+    <h2 class="section-title">Audio Overview — Listen to your documents</h2>
+    <p class="section-lead">NotebookLM's Audio Overview feature converts your notebook sources into a conversational audio discussion — two AI hosts discuss and explain the key content from your documents as a podcast-style summary. Useful for getting oriented in a long document before a meeting.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">10</div><div class="task-title">Generate an Audio Overview</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">With sources loaded in your notebook, click the <strong>Audio Overview</strong> button → click <strong>Generate</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">NotebookLM generates a 10–20 minute audio discussion summarising the key themes, findings, and ideas from your uploaded documents. Generation takes 1–3 minutes</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Press play to listen directly in the browser — you can also download the audio file to listen offline or on mobile during travel</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Click <strong>Customise</strong> before generating to specify what aspects to focus on or what audience the summary is for — for example, focusing on financial performance or environmental outcomes</div></li>
+        </ol>
+        <div class="note-box"><strong>When to use Audio Overview at CBF:</strong> Best for getting a quick orientation of a lengthy board paper or project report before a meeting, or listening to a document summary while travelling between sites. It is not a replacement for detailed review — but an excellent way to familiarise yourself with a document's key themes before going deeper.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="tips">
+    <div class="section-tag">Best Practices</div>
+    <h2 class="section-title">Tips for CBF staff</h2>
+    <p class="section-lead">Habits that make your NotebookLM sessions more productive and your outputs more reliable.</p>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon blue">📂</div>
+        <h4>One notebook per project or cycle</h4>
+        <p>Keep sources organised by creating dedicated notebooks per grantee, project, or reporting cycle. Mixing sources from different projects in one notebook makes answers less focused and harder to trace back to their origin.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon green">🔍</div>
+        <h4>Always verify citations</h4>
+        <p>Click every citation in NotebookLM's responses to verify the source passage before using the information in a report or formal communication. NotebookLM is highly accurate, but always confirm critical figures and direct quotes.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon gold">💬</div>
+        <h4>Ask specific, structured questions</h4>
+        <p>Vague questions get vague answers. Instead of "summarise this report", ask "summarise the biodiversity outcomes reported in section 3 against the targets set in the logframe". The more specific the question, the more useful the output.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon teal">📝</div>
+        <h4>Save notes throughout, not at the end</h4>
+        <p>Save useful responses as notes as you work through a review session. Use the Synthesise notes feature at the end to compile them into your review document — much faster than recalling what was covered after the fact.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon blue">🔒</div>
+        <h4>Handle sensitive documents with care</h4>
+        <p>Do not upload documents containing sensitive personal data, financial account details, or highly confidential third-party information without checking with your manager first. Standard grantee progress reports and project documents are appropriate for NotebookLM use.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon green">🌐</div>
+        <h4>Use the language feature proactively</h4>
+        <p>When you receive a Spanish or French language report, upload it to NotebookLM and begin your review immediately in English — do not wait for a translation. This can save days on regional programme reviews with multilingual grantees.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="support">
+    <div class="section-tag">Need Help?</div>
+    <h2 class="section-title">Getting support</h2>
+    <p class="section-lead">For technical access issues with NotebookLM, contact the CBF System Administrator. For workflow questions, colleagues already using the tool are a great first resource — and the Google Help Center has comprehensive documentation.</p>
+    <div class="contact-card">
+      <div>
+        <h3>Contact & Resources</h3>
+        <p>NotebookLM is free and available to all CBF staff through your Google account. For access issues or questions about appropriate use, reach out to the System Administrator.</p>
+      </div>
+      <div class="contact-links">
+        <a href="#" class="contact-link">System Administrator</a>
+        <a href="https://support.google.com/notebooklm" target="_blank" class="contact-link">NotebookLM Help Center ↗</a>
+        <a href="https://notebooklm.google.com" target="_blank" class="contact-link">Open NotebookLM ↗</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  <svg class="wave-top" viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1350,15 1440,20 L1440,40 L0,40 Z" fill="#1F4A94"/>
+  </svg>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Caribbean <span>Biodiversity</span> Fund</div>
+      <div class="footer-text">© 2026 Caribbean Biodiversity Fund. All rights reserved.</div>
+    </div>
+    <div class="footer-series">CBF Staff Training Series · <span>Google Workspace</span> · NotebookLM Guide</div>
+  </div>
+</footer>
+
+</body>
+</html>
