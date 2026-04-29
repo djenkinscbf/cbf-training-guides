@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Slides – CBF Staff Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Outfit', sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: #0EBBB9; padding: 0; position: relative; overflow: hidden; }
+  .header-inner { padding: 36px 48px 0 48px; position: relative; z-index: 2; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+  .header-brand { display: flex; flex-direction: column; }
+  .header-org { color: #fff; font-size: 18px; font-weight: 800; line-height: 1.2; }
+  .header-org span { color: #F5BD29; }
+  .header-org-sub { color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .badge-app { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .header-title { color: #fff; font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
+  .header-title span { color: #F5BD29; }
+  .header-sub { color: rgba(255,255,255,0.88); font-size: 16px; font-weight: 400; max-width: 520px; line-height: 1.6; padding-bottom: 36px; }
+  .wave-footer { width: 100%; display: block; line-height: 0; }
+  .nav-strip { background: #fff; border-bottom: 1px solid #e0e6ef; padding: 0 48px; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+  .nav-strip a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; padding: 14px 18px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+  .nav-strip a:hover { color: #0a8f8d; border-bottom-color: #0a8f8d; }
+  .main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section-tag { display: inline-block; background: #e0f7f7; color: #0a8f8d; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+  .section-title { font-size: 26px; font-weight: 800; color: #0a8f8d; margin-bottom: 6px; }
+  .section-lead { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 28px; max-width: 640px; }
+  .section-divider { border: none; border-top: 1.5px solid #e0e6ef; margin: 48px 0; }
+  .overview-card { background: #0a8f8d; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; gap: 32px; align-items: flex-start; margin-bottom: 36px; }
+  .overview-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .overview-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .overview-text p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.88); }
+  .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .fact-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; border-left: 4px solid #0EBBB9; min-width: 0; }
+  .fact-card.blue { border-left-color: #1F4A94; }
+  .fact-card.green { border-left-color: #418344; }
+  .fact-card.gold { border-left-color: #F5BD29; }
+  .fact-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 6px; }
+  .fact-value { font-size: 14px; font-weight: 600; color: #0a8f8d; line-height: 1.45; word-break: break-word; }
+  .fact-card.blue .fact-value { color: #1F4A94; }
+  .fact-card.green .fact-value { color: #418344; }
+  .fact-card.gold .fact-value { color: #b88a1a; }
+  .task-block { background: #fff; border: 1px solid #e0e6ef; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+  .task-header { background: #e8fafa; padding: 18px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e0e6ef; }
+  .task-num { width: 32px; height: 32px; background: #0EBBB9; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .task-title { font-size: 16px; font-weight: 700; color: #1a1a1a; flex: 1; }
+  .task-body { padding: 24px; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .step-item { display: flex; gap: 14px; align-items: flex-start; }
+  .step-dot { width: 24px; height: 24px; background: #e0f7f7; color: #0a8f8d; font-size: 12px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; line-height: 1.6; color: #333; }
+  .step-text strong { color: #0a8f8d; font-weight: 600; }
+  .step-text code { background: #e0f7f7; color: #0a8f8d; font-family: monospace; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .note-box { background: #fffbea; border: 1px solid #f5bd29; border-left: 4px solid #F5BD29; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a5c00; line-height: 1.6; }
+  .note-box strong { color: #5a4300; }
+  .alert-box { background: #fff0f0; border: 1px solid #f5a0a0; border-left: 4px solid #e03c3c; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a1a1a; line-height: 1.6; }
+  .alert-box strong { color: #5a0000; }
+  .success-box { background: #f2f8f2; border: 1px solid #a0d5a0; border-left: 4px solid #418344; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #1a4a1a; line-height: 1.6; }
+  .info-box { background: #e0f7f7; border: 1px solid #a0d8d7; border-left: 4px solid #0EBBB9; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #0a5555; line-height: 1.6; }
+  .brand-box { background: #e8f0fb; border: 2px solid #1F4A94; border-radius: 12px; padding: 18px 20px; margin-top: 16px; font-size: 13px; color: #0a2255; line-height: 1.6; }
+  .brand-box strong { color: #1F4A94; display: block; margin-bottom: 6px; font-size: 14px; }
+  .path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+  .path-step { background: #e0f7f7; color: #0a8f8d; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+  .path-arrow { color: #aaa; font-size: 14px; }
+
+  /* BRAND COLOUR SWATCHES */
+  .colour-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; }
+  .swatch { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .swatch-circle { width: 44px; height: 44px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.08); }
+  .swatch-name { font-size: 10px; font-weight: 700; color: #555; text-align: center; line-height: 1.3; }
+  .swatch-hex { font-size: 10px; color: #888; font-family: monospace; }
+
+  /* SLIDE ANATOMY */
+  .slide-anatomy { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 16px 0; }
+  .anatomy-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 18px; border-top: 3px solid #0EBBB9; }
+  .anatomy-card.blue-t { border-top-color: #1F4A94; }
+  .anatomy-card.green-t { border-top-color: #418344; }
+  .anatomy-card.gold-t { border-top-color: #F5BD29; }
+  .anatomy-title { font-size: 14px; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; }
+  .anatomy-rule { font-size: 12px; color: #555; line-height: 1.6; }
+  .anatomy-rule strong { color: #0a8f8d; }
+  .anatomy-card.blue-t .anatomy-rule strong { color: #1F4A94; }
+  .anatomy-card.green-t .anatomy-rule strong { color: #418344; }
+  .anatomy-card.gold-t .anatomy-rule strong { color: #b88a1a; }
+
+  /* DO / DON'T */
+  .do-dont-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .do-card { background: #f2f8f2; border: 1.5px solid #418344; border-radius: 12px; padding: 18px; }
+  .dont-card { background: #fff0f0; border: 1.5px solid #e03c3c; border-radius: 12px; padding: 18px; }
+  .do-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #418344; margin-bottom: 10px; }
+  .dont-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #e03c3c; margin-bottom: 10px; }
+  .do-item { display: flex; gap: 8px; font-size: 13px; color: #333; line-height: 1.5; margin-bottom: 7px; }
+  .do-item:last-child { margin-bottom: 0; }
+  .do-item .icon { color: #418344; flex-shrink: 0; }
+  .do-item .icon.red { color: #e03c3c; }
+
+  /* SHORTCUTS */
+  .shortcuts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 14px; }
+  .shortcut-item { background: #fff; border: 1px solid #e0e6ef; border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .shortcut-action { font-size: 13px; color: #333; }
+  .shortcut-keys { display: flex; gap: 4px; flex-shrink: 0; }
+  .kbd { background: #e0f7f7; border: 1px solid #a0d8d7; border-bottom: 2px solid #80c0bf; color: #0a8f8d; font-family: monospace; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 12px; }
+  .tip-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; }
+  .tip-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .tip-icon.teal { background: #e0f7f7; }
+  .tip-icon.blue { background: #e8f0fb; }
+  .tip-icon.green { background: #e8f5e8; }
+  .tip-icon.gold { background: #fef7e0; }
+  .tip-card h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; color: #555; line-height: 1.6; }
+
+  .contact-card { background: #0a8f8d; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .contact-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .contact-card p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.6; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link { background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.3); text-align: center; white-space: nowrap; }
+  .page-footer { background: #0a8f8d; padding: 0; margin-top: 80px; }
+  .wave-top { width: 100%; display: block; line-height: 0; }
+  .footer-inner { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { color: #fff; font-size: 15px; font-weight: 800; }
+  .footer-brand span { color: #F5BD29; }
+  .footer-text { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 3px; }
+  .footer-series { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500; }
+  .footer-series span { color: #F5BD29; }
+  @media (max-width: 640px) {
+    .header-inner { padding: 24px 20px 0; }
+    .header-title { font-size: 28px; }
+    .main { padding: 32px 16px 60px; }
+    .nav-strip { padding: 0 16px; }
+    .overview-card { flex-direction: column; padding: 24px; }
+    .do-dont-grid { grid-template-columns: 1fr; }
+    .footer-inner { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="header-org">Caribbean <span>Biodiversity</span> Fund</div>
+        <div class="header-org-sub">Staff Training Series</div>
+      </div>
+      <span class="badge-app">Google Workspace</span>
+    </div>
+    <div class="header-title">Google Slides <span>at CBF</span></div>
+    <div class="header-sub">Your complete guide to building on-brand presentations at CBF — from structuring a slide deck to presenting to partners, donors, and the board.</div>
+  </div>
+  <svg class="wave-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,65 480,15 720,40 C960,65 1200,15 1440,40 L1440,60 L0,60 Z" fill="#f5f7fa"/>
+  </svg>
+</div>
+
+<nav class="nav-strip">
+  <a href="#overview">Overview</a>
+  <a href="#creating">Creating</a>
+  <a href="#brand">CBF Branding</a>
+  <a href="#building">Building Slides</a>
+  <a href="#visuals">Visuals & Charts</a>
+  <a href="#animations">Animations</a>
+  <a href="#presenting">Presenting</a>
+  <a href="#collaboration">Collaboration</a>
+  <a href="#exporting">Exporting</a>
+  <a href="#shortcuts">Shortcuts</a>
+  <a href="#tips">Tips</a>
+  <a href="#support">Support</a>
+</nav>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <div class="section-tag">Overview</div>
+    <h2 class="section-title">What is Google Slides?</h2>
+    <p class="section-lead">Google Slides is CBF's tool for creating presentations — from internal project updates and team briefings to external donor reports, board presentations, and partner workshops. Every CBF presentation should reflect the organisation's brand identity consistently.</p>
+
+    <div class="overview-card">
+      <div class="overview-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="overview-text">
+        <h3>How CBF uses Google Slides</h3>
+        <p>Slides is used for board meetings and governance presentations, donor and partner briefings, project launch and close-out presentations, training sessions and workshops, and all-staff communications. CBF has an official PowerPoint template that can be imported into Google Slides — always start from the CBF template, not a blank slide or a generic Google theme.</p>
+      </div>
+    </div>
+
+    <div class="facts-grid">
+      <div class="fact-card">
+        <div class="fact-label">Platform</div>
+        <div class="fact-value">Google Slides (Workspace)</div>
+      </div>
+      <div class="fact-card blue">
+        <div class="fact-label">Template</div>
+        <div class="fact-value">CBF PowerPoint template — import into Slides</div>
+      </div>
+      <div class="fact-card green">
+        <div class="fact-label">Integration</div>
+        <div class="fact-value">Embed live charts from Google Sheets</div>
+      </div>
+      <div class="fact-card gold">
+        <div class="fact-label">Export</div>
+        <div class="fact-value">PDF, PPTX, or present directly in browser</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- CREATING -->
+  <section id="creating">
+    <div class="section-tag">Getting Started</div>
+    <h2 class="section-title">Creating a new presentation</h2>
+    <p class="section-lead">Always start from the CBF template. This ensures every presentation is on-brand from the first slide and saves significant formatting time.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">1</div><div class="task-title">Start from the CBF template</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Locate the <strong>CBF PowerPoint Template (.pptx)</strong> in the team's Shared Drive — it is stored in the CBF Brand Assets folder. Ask your manager or the Communications team if you cannot find it</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Right-click the template file → <strong>Open with → Google Slides</strong>. This opens it in Slides format while preserving all layouts and branding</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Immediately click <strong>File → Make a copy</strong> and rename your copy — example: <code>2026_BoardMeeting_Q2Update_DRAFT</code>. Move it to the correct project folder in Shared Drive</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Never edit the original template file. Always work from a copy</div></li>
+        </ol>
+        <div class="alert-box"><strong>Template first, always:</strong> Creating a presentation from a blank Google Slide or a generic theme produces an off-brand result. Every CBF presentation that leaves the organisation — to donors, partners, or the board — must use the CBF template. No exceptions.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">2</div><div class="task-title">Navigate the Slides interface</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">The <strong>slide panel</strong> on the left shows thumbnail previews of all slides — click any thumbnail to jump to that slide</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">The <strong>editing canvas</strong> in the centre is where you work on the selected slide</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">The <strong>toolbar</strong> at the top contains formatting options — text, shapes, images, lines, and more</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Right-click anywhere in the slide panel to <strong>add, duplicate, delete, or reorder slides</strong></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- CBF BRANDING -->
+  <section id="brand">
+    <div class="section-tag">CBF Brand Standards</div>
+    <h2 class="section-title">Applying CBF branding in Slides</h2>
+    <p class="section-lead">Every CBF presentation communicates the organisation's identity to its audience. Consistent, correct use of brand elements — colours, fonts, logo, and motifs — is not optional. It reflects CBF's credibility and professionalism.</p>
+
+    <!-- COLOURS -->
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">3</div><div class="task-title">Use the correct CBF colours</div></div>
+      <div class="task-body">
+        <p style="font-size:14px;color:#555;margin-bottom:14px;">Apply CBF's colour palette using the 60-30-10 rule: 60% primary colours (blue/green), 30% neutrals (white/grey), 10% accent colours (saffron, teal, persimmon, raspberry).</p>
+
+        <div style="margin-bottom:16px;">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:10px;">Primary colours — 60% of slide design</div>
+          <div class="colour-row">
+            <div class="swatch"><div class="swatch-circle" style="background:#1F4A94;"></div><div class="swatch-name">Dark Cornflower Blue</div><div class="swatch-hex">#1F4A94</div></div>
+            <div class="swatch"><div class="swatch-circle" style="background:#418344;"></div><div class="swatch-name">Fern Green</div><div class="swatch-hex">#418344</div></div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:10px;">Neutral colours — 30% of slide design</div>
+          <div class="colour-row">
+            <div class="swatch"><div class="swatch-circle" style="background:#333333;border-color:#555;"></div><div class="swatch-name">Dark Charcoal</div><div class="swatch-hex">#333333</div></div>
+            <div class="swatch"><div class="swatch-circle" style="background:#E6E6E6;"></div><div class="swatch-name">Platinum</div><div class="swatch-hex">#E6E6E6</div></div>
+            <div class="swatch"><div class="swatch-circle" style="background:#ffffff;"></div><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:10px;">Accent colours — 10% of slide design (highlights, tags, CTAs only)</div>
+          <div class="colour-row">
+            <div class="swatch"><div class="swatch-circle" style="background:#F5BD29;"></div><div class="swatch-name">Saffron</div><div class="swatch-hex">#F5BD29</div></div>
+            <div class="swatch"><div class="swatch-circle" style="background:#F45C02;"></div><div class="swatch-name">Persimmon</div><div class="swatch-hex">#F45C02</div></div>
+            <div class="swatch"><div class="swatch-circle" style="background:#0EBBB9;"></div><div class="swatch-name">Tiffany Blue</div><div class="swatch-hex">#0EBBB9</div></div>
+            <div class="swatch"><div class="swatch-circle" style="background:#FF126A;"></div><div class="swatch-name">Vivid Raspberry</div><div class="swatch-hex">#FF126A</div></div>
+          </div>
+        </div>
+
+        <div class="brand-box" style="margin-top:16px;">
+          <strong>Adding CBF colours to Google Slides</strong>
+          When selecting a fill or font colour in Slides, click <strong>Custom</strong> at the bottom of the colour picker and enter the HEX code directly (e.g. #1F4A94). Save custom colours to your palette for faster access on future slides.
+        </div>
+        <div class="alert-box"><strong>Never create unofficial colour variations:</strong> Do not use lighter or darker tints of CBF colours, or mix in non-brand colours. The hex codes above are the only approved values. This rule applies to all CBF presentations regardless of audience.</div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">4</div><div class="task-title">Use correct CBF typography</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">CBF's official typeface is <strong>Outfit</strong>. Use <strong>Outfit ExtraBold</strong> for slide titles and section headers, and <strong>Outfit Light or Regular</strong> for body text and captions</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">To install Outfit in Google Slides: click the font name dropdown in the toolbar → click <strong>More fonts</strong> → search "Outfit" → click it to add it to your font list</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">If Outfit is unavailable on a specific device, use <strong>Arial</strong> as the substitute — it is the approved fallback per the CBF Brand Toolkit</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Keep text concise — <strong>maximum 8–10 words per line</strong> on a slide. Slides are not documents. If you need more text, split it across two slides</div></li>
+        </ol>
+        <div class="note-box"><strong>Typography hierarchy for slides:</strong> H1 (slide title): 36–44px ExtraBold · H2 (section header): 28–32px Bold · Body text: 18–20px Regular or Light · Captions/labels: 14–16px Regular. Scale down slightly for dense content slides.</div>
+      </div>
+    </div>
+
+    <!-- LOGO -->
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">5</div><div class="task-title">Logo placement and usage rules</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">The CBF logo must appear on the <strong>cover slide</strong> and the <strong>closing/contact slide</strong> at minimum. It may also appear on section divider slides</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Place the logo in a <strong>clear area</strong> — always on a solid background. If the background is dark (navy or green), use the <strong>white version</strong> of the logo. On light backgrounds, use the full-colour version</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Maintain clear space around the logo equal to the width of the letter "C" in the CBF wordmark. Do not crowd it with text or other elements</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Never stretch, rotate, recolour, or recreate the logo. Always use the official logo files from the CBF Brand Assets folder in Shared Drive</div></li>
+        </ol>
+        <div class="success-box"><strong>Logo on every content slide is not required:</strong> The CBF template places the logo on key slides. You do not need the logo on every single content slide — that clutters the layout. The template handles logo placement correctly — trust it.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- BUILDING SLIDES -->
+  <section id="building">
+    <div class="section-tag">Slide Design</div>
+    <h2 class="section-title">Building effective slides</h2>
+    <p class="section-lead">A CBF presentation should be visual, clear, and structured. Slides support what you say — they do not replace it. Less text, more impact.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">6</div><div class="task-title">Structure your slide deck</div></div>
+      <div class="task-body">
+        <p style="font-size:14px;color:#555;margin-bottom:16px;">Every CBF presentation should follow this structure, using the corresponding layouts from the CBF template:</p>
+        <div class="slide-anatomy">
+          <div class="anatomy-card blue-t">
+            <div class="anatomy-title">Cover slide</div>
+            <div class="anatomy-rule">Presentation title, subtitle, date, and CBF logo. <strong>Use the template cover layout.</strong> No bullet points or body text here.</div>
+          </div>
+          <div class="anatomy-card green-t">
+            <div class="anatomy-title">Agenda / Contents</div>
+            <div class="anatomy-rule">List the main sections — keep to <strong>4–6 items maximum.</strong> Gives the audience orientation from the start.</div>
+          </div>
+          <div class="anatomy-card">
+            <div class="anatomy-title">Section dividers</div>
+            <div class="anatomy-rule">Use the template's divider layout between major sections. <strong>Bold section title only</strong> — no body text on divider slides.</div>
+          </div>
+          <div class="anatomy-card gold-t">
+            <div class="anatomy-title">Content slides</div>
+            <div class="anatomy-rule">One key idea per slide. Title + visuals or 3–5 bullet points maximum. <strong>Never more than 8–10 words per line.</strong></div>
+          </div>
+          <div class="anatomy-card blue-t">
+            <div class="anatomy-title">Data / impact slides</div>
+            <div class="anatomy-rule">Use large, bold numbers for key figures. Charts and icons from Sheets. <strong>Let the numbers do the talking.</strong></div>
+          </div>
+          <div class="anatomy-card green-t">
+            <div class="anatomy-title">Closing slide</div>
+            <div class="anatomy-rule">CBF logo, contact information, and website. End with the CBF mission statement or a key call to action. <strong>Never end on a blank slide.</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">7</div><div class="task-title">Add and format text boxes</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click on a text placeholder from the template to edit it — or click <strong>Insert → Text box</strong> and draw a new text area on the slide</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Keep bullet points to <strong>3–5 items per slide maximum</strong>. Each bullet should be a fragment, not a full sentence — you will speak the full detail aloud</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To adjust line spacing: select the text → <strong>Format → Line & paragraph spacing</strong>. Use 1.15–1.5 spacing for readability on screen</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Align text to the <strong>left or centre</strong> for most slide content. Avoid justified text — it creates uneven spacing that is harder to read at presentation sizes</div></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">8</div><div class="task-title">Slide design: do's and don'ts</div></div>
+      <div class="task-body">
+        <div class="do-dont-grid">
+          <div class="do-card">
+            <div class="do-label">✓ Do</div>
+            <div class="do-item"><span class="icon">✓</span><span>One key idea per slide — split complex content across multiple slides</span></div>
+            <div class="do-item"><span class="icon">✓</span><span>Use high-quality Caribbean imagery — full-bleed where possible</span></div>
+            <div class="do-item"><span class="icon">✓</span><span>Use large bold numbers for impact statistics</span></div>
+            <div class="do-item"><span class="icon">✓</span><span>Leave generous white space — slides should breathe</span></div>
+            <div class="do-item"><span class="icon">✓</span><span>Use CBF wave, dot ripple, or leaf motifs as subtle decorative accents</span></div>
+            <div class="do-item"><span class="icon">✓</span><span>Keep the slide title to 6 words or fewer</span></div>
+          </div>
+          <div class="dont-card">
+            <div class="dont-label">✕ Don't</div>
+            <div class="do-item"><span class="icon red">✕</span><span>Put entire paragraphs of text on a slide — this is a document, not a presentation</span></div>
+            <div class="do-item"><span class="icon red">✕</span><span>Use non-CBF colours, fonts, or generic Google themes</span></div>
+            <div class="do-item"><span class="icon red">✕</span><span>Crowd a slide with multiple charts, images, and text blocks at once</span></div>
+            <div class="do-item"><span class="icon red">✕</span><span>Use more than 2–3 different font sizes on one slide</span></div>
+            <div class="do-item"><span class="icon red">✕</span><span>Use low-resolution or non-Caribbean imagery</span></div>
+            <div class="do-item"><span class="icon red">✕</span><span>Mix too many accent colours — pick one accent per slide</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- VISUALS & CHARTS -->
+  <section id="visuals">
+    <div class="section-tag">Visual Content</div>
+    <h2 class="section-title">Images, charts, and shapes</h2>
+    <p class="section-lead">Strong visuals are a core part of CBF's brand identity. Photography, charts from Google Sheets, and brand icons and motifs all have their place in CBF presentations.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">9</div><div class="task-title">Insert and format images</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>Insert → Image</strong> → choose your source: upload from computer, search the web, Google Drive, or Google Photos</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">CBF imagery should depict <strong>Caribbean landscapes, marine life, people, and ecosystems</strong> — always high-resolution, authentic, and optimistic in tone. See the CBF Brand Toolkit imagery guidelines for full guidance</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To resize while maintaining proportions: hold <strong>Shift</strong> while dragging a corner handle. To crop an image: right-click → <strong>Crop image</strong> and drag the crop handles</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">For photo mask effects (circular or wave-cropped images per the CBF Brand Toolkit): right-click the image → <strong>Mask image</strong> → choose a shape. Round (circle) masks work well for people and community shots</div></li>
+        </ol>
+        <div class="note-box"><strong>Image quality:</strong> Never use images that appear blurry or pixelated on the slide canvas — they will look worse when projected. Use images at least 1920×1080px for full-slide visuals. Check the CBF shared photo library in Drive for approved, high-resolution images.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">10</div><div class="task-title">Embed a live chart from Google Sheets</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open the Google Sheet containing your chart → click the chart → click the <strong>three-dot menu</strong> on the chart → <strong>Copy chart</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Switch to your Google Slides presentation → paste (<code>Ctrl+V</code>). A dialog asks whether to <strong>Link to spreadsheet</strong> or paste unlinked — always choose <strong>Link to spreadsheet</strong></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">When the underlying Sheet data changes, a <strong>Update</strong> button appears on the chart in Slides — click it to refresh the chart with the latest figures</div></li>
+        </ol>
+        <div class="success-box"><strong>Live data in presentations:</strong> Linking charts from Sheets means your donor and board presentations always reflect the most current project data. No more manually updating numbers slide by slide before every meeting.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">11</div><div class="task-title">Add shapes, icons, and CBF motifs</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>Insert → Shape</strong> to add geometric shapes — use rounded rectangles for callout boxes and labels, echoing the circular language of the CBF logo</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">CBF brand motifs (waves, dot ripples, leaf shapes) are available as SVG files in the CBF Brand Assets folder in Shared Drive. Insert them via <strong>Insert → Image → Drive</strong> and position them as subtle decorative elements in corners or edges</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Use <strong>one motif per slide maximum</strong> — waves for marine/coastal content, leaves for terrestrial/nature content, dots for general brand texture. Never layer multiple motifs on one slide</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To align multiple objects: select them all (Shift+click each) → right-click → <strong>Align & distribute</strong> → choose centre, left, right, top, or bottom alignment</div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ANIMATIONS -->
+  <section id="animations">
+    <div class="section-tag">Transitions & Animations</div>
+    <h2 class="section-title">Transitions and animations</h2>
+    <p class="section-lead">Used well, transitions and animations guide the audience's attention. Used poorly, they are a distraction. CBF presentations should feel polished and professional — not flashy.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">12</div><div class="task-title">Add slide transitions</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>View → Transition</strong> (or right-click a slide thumbnail → <strong>Change transition</strong>) to open the Transitions panel</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Choose a transition style — for CBF presentations use <strong>Fade</strong> or <strong>Slide from right</strong> for a clean, professional feel. Set the speed to <strong>Medium</strong></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click <strong>Apply to all slides</strong> to use the same transition throughout — consistency looks more professional than mixing transition styles</div></li>
+        </ol>
+        <div class="note-box"><strong>CBF standard:</strong> Use Fade transitions at Medium speed for all formal CBF presentations (board, donor, partner). Reserve livelier transitions only for internal training or workshop sessions where a lighter tone is appropriate.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">13</div><div class="task-title">Add object animations</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click an object on the slide (text box, image, shape) → click <strong>View → Animate</strong> to open the Animations panel</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click <strong>Add animation</strong> → choose the animation type (Appear, Fade in, or Fly in from bottom are clean choices for CBF decks) and set timing: <strong>On click</strong> lets you control the pace, <strong>After previous</strong> runs automatically</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Use animations to <strong>reveal bullet points one at a time</strong> on content-heavy slides — this keeps the audience focused on what you are currently discussing rather than reading ahead</div></li>
+        </ol>
+        <div class="alert-box"><strong>Less is more:</strong> Spinning, bouncing, or complex animations are not appropriate for formal CBF presentations. If in doubt, use no animation at all — a clean static slide is always preferable to a distracting one.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- PRESENTING -->
+  <section id="presenting">
+    <div class="section-tag">Presenting</div>
+    <h2 class="section-title">Presenting your slides</h2>
+    <p class="section-lead">Google Slides has several presentation modes — including a presenter view with speaker notes that only you can see. Use these tools to deliver polished, confident presentations.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">14</div><div class="task-title">Start and navigate a presentation</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click the <strong>Slideshow</strong> button (top-right, play icon) or press <code>Ctrl+F5</code> to start the presentation from the current slide. Press <code>Ctrl+Shift+F5</code> to start from the beginning</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Navigate slides with the <strong>arrow keys</strong>, <strong>spacebar</strong> (forward), or click the on-screen arrows. Press <strong>Esc</strong> to exit the slideshow at any time</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To jump to a specific slide: type the slide number and press <strong>Enter</strong> during the presentation</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Press <strong>B</strong> during a presentation to black out the screen — useful when you want the audience to focus on discussion rather than the slide</div></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">15</div><div class="task-title">Use Presenter View with speaker notes</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click the <strong>dropdown arrow</strong> next to the Slideshow button → select <strong>Presenter view</strong>. This opens a separate window showing your notes, a slide timer, and a preview of the next slide</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">The audience sees only the presentation on the main screen — you see your speaker notes on your own screen. Move the presenter window to your laptop screen and the main presentation to the projector or external display</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To add speaker notes: click the <strong>Click to add speaker notes</strong> area below the slide canvas in the editor — type your talking points here. Keep notes concise — keywords, not scripts</div></li>
+        </ol>
+        <div class="success-box"><strong>Always use Presenter View for formal meetings:</strong> Speaker notes let you glance at key statistics, names, or talking points without breaking eye contact with your audience. This is particularly valuable for board and donor presentations.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">16</div><div class="task-title">Present via Google Meet</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">In Google Slides, click <strong>Slideshow → Present to a meeting</strong> — this connects directly to your active Google Meet session without needing to screen share separately</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Alternatively, in Google Meet click <strong>Present now → A tab</strong> and select your Slides browser tab</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Participants see your slides in real time. You retain control of advancing slides from your own screen</div></li>
+        </ol>
+        <div class="info-box"><strong>Before any virtual presentation:</strong> Do a dry run — open the presentation, enter Presenter View, and go through every slide checking for typos, broken chart links, and missing images. A 10-minute rehearsal prevents the most common presentation problems.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- COLLABORATION -->
+  <section id="collaboration">
+    <div class="section-tag">Working Together</div>
+    <h2 class="section-title">Collaborating on presentations</h2>
+    <p class="section-lead">Multiple people can work on the same presentation simultaneously in Google Slides — useful for large team decks or when sections are owned by different staff members.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">17</div><div class="task-title">Comment on specific slides</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click on the slide or object you want to comment on → press <code>Ctrl+Alt+M</code> or click <strong>Insert → Comment</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Type your feedback and use <strong>@name</strong> to tag a specific colleague. They receive an email with a direct link to the slide and comment</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Resolve comments once addressed. Before a presentation is finalised, all comments should be resolved</div></li>
+        </ol>
+        <div class="note-box"><strong>Review process for formal decks:</strong> For board or donor presentations, share the deck in Commenter access with your manager or the Communications team before finalising. This ensures brand compliance and content accuracy before the presentation reaches its audience.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- EXPORTING -->
+  <section id="exporting">
+    <div class="section-tag">Exporting</div>
+    <h2 class="section-title">Exporting and sharing presentations</h2>
+    <p class="section-lead">Export your presentation in the appropriate format depending on how it will be used and who will receive it.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">18</div><div class="task-title">Export to PDF or PowerPoint</div></div>
+      <div class="task-body">
+        <div class="path-flow">
+          <span class="path-step">File</span><span class="path-arrow">→</span>
+          <span class="path-step">Download</span><span class="path-arrow">→</span>
+          <span class="path-step">Select format</span>
+        </div>
+        <ol class="steps-list" style="margin-top:14px;">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text"><strong>PDF (.pdf)</strong> — for sending to external audiences (donors, partners, board members). The layout is locked and renders identically on all devices. Use for final versions only</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text"><strong>PowerPoint (.pptx)</strong> — when a partner or donor requests an editable version, or when the file will be opened in Microsoft Office. Note that some Google Slides features may not render perfectly in PowerPoint</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text"><strong>PNG or JPEG images</strong> — export individual slides as images for use in reports, social media, or email newsletters via <strong>File → Download → PNG image</strong></div></li>
+        </ol>
+        <div class="brand-box">
+          <strong>Archive final presentations to Zoho WorkDrive</strong>
+          Once a presentation has been delivered and is final — board meeting slides, donor briefings, project close-out decks — export as PDF and archive to the correct folder in Zoho WorkDrive. This ensures CBF's institutional knowledge is preserved. The Google Slides file remains in Drive for future reference and adaptation.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SHORTCUTS -->
+  <section id="shortcuts">
+    <div class="section-tag">Keyboard Shortcuts</div>
+    <h2 class="section-title">Useful keyboard shortcuts</h2>
+    <p class="section-lead">Speed up common Slides tasks. Mac users replace Ctrl with ⌘.</p>
+
+    <div class="shortcuts-grid">
+      <div class="shortcut-item"><span class="shortcut-action">New slide</span><div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">M</span></div></div>
+      <div class="shortcut-item"><span class="shortcut-action">Duplicate slide</span><div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">D</span></div></div>
+      <div class="shortcut-item"><span class="shortcut-action">Start slideshow</span><div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">F5</span></div></div>
+      <div class="shortcut-item"><span class="shortcut-action">Start from beginning</span><div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Shift</span><span class="kbd">F5</span></div></div>
+      <div class="shortcut-item"><span class="shortcut-action">Add comment</span><div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">M</span></div></div>
+      <div class="shortcut-item"><span class="shortcut-action">Insert link</span><div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">K</span></div></div>
+      <div class="shortcut-item"><span class="shortcut-action">Group objects</span><div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">G</span></div></div>
+      <div class="shortcut-item"><span class="shortcut-action">Ungroup objects</span><div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Shift</span><span class="kbd">G</span></div></div>
+      <div class="shortcut-item"><span class="shortcut-action">Select all</span><div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">A</span></div></div>
+      <div class="shortcut-item"><span class="shortcut-action">Undo</span><div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Z</span></div></div>
+      <div class="shortcut-item"><span class="shortcut-action">Black screen (during show)</span><div class="shortcut-keys"><span class="kbd">B</span></div></div>
+      <div class="shortcut-item"><span class="shortcut-action">All shortcuts</span><div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">/</span></div></div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- TIPS -->
+  <section id="tips">
+    <div class="section-tag">Best Practices</div>
+    <h2 class="section-title">Tips for CBF staff</h2>
+    <p class="section-lead">Habits that make your presentations more effective, on-brand, and professional.</p>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a8f8d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h4>One idea per slide</h4>
+        <p>If a slide needs a scroll bar to read, it has too much content. Split it across two slides. Your audience reads faster than you speak — keep them on the same point as you.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Get brand approval for external decks</h4>
+        <p>Before any presentation goes to a donor, partner, or the board, share it with the Communications team for a brand review. Especially for first-time presenters or new templates.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h4>Link your data, don't copy it</h4>
+        <p>Embed charts from Google Sheets with a live link. When project data updates, your presentation stays current with one click — no manual reformatting required.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b88a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h4>Use speaker notes, not slide text</h4>
+        <p>Everything you plan to say that doesn't fit on the slide goes in speaker notes. Your slides should be a visual anchor — not a transcript. Notes are visible only to you in Presenter View.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a8f8d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <h4>Archive delivered presentations</h4>
+        <p>Export as PDF and upload to Zoho WorkDrive after every formal presentation. This builds CBF's institutional memory and makes future presentations easier to build on.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h4>Rehearse before presenting</h4>
+        <p>Go through the full deck in Presenter View before any formal presentation. Check all linked charts are updated, no slides are missing, and your speaker notes are complete.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SUPPORT -->
+  <section id="support">
+    <div class="section-tag">Need Help?</div>
+    <h2 class="section-title">Getting support</h2>
+    <p class="section-lead">For technical issues with Google Slides, contact the CBF System Administrator. For brand guidance, template access, or approval of external presentations, contact the Communications team.</p>
+    <div class="contact-card">
+      <div>
+        <h3>Contact & Resources</h3>
+        <p>The CBF Communications team owns the official template and can advise on brand compliance. The System Administrator handles access and technical issues.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:communications@caribbeanbiodiversityfund.org" class="contact-link">Communications Team</a>
+        <a href="#" class="contact-link">System Administrator</a>
+        <a href="https://support.google.com/docs/topic/9055174" target="_blank" class="contact-link">Google Slides Help Center ↗</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  <svg class="wave-top" viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1350,15 1440,20 L1440,40 L0,40 Z" fill="#0a8f8d"/>
+  </svg>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Caribbean <span>Biodiversity</span> Fund</div>
+      <div class="footer-text">© 2026 Caribbean Biodiversity Fund. All rights reserved.</div>
+    </div>
+    <div class="footer-series">CBF Staff Training Series · <span>Google Workspace</span> · Google Slides Guide</div>
+  </div>
+</footer>
+
+</body>
+</html>

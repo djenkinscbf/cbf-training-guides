@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Sheets – CBF Staff Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Outfit', sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: #418344; padding: 0; position: relative; overflow: hidden; }
+  .header-inner { padding: 36px 48px 0 48px; position: relative; z-index: 2; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+  .header-brand { display: flex; flex-direction: column; }
+  .header-org { color: #fff; font-size: 18px; font-weight: 800; line-height: 1.2; }
+  .header-org span { color: #F5BD29; }
+  .header-org-sub { color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .badge-app { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .header-title { color: #fff; font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
+  .header-title span { color: #F5BD29; }
+  .header-sub { color: rgba(255,255,255,0.88); font-size: 16px; font-weight: 400; max-width: 520px; line-height: 1.6; padding-bottom: 36px; }
+  .wave-footer { width: 100%; display: block; line-height: 0; }
+  .nav-strip { background: #fff; border-bottom: 1px solid #e0e6ef; padding: 0 48px; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+  .nav-strip a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; padding: 14px 18px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+  .nav-strip a:hover { color: #418344; border-bottom-color: #418344; }
+  .main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section-tag { display: inline-block; background: #e8f5e8; color: #418344; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+  .section-title { font-size: 26px; font-weight: 800; color: #418344; margin-bottom: 6px; }
+  .section-lead { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 28px; max-width: 640px; }
+  .section-divider { border: none; border-top: 1.5px solid #e0e6ef; margin: 48px 0; }
+  .overview-card { background: #418344; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; gap: 32px; align-items: flex-start; margin-bottom: 36px; }
+  .overview-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .overview-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .overview-text p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.88); }
+  .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .fact-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; border-left: 4px solid #418344; min-width: 0; }
+  .fact-card.blue { border-left-color: #1F4A94; }
+  .fact-card.teal { border-left-color: #0EBBB9; }
+  .fact-card.gold { border-left-color: #F5BD29; }
+  .fact-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 6px; }
+  .fact-value { font-size: 14px; font-weight: 600; color: #418344; line-height: 1.45; word-break: break-word; }
+  .fact-card.blue .fact-value { color: #1F4A94; }
+  .fact-card.teal .fact-value { color: #0a9997; }
+  .fact-card.gold .fact-value { color: #b88a1a; }
+  .task-block { background: #fff; border: 1px solid #e0e6ef; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+  .task-header { background: #f2f8f2; padding: 18px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e0e6ef; }
+  .task-num { width: 32px; height: 32px; background: #418344; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .task-title { font-size: 16px; font-weight: 700; color: #1a1a1a; flex: 1; }
+  .task-body { padding: 24px; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .step-item { display: flex; gap: 14px; align-items: flex-start; }
+  .step-dot { width: 24px; height: 24px; background: #e8f5e8; color: #418344; font-size: 12px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; line-height: 1.6; color: #333; }
+  .step-text strong { color: #418344; font-weight: 600; }
+  .step-text code { background: #e8f5e8; color: #418344; font-family: monospace; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .note-box { background: #fffbea; border: 1px solid #f5bd29; border-left: 4px solid #F5BD29; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a5c00; line-height: 1.6; }
+  .note-box strong { color: #5a4300; }
+  .alert-box { background: #fff0f0; border: 1px solid #f5a0a0; border-left: 4px solid #e03c3c; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a1a1a; line-height: 1.6; }
+  .alert-box strong { color: #5a0000; }
+  .success-box { background: #f2f8f2; border: 1px solid #a0d5a0; border-left: 4px solid #418344; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #1a4a1a; line-height: 1.6; }
+  .info-box { background: #e8f0fb; border: 1px solid #a0bce0; border-left: 4px solid #1F4A94; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #0a2255; line-height: 1.6; }
+  .path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+  .path-step { background: #e8f5e8; color: #418344; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+  .path-arrow { color: #aaa; font-size: 14px; }
+
+  /* FORMULA CARDS */
+  .formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 16px; }
+  .formula-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 18px; border-top: 3px solid #418344; }
+  .formula-card.blue-top { border-top-color: #1F4A94; }
+  .formula-card.gold-top { border-top-color: #F5BD29; }
+  .formula-card.teal-top { border-top-color: #0EBBB9; }
+  .formula-card.orange-top { border-top-color: #F45C02; }
+  .formula-name { font-size: 15px; font-weight: 800; color: #1a1a1a; margin-bottom: 4px; font-family: monospace; }
+  .formula-syntax { font-size: 12px; font-family: monospace; background: #f0f4f0; color: #418344; padding: 5px 10px; border-radius: 6px; margin: 8px 0; display: block; word-break: break-all; }
+  .formula-card.blue-top .formula-syntax { background: #e8f0fb; color: #1F4A94; }
+  .formula-card.gold-top .formula-syntax { background: #fef7e0; color: #b88a1a; }
+  .formula-card.teal-top .formula-syntax { background: #e0f7f7; color: #0a8f8d; }
+  .formula-card.orange-top .formula-syntax { background: #fde8db; color: #c04800; }
+  .formula-desc { font-size: 12px; color: #555; line-height: 1.5; }
+  .formula-example { font-size: 11px; color: #888; margin-top: 6px; font-style: italic; }
+
+  /* SHORTCUTS */
+  .shortcuts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 14px; }
+  .shortcut-item { background: #fff; border: 1px solid #e0e6ef; border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .shortcut-action { font-size: 13px; color: #333; }
+  .shortcut-keys { display: flex; gap: 4px; flex-shrink: 0; }
+  .kbd { background: #f2f8f2; border: 1px solid #b0d0b0; border-bottom: 2px solid #90b890; color: #418344; font-family: monospace; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 12px; }
+  .tip-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; }
+  .tip-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .tip-icon.green { background: #e8f5e8; }
+  .tip-icon.blue { background: #e8f0fb; }
+  .tip-icon.gold { background: #fef7e0; }
+  .tip-icon.teal { background: #e0f7f7; }
+  .tip-card h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; color: #555; line-height: 1.6; }
+
+  /* USE CASES */
+  .use-cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 32px; }
+  .use-case-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 18px; display: flex; gap: 12px; align-items: flex-start; }
+  .use-case-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .use-case-card h4 { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+  .use-case-card p { font-size: 12px; color: #666; line-height: 1.5; }
+
+  .contact-card { background: #418344; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .contact-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .contact-card p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.6; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link { background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.3); text-align: center; white-space: nowrap; }
+  .page-footer { background: #418344; padding: 0; margin-top: 80px; }
+  .wave-top { width: 100%; display: block; line-height: 0; }
+  .footer-inner { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { color: #fff; font-size: 15px; font-weight: 800; }
+  .footer-brand span { color: #F5BD29; }
+  .footer-text { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 3px; }
+  .footer-series { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500; }
+  .footer-series span { color: #F5BD29; }
+  @media (max-width: 640px) {
+    .header-inner { padding: 24px 20px 0; }
+    .header-title { font-size: 28px; }
+    .main { padding: 32px 16px 60px; }
+    .nav-strip { padding: 0 16px; }
+    .overview-card { flex-direction: column; padding: 24px; }
+    .footer-inner { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="header-org">Caribbean <span>Biodiversity</span> Fund</div>
+        <div class="header-org-sub">Staff Training Series</div>
+      </div>
+      <span class="badge-app">Google Workspace</span>
+    </div>
+    <div class="header-title">Google Sheets <span>at CBF</span></div>
+    <div class="header-sub">Your complete guide to working with data at the Caribbean Biodiversity Fund — from building clean spreadsheets to tracking project budgets, indicators, and reports.</div>
+  </div>
+  <svg class="wave-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,65 480,15 720,40 C960,65 1200,15 1440,40 L1440,60 L0,60 Z" fill="#f5f7fa"/>
+  </svg>
+</div>
+
+<nav class="nav-strip">
+  <a href="#overview">Overview</a>
+  <a href="#creating">Creating</a>
+  <a href="#entering">Data Entry</a>
+  <a href="#formatting">Formatting</a>
+  <a href="#formulas">Formulas</a>
+  <a href="#sorting">Sort & Filter</a>
+  <a href="#charts">Charts</a>
+  <a href="#collaboration">Collaboration</a>
+  <a href="#shortcuts">Shortcuts</a>
+  <a href="#tips">Tips</a>
+  <a href="#support">Support</a>
+</nav>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <div class="section-tag">Overview</div>
+    <h2 class="section-title">What is Google Sheets?</h2>
+    <p class="section-lead">Google Sheets is CBF's spreadsheet tool — used for tracking budgets, monitoring project indicators, managing data, logging activities, and building reports. Like all Google Workspace apps, it saves automatically and supports real-time collaboration.</p>
+
+    <div class="overview-card">
+      <div class="overview-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+      </div>
+      <div class="overview-text">
+        <h3>How CBF uses Google Sheets</h3>
+        <p>Sheets is the go-to tool whenever structured data needs to be captured, tracked, or analysed. Common uses include project budget tracking, monitoring and evaluation (M&E) indicator logs, work plans, procurement trackers, and data submitted to donors. Sheets integrates directly with Google Docs and Slides for embedding live data in reports and presentations.</p>
+      </div>
+    </div>
+
+    <div class="use-cases">
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#e8f5e8;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <div><h4>Budget tracking</h4><p>Monitor expenditure against allocations across projects and cost centres</p></div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#e8f0fb;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div><h4>M&E indicators</h4><p>Log and track project indicators, targets, and results over time</p></div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#e0f7f7;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a8f8d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div><h4>Work plans</h4><p>Track activities, milestones, responsible parties, and deadlines</p></div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#fef7e0;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b88a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>
+        </div>
+        <div><h4>Stakeholder registers</h4><p>Maintain contact lists, partner databases, and grantee records</p></div>
+      </div>
+    </div>
+
+    <div class="facts-grid">
+      <div class="fact-card">
+        <div class="fact-label">Platform</div>
+        <div class="fact-value">Google Sheets (Workspace)</div>
+      </div>
+      <div class="fact-card blue">
+        <div class="fact-label">Saving</div>
+        <div class="fact-value">Automatic — every change saved instantly</div>
+      </div>
+      <div class="fact-card teal">
+        <div class="fact-label">Compatibility</div>
+        <div class="fact-value">Import & export Excel (.xlsx) files</div>
+      </div>
+      <div class="fact-card gold">
+        <div class="fact-label">Capacity</div>
+        <div class="fact-value">Up to 10 million cells per spreadsheet</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- CREATING -->
+  <section id="creating">
+    <div class="section-tag">Getting Started</div>
+    <h2 class="section-title">Creating and opening spreadsheets</h2>
+    <p class="section-lead">New sheets can be created from Google Drive or sheets.google.com. Existing Excel files can be uploaded and converted to Google Sheets format.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">1</div><div class="task-title">Create a new spreadsheet</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Go to <strong>sheets.google.com</strong> and click the <strong>blank spreadsheet</strong> thumbnail, or click <strong>+ New → Google Sheets</strong> from Google Drive</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click <strong>Untitled spreadsheet</strong> at the top and give it a clear name — include year, topic, and status. Example: <code>2026_ReefResilience_BudgetTracker</code></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Move it to the correct Shared Drive folder immediately — click the folder icon next to the file name → navigate to the right location → click <strong>Move</strong></div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Rename the default <strong>Sheet1</strong> tab at the bottom — double-click it and type a descriptive name (e.g. <code>Budget Summary</code>, <code>Raw Data</code>, <code>Jan 2026</code>)</div></li>
+        </ol>
+        <div class="note-box"><strong>Tab naming matters:</strong> If your spreadsheet has multiple sheets, name every tab clearly. "Sheet1", "Sheet2", "Sheet3" is confusing for anyone else opening the file — especially during handovers or audits.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">2</div><div class="task-title">Upload and convert an Excel file</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Drag the .xlsx file into Google Drive, or click <strong>+ New → File upload</strong> and select it</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Right-click the uploaded file → <strong>Open with → Google Sheets</strong>. This opens it as a Google Sheet while preserving the original Excel file</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To save it permanently as a Google Sheet: click <strong>File → Save as Google Sheets</strong>. The converted version is now fully editable in Sheets format</div></li>
+        </ol>
+        <div class="info-box"><strong>When to keep Excel format:</strong> If a file is regularly shared with external partners or donors who use Excel, keep the .xlsx format to avoid compatibility issues. For purely internal CBF work, convert to Google Sheets to enable full collaboration features.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- DATA ENTRY -->
+  <section id="entering">
+    <div class="section-tag">Data Entry</div>
+    <h2 class="section-title">Entering and managing data</h2>
+    <p class="section-lead">Clean, consistent data entry is the foundation of any useful spreadsheet. These habits prevent errors and make your data reliable for reporting and analysis.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">3</div><div class="task-title">Enter data cleanly</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click a cell and type to enter data. Press <strong>Tab</strong> to move right, <strong>Enter</strong> to move down, or <strong>arrow keys</strong> to navigate freely</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Keep <strong>one type of data per column</strong> — do not mix text and numbers in the same column, and do not add notes inside data cells. Use a dedicated Notes column instead</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Use <strong>consistent formats</strong> within each column — dates should all use the same format (e.g. <code>DD/MM/YYYY</code>), currency values should all be numbers without currency symbols mixed in</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Always include a <strong>header row</strong> in row 1 with clear column names. Freeze the header row so it stays visible when scrolling: <strong>View → Freeze → 1 row</strong></div></li>
+          <li class="step-item"><div class="step-dot">5</div><div class="step-text">To fill a range quickly: enter a value, select the cell, then drag the small <strong>blue square</strong> (fill handle) at the bottom-right corner down or across to repeat or extend the pattern</div></li>
+        </ol>
+        <div class="alert-box"><strong>One row = one record:</strong> Each row should represent one item — one expense, one activity, one indicator. Never merge data from two records into one row. This is the most common data entry mistake that breaks filtering and formulas.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">4</div><div class="task-title">Use data validation to prevent errors</div></div>
+      <div class="task-body">
+        <div class="path-flow">
+          <span class="path-step">Select cells</span><span class="path-arrow">→</span>
+          <span class="path-step">Data</span><span class="path-arrow">→</span>
+          <span class="path-step">Data validation</span>
+        </div>
+        <ol class="steps-list" style="margin-top:14px;">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Under <strong>Criteria</strong>, choose what type of data is allowed: a list of items, a date range, a number range, or a custom formula</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">For a dropdown list: select <strong>Dropdown (from a range)</strong> or <strong>Dropdown</strong> and enter your options (e.g. <code>Active, Completed, On Hold</code>)</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Set the <strong>invalid data</strong> option to <strong>Show warning</strong> or <strong>Reject input</strong> to enforce the rules when someone enters data</div></li>
+        </ol>
+        <div class="success-box"><strong>Use dropdowns for status fields:</strong> Any column with a fixed set of options — project status, region, funding source — should use a dropdown validation. This prevents typos and ensures your data filters and pivot summaries work correctly.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- FORMATTING -->
+  <section id="formatting">
+    <div class="section-tag">Formatting</div>
+    <h2 class="section-title">Formatting spreadsheets</h2>
+    <p class="section-lead">Well-formatted spreadsheets are easier to read and less prone to interpretation errors. Use formatting to guide the reader's eye — not to decorate.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">5</div><div class="task-title">Format cells, rows, and columns</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text"><strong>Header rows:</strong> Select row 1 → make text bold, increase font size slightly, and apply a background fill colour (CBF navy #1F4A94 with white text, or light grey for simpler sheets)</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text"><strong>Column width:</strong> Double-click the column border in the header to auto-fit the width to the content — or drag to set a custom width. Right-click a column header → <strong>Resize column</strong> for a precise value</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text"><strong>Number formatting:</strong> Select cells containing currency → click <strong>Format → Number → Currency</strong>. For percentages: <strong>Format → Number → Percent</strong></div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text"><strong>Alternating row colours:</strong> Select your data range → <strong>Format → Alternating colours</strong> → choose a colour scheme. This dramatically improves readability for long data tables</div></li>
+          <li class="step-item"><div class="step-dot">5</div><div class="step-text"><strong>Borders:</strong> Select cells → click the <strong>border icon</strong> in the toolbar to add borders. Use a full outer border for the table and inner borders to separate columns</div></li>
+        </ol>
+        <div class="note-box"><strong>CBF colour guidance:</strong> When using colour to highlight cells (e.g. red for overspend, green for on-track), always add a legend somewhere on the sheet explaining what each colour means. Never rely on colour alone to convey meaning — some colleagues may have colour vision differences.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">6</div><div class="task-title">Freeze rows and columns</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">To freeze the header row: click <strong>View → Freeze → 1 row</strong>. The first row stays visible as you scroll down through data</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">To freeze a column (useful for ID or name columns in wide sheets): click <strong>View → Freeze → 1 column</strong></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To freeze at a specific row or column: click the cell just below/to the right of where you want to freeze → <strong>View → Freeze → Up to current row/column</strong></div></li>
+        </ol>
+        <div class="success-box"><strong>Always freeze header rows</strong> on any sheet with more than 10 rows of data. It is one of the simplest improvements that makes a spreadsheet significantly easier to use.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- FORMULAS -->
+  <section id="formulas">
+    <div class="section-tag">Formulas & Functions</div>
+    <h2 class="section-title">Essential formulas for CBF work</h2>
+    <p class="section-lead">You do not need to be a spreadsheet expert to use Google Sheets effectively at CBF. These core formulas cover the vast majority of data tasks you will encounter.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">7</div><div class="task-title">How formulas work</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Every formula starts with an <strong>=</strong> sign. Click a cell, type <code>=</code>, and start typing the formula name — Sheets will suggest completions</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Formulas reference cells by their column letter and row number — e.g. <code>B2</code> means column B, row 2. A range is written as <code>B2:B20</code> (all cells from B2 to B20)</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To copy a formula down a column: click the cell with the formula → drag the blue fill handle down. Cell references update automatically (e.g. <code>B2</code> becomes <code>B3</code>, <code>B4</code>, etc.)</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To <strong>lock a reference</strong> so it doesn't change when copied, add a <code>$</code> sign: <code>$B$2</code> always refers to B2 regardless of where the formula is copied</div></li>
+        </ol>
+        <div class="info-box"><strong>If a formula shows an error:</strong> <code>#REF!</code> means a referenced cell was deleted. <code>#VALUE!</code> means the wrong data type was used (e.g. text where a number is expected). <code>#DIV/0!</code> means the formula is trying to divide by zero. Click the cell and check the formula bar to diagnose.</div>
+      </div>
+    </div>
+
+    <div class="formula-grid">
+      <div class="formula-card">
+        <div class="formula-name">SUM</div>
+        <code class="formula-syntax">=SUM(B2:B20)</code>
+        <div class="formula-desc">Adds all values in a range. The most used formula at CBF for budget totals and activity counts.</div>
+        <div class="formula-example">Example: =SUM(D2:D50) totals all budget figures in column D</div>
+      </div>
+      <div class="formula-card blue-top">
+        <div class="formula-name">AVERAGE</div>
+        <code class="formula-syntax">=AVERAGE(C2:C20)</code>
+        <div class="formula-desc">Calculates the mean of a range. Useful for average spend per project or average indicator score.</div>
+        <div class="formula-example">Example: =AVERAGE(E2:E12) averages monthly expenditure</div>
+      </div>
+      <div class="formula-card gold-top">
+        <div class="formula-name">COUNT / COUNTA</div>
+        <code class="formula-syntax">=COUNTA(A2:A100)</code>
+        <div class="formula-desc">COUNT counts numeric cells. COUNTA counts all non-empty cells — use COUNTA for text data like names or statuses.</div>
+        <div class="formula-example">Example: =COUNTA(B2:B50) counts number of completed entries</div>
+      </div>
+      <div class="formula-card teal-top">
+        <div class="formula-name">IF</div>
+        <code class="formula-syntax">=IF(D2>1000,"Over","OK")</code>
+        <div class="formula-desc">Returns one value if a condition is true, another if false. Great for status flags and budget alerts.</div>
+        <div class="formula-example">Example: =IF(E2>=F2,"On Track","Behind") compares actual vs target</div>
+      </div>
+      <div class="formula-card orange-top">
+        <div class="formula-name">SUMIF</div>
+        <code class="formula-syntax">=SUMIF(A:A,"Marine",D:D)</code>
+        <div class="formula-desc">Sums values where a condition is met. Use to total budget by project type, region, or status.</div>
+        <div class="formula-example">Example: totals all expenditure rows where project = "Marine Conservation"</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-name">COUNTIF</div>
+        <code class="formula-syntax">=COUNTIF(C:C,"Active")</code>
+        <div class="formula-desc">Counts cells matching a condition. Use to count how many projects are active, complete, or on hold.</div>
+        <div class="formula-example">Example: =COUNTIF(B2:B50,"Complete") counts completed activities</div>
+      </div>
+      <div class="formula-card blue-top">
+        <div class="formula-name">VLOOKUP</div>
+        <code class="formula-syntax">=VLOOKUP(A2,Sheet2!A:C,2,FALSE)</code>
+        <div class="formula-desc">Looks up a value in another table and returns a related value. Useful for pulling project names or budget codes from a reference sheet.</div>
+        <div class="formula-example">Example: looks up a project ID and returns the project name from a lookup table</div>
+      </div>
+      <div class="formula-card gold-top">
+        <div class="formula-name">TEXT</div>
+        <code class="formula-syntax">=TEXT(A2,"DD/MM/YYYY")</code>
+        <div class="formula-desc">Formats a number or date as text in a specific pattern. Use to standardise date display in reports.</div>
+        <div class="formula-example">Example: =TEXT(TODAY(),"DD MMMM YYYY") returns today's date formatted</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SORT & FILTER -->
+  <section id="sorting">
+    <div class="section-tag">Data Analysis</div>
+    <h2 class="section-title">Sorting and filtering data</h2>
+    <p class="section-lead">Sorting and filtering let you focus on specific subsets of data without deleting anything. These are among the most used features for CBF project tracking and reporting.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">8</div><div class="task-title">Sort data</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click any cell in the column you want to sort by → click <strong>Data → Sort sheet by column [X] A→Z</strong> or <strong>Z→A</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">For multi-level sorting (e.g. sort by region first, then by date): click <strong>Data → Sort range → Advanced range sorting options</strong> → add sort levels</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Always ensure your data has a clear header row before sorting — Sheets needs to know which row is the header so it does not sort it into the data</div></li>
+        </ol>
+        <div class="alert-box"><strong>Sort the range, not the sheet:</strong> For tables with multiple related columns, always select the full data range before sorting — not just one column. Sorting a single column shifts that column's values out of alignment with the rest of the row.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">9</div><div class="task-title">Add and use filters</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click any cell in your data → click <strong>Data → Create a filter</strong>. Filter dropdowns (▼) appear in the header row</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click a filter dropdown to filter by specific values, conditions (greater than, contains, etc.), or to search for a value</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Filtered rows are hidden — not deleted. Remove the filter to restore all rows: click <strong>Data → Remove filter</strong></div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To let each collaborator filter without affecting others' view: use <strong>Data → Filter views → Create new filter view</strong> instead — each person gets their own private filter</div></li>
+        </ol>
+        <div class="success-box"><strong>Use Filter Views for shared sheets:</strong> When multiple people use the same sheet, Filter Views mean your filter does not disrupt what colleagues are seeing. This is especially important for live project trackers and budget sheets.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- CHARTS -->
+  <section id="charts">
+    <div class="section-tag">Data Visualisation</div>
+    <h2 class="section-title">Creating charts</h2>
+    <p class="section-lead">Charts turn raw data into visuals that communicate clearly in reports and presentations. Charts created in Sheets can be embedded directly into Google Docs and Slides.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">10</div><div class="task-title">Insert a chart</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Select the data you want to chart — include the header row. Click <strong>Insert → Chart</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">The <strong>Chart editor</strong> opens on the right. Under <strong>Chart type</strong>, select the most appropriate format:
+            <br>— <strong>Bar / Column chart</strong>: compare values across categories (e.g. budget by project)
+            <br>— <strong>Line chart</strong>: show trends over time (e.g. spend by month)
+            <br>— <strong>Pie chart</strong>: show proportions (e.g. budget allocation by programme area)</div>
+          </li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click the <strong>Customise</strong> tab in the Chart editor to update the chart title, axis labels, colours, and font — apply CBF primary colours (#1F4A94 navy, #418344 green) for on-brand visuals</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To embed the chart in a Google Doc or Slide: copy the chart (right-click → Copy) → paste it into the document. Sheets will ask if you want to <strong>link to spreadsheet</strong> — choose this so the chart updates automatically when the data changes</div></li>
+        </ol>
+        <div class="note-box"><strong>Link charts to data:</strong> Always link embedded charts back to the Sheets source when inserting into Docs or Slides. This means your reports always reflect the latest figures without manually updating visuals every time data changes.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- COLLABORATION -->
+  <section id="collaboration">
+    <div class="section-tag">Working Together</div>
+    <h2 class="section-title">Collaborating on spreadsheets</h2>
+    <p class="section-lead">Google Sheets supports the same real-time collaboration as Docs. These practices keep shared data sheets clean and reliable.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">11</div><div class="task-title">Protect ranges and sheets</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">To prevent colleagues from accidentally editing formula cells or header rows: right-click the cells or sheet tab → <strong>Protect range</strong> or <strong>Protect sheet</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Set who is allowed to edit the protected range — typically only the sheet owner or data manager. Other users will see a warning if they try to edit</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To protect an entire sheet while allowing edits to specific input cells: protect the sheet first, then within the protection settings click <strong>Except certain cells</strong> and select the input range</div></li>
+        </ol>
+        <div class="info-box"><strong>Protect formula columns:</strong> In any shared budget or M&E tracker, protect the columns containing formulas. Nothing breaks a shared spreadsheet faster than a colleague accidentally overwriting a formula cell with a value.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">12</div><div class="task-title">Leave comments in cells</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Right-click a cell → <strong>Comment</strong> (or press <code>Ctrl+Alt+M</code>) to add a comment anchored to that specific cell</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">A small orange triangle appears in the top-right corner of the cell — hover over it to read the comment</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Use @mentions in comments to tag a colleague for their attention — they receive an email notification with a link directly to the cell</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Resolve comments once addressed — right-click the cell → <strong>Resolve comment</strong></div></li>
+        </ol>
+        <div class="success-box"><strong>Use comments, not text notes:</strong> For flagging issues, questions, or instructions in a shared spreadsheet, always use cell comments rather than typing notes directly into data cells. Notes in data cells break formulas and filters.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SHORTCUTS -->
+  <section id="shortcuts">
+    <div class="section-tag">Keyboard Shortcuts</div>
+    <h2 class="section-title">Useful keyboard shortcuts</h2>
+    <p class="section-lead">Speed up common Sheets tasks. Mac users replace Ctrl with ⌘.</p>
+
+    <div class="shortcuts-grid">
+      <div class="shortcut-item">
+        <span class="shortcut-action">Select entire column</span>
+        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Space</span></div>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-action">Select entire row</span>
+        <div class="shortcut-keys"><span class="kbd">Shift</span><span class="kbd">Space</span></div>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-action">Insert row above</span>
+        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">+</span></div>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-action">Delete row</span>
+        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">−</span></div>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-action">Fill down</span>
+        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">D</span></div>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-action">Fill right</span>
+        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">R</span></div>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-action">Find & replace</span>
+        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">H</span></div>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-action">Add comment</span>
+        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">M</span></div>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-action">Format as currency</span>
+        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Shift</span><span class="kbd">4</span></div>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-action">Format as percent</span>
+        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Shift</span><span class="kbd">5</span></div>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-action">Go to cell</span>
+        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">G</span></div>
+      </div>
+      <div class="shortcut-item">
+        <span class="shortcut-action">Show all shortcuts</span>
+        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">/</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- TIPS -->
+  <section id="tips">
+    <div class="section-tag">Best Practices</div>
+    <h2 class="section-title">Tips for CBF staff</h2>
+    <p class="section-lead">Habits that keep your spreadsheets reliable, shareable, and useful for the long term.</p>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h4>Separate raw data from summaries</h4>
+        <p>Keep raw data entry on one tab and summary tables or charts on another. Never edit raw data to make summaries look right — fix the formula instead.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Protect formula cells</h4>
+        <p>Any cell containing a formula that other people should not edit should be protected. This prevents accidental overwrites that silently break calculations.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a9997" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h4>Use Filter Views, not filters</h4>
+        <p>On shared sheets, always use Filter Views (Data → Filter views) rather than regular filters. This lets you analyse data without disrupting your colleagues' view.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b88a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <h4>Archive final sheets to WorkDrive</h4>
+        <p>When a reporting period closes, export the final spreadsheet as .xlsx or PDF and archive it to Zoho WorkDrive. Keep Google Sheets for active tracking only.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h4>Add a legend for colour coding</h4>
+        <p>If you use colour to flag statuses or thresholds, always include a small legend on the sheet. Colour-only signals are inaccessible to colleagues with colour vision differences.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <h4>Format numbers correctly from the start</h4>
+        <p>Apply currency, percentage, and date formats as soon as you create a column — not after entering data. Reformatting later can cause display inconsistencies.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="support">
+    <div class="section-tag">Need Help?</div>
+    <h2 class="section-title">Getting support</h2>
+    <p class="section-lead">For technical issues with Google Sheets, contact the CBF System Administrator. For guidance on specific formulas or data analysis questions, the Google Help Center has comprehensive documentation.</p>
+    <div class="contact-card">
+      <div>
+        <h3>Contact & Resources</h3>
+        <p>The CBF System Administrator handles access and technical issues. The Google Sheets Help Center covers formulas, data tools, and advanced features in depth.</p>
+      </div>
+      <div class="contact-links">
+        <a href="#" class="contact-link">System Administrator</a>
+        <a href="https://support.google.com/docs/topic/9054603" target="_blank" class="contact-link">Google Sheets Help Center ↗</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  <svg class="wave-top" viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1350,15 1440,20 L1440,40 L0,40 Z" fill="#418344"/>
+  </svg>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Caribbean <span>Biodiversity</span> Fund</div>
+      <div class="footer-text">© 2026 Caribbean Biodiversity Fund. All rights reserved.</div>
+    </div>
+    <div class="footer-series">CBF Staff Training Series · <span>Google Workspace</span> · Google Sheets Guide</div>
+  </div>
+</footer>
+
+</body>
+</html>
