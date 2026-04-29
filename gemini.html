@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini – CBF Staff Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Outfit', sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: #418344; padding: 0; position: relative; overflow: hidden; }
+  .header-inner { padding: 36px 48px 0 48px; position: relative; z-index: 2; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+  .header-brand { display: flex; flex-direction: column; }
+  .header-org { color: #fff; font-size: 18px; font-weight: 800; line-height: 1.2; }
+  .header-org span { color: #F5BD29; }
+  .header-org-sub { color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .badge-app { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .header-title { color: #fff; font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
+  .header-title span { color: #F5BD29; }
+  .header-sub { color: rgba(255,255,255,0.88); font-size: 16px; font-weight: 400; max-width: 540px; line-height: 1.6; padding-bottom: 36px; }
+  .wave-footer { width: 100%; display: block; line-height: 0; }
+  .nav-strip { background: #fff; border-bottom: 1px solid #e0e6ef; padding: 0 48px; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+  .nav-strip a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; padding: 14px 18px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+  .nav-strip a:hover { color: #418344; border-bottom-color: #418344; }
+  .main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section-tag { display: inline-block; background: #e8f5e8; color: #418344; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+  .section-title { font-size: 26px; font-weight: 800; color: #418344; margin-bottom: 6px; }
+  .section-lead { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 28px; max-width: 640px; }
+  .section-divider { border: none; border-top: 1.5px solid #e0e6ef; margin: 48px 0; }
+  .overview-card { background: #418344; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; gap: 32px; align-items: flex-start; margin-bottom: 36px; }
+  .overview-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .overview-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .overview-text p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.88); }
+  .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .fact-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; border-left: 4px solid #418344; min-width: 0; }
+  .fact-card.blue { border-left-color: #1F4A94; }
+  .fact-card.teal { border-left-color: #0EBBB9; }
+  .fact-card.gold { border-left-color: #F5BD29; }
+  .fact-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 6px; }
+  .fact-value { font-size: 14px; font-weight: 600; color: #418344; line-height: 1.45; word-break: break-word; }
+  .fact-card.blue .fact-value { color: #1F4A94; }
+  .fact-card.teal .fact-value { color: #0a9997; }
+  .fact-card.gold .fact-value { color: #b88a1a; }
+  .task-block { background: #fff; border: 1px solid #e0e6ef; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+  .task-header { background: #f2f8f2; padding: 18px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e0e6ef; }
+  .task-num { width: 32px; height: 32px; background: #418344; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .task-title { font-size: 16px; font-weight: 700; color: #1a1a1a; flex: 1; }
+  .task-body { padding: 24px; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .step-item { display: flex; gap: 14px; align-items: flex-start; }
+  .step-dot { width: 24px; height: 24px; background: #e8f5e8; color: #418344; font-size: 12px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; line-height: 1.6; color: #333; }
+  .step-text strong { color: #418344; font-weight: 600; }
+  .step-text code { background: #e8f5e8; color: #418344; font-family: monospace; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .note-box { background: #fffbea; border: 1px solid #f5bd29; border-left: 4px solid #F5BD29; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a5c00; line-height: 1.6; }
+  .note-box strong { color: #5a4300; }
+  .alert-box { background: #fff0f0; border: 1px solid #f5a0a0; border-left: 4px solid #e03c3c; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a1a1a; line-height: 1.6; }
+  .alert-box strong { color: #5a0000; }
+  .success-box { background: #f2f8f2; border: 1px solid #a0d5a0; border-left: 4px solid #418344; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #1a4a1a; line-height: 1.6; }
+  .info-box { background: #e8f0fb; border: 1px solid #a0bce0; border-left: 4px solid #1F4A94; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #0a2255; line-height: 1.6; }
+
+  /* VS TABLE */
+  .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .vs-card { border-radius: 14px; padding: 22px 24px; }
+  .vs-card.gemini { background: #e8f5e8; border: 2px solid #418344; }
+  .vs-card.notebooklm { background: #e8f0fb; border: 2px solid #1F4A94; }
+  .vs-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .vs-card.gemini .vs-label { color: #418344; }
+  .vs-card.notebooklm .vs-label { color: #1F4A94; }
+  .vs-title { font-size: 17px; font-weight: 800; margin-bottom: 10px; }
+  .vs-card.gemini .vs-title { color: #418344; }
+  .vs-card.notebooklm .vs-title { color: #1F4A94; }
+  .vs-item { display: flex; gap: 8px; font-size: 12px; color: #444; line-height: 1.5; margin-bottom: 6px; }
+  .vs-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .vs-card.gemini .vs-dot { background: #418344; }
+  .vs-card.notebooklm .vs-dot { background: #1F4A94; }
+
+  /* PROMPT CARDS */
+  .prompt-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin-top: 16px; }
+  .prompt-card { background: #f2f8f2; border: 1px solid #b0d5b0; border-radius: 12px; padding: 16px; }
+  .prompt-category { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #888; margin-bottom: 8px; }
+  .prompt-text { font-size: 13px; color: #418344; font-style: italic; line-height: 1.6; font-weight: 500; }
+  .prompt-text::before { content: '"'; }
+  .prompt-text::after { content: '"'; }
+
+  /* USE CASES */
+  .use-cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 32px; }
+  .use-case-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 18px; display: flex; gap: 12px; align-items: flex-start; }
+  .use-case-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+  .use-case-card h4 { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+  .use-case-card p { font-size: 12px; color: #666; line-height: 1.5; }
+
+  /* PROMPTING PRINCIPLES */
+  .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 16px 0; }
+  .principle-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 18px; border-top: 3px solid #418344; }
+  .principle-card.blue { border-top-color: #1F4A94; }
+  .principle-card.gold { border-top-color: #F5BD29; }
+  .principle-card.teal { border-top-color: #0EBBB9; }
+  .principle-num { font-size: 22px; font-weight: 800; color: #418344; margin-bottom: 6px; }
+  .principle-card.blue .principle-num { color: #1F4A94; }
+  .principle-card.gold .principle-num { color: #b88a1a; }
+  .principle-card.teal .principle-num { color: #0a9997; }
+  .principle-title { font-size: 14px; font-weight: 800; color: #1a1a1a; margin-bottom: 5px; }
+  .principle-desc { font-size: 12px; color: #555; line-height: 1.5; }
+  .principle-example { font-size: 11px; color: #888; margin-top: 8px; font-style: italic; line-height: 1.4; }
+
+  /* INTEGRATION CARDS */
+  .integration-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+  .integration-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 16px; text-align: center; }
+  .integration-icon { font-size: 28px; margin-bottom: 8px; }
+  .integration-name { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+  .integration-desc { font-size: 11px; color: #666; line-height: 1.4; }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 12px; }
+  .tip-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; }
+  .tip-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; font-size: 18px; }
+  .tip-icon.green { background: #e8f5e8; }
+  .tip-icon.blue { background: #e8f0fb; }
+  .tip-icon.gold { background: #fef7e0; }
+  .tip-icon.teal { background: #e0f7f7; }
+  .tip-card h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; color: #555; line-height: 1.6; }
+
+  /* POLICY BLOCK */
+  .policy-block { background: #fff; border: 2px solid #e03c3c; border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; }
+  .policy-title { font-size: 18px; font-weight: 800; color: #c0000a; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .policy-rules { display: flex; flex-direction: column; gap: 10px; }
+  .policy-rule { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: #333; line-height: 1.6; }
+  .policy-rule .icon { color: #e03c3c; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  .contact-card { background: #418344; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .contact-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .contact-card p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.6; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link { background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.3); text-align: center; white-space: nowrap; }
+  .page-footer { background: #418344; padding: 0; margin-top: 80px; }
+  .wave-top { width: 100%; display: block; line-height: 0; }
+  .footer-inner { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { color: #fff; font-size: 15px; font-weight: 800; }
+  .footer-brand span { color: #F5BD29; }
+  .footer-text { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 3px; }
+  .footer-series { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500; }
+  .footer-series span { color: #F5BD29; }
+  @media (max-width: 640px) {
+    .header-inner { padding: 24px 20px 0; }
+    .header-title { font-size: 28px; }
+    .main { padding: 32px 16px 60px; }
+    .nav-strip { padding: 0 16px; }
+    .overview-card { flex-direction: column; padding: 24px; }
+    .vs-grid { grid-template-columns: 1fr; }
+    .footer-inner { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="header-org">Caribbean <span>Biodiversity</span> Fund</div>
+        <div class="header-org-sub">Staff Training Series</div>
+      </div>
+      <span class="badge-app">Google Workspace</span>
+    </div>
+    <div class="header-title">Gemini <span>at CBF</span></div>
+    <div class="header-sub">Your complete guide to using Google's AI assistant at CBF — from drafting emails and summarising documents to generating ideas and working smarter across Google Workspace.</div>
+  </div>
+  <svg class="wave-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,65 480,15 720,40 C960,65 1200,15 1440,40 L1440,60 L0,60 Z" fill="#f5f7fa"/>
+  </svg>
+</div>
+
+<nav class="nav-strip">
+  <a href="#overview">Overview</a>
+  <a href="#access">Access</a>
+  <a href="#gemini-vs-notebooklm">Gemini vs NotebookLM</a>
+  <a href="#prompting">Prompting</a>
+  <a href="#usecases">Use Cases</a>
+  <a href="#workspace">In Workspace</a>
+  <a href="#policies">Policies</a>
+  <a href="#tips">Tips</a>
+  <a href="#support">Support</a>
+</nav>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <div class="section-tag">Overview</div>
+    <h2 class="section-title">What is Gemini?</h2>
+    <p class="section-lead">Gemini is Google's AI assistant — available as a standalone tool at gemini.google.com and built directly into Google Workspace apps including Gmail, Docs, Sheets, Slides, and Drive. It helps CBF staff write faster, think through problems, summarise content, and automate repetitive tasks using natural language instructions.</p>
+
+    <div class="overview-card">
+      <div class="overview-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="overview-text">
+        <h3>How Gemini fits into CBF's work</h3>
+        <p>Gemini is a general-purpose AI assistant that draws on broad world knowledge to help with writing, research, analysis, and ideation. Unlike NotebookLM — which is anchored strictly to documents you upload — Gemini can help with tasks that don't require a specific source, like drafting a new email, brainstorming project ideas, explaining a concept, or rewriting a paragraph. Within Google Workspace, Gemini acts as an intelligent writing and thinking partner embedded in the tools you already use every day.</p>
+      </div>
+    </div>
+
+    <div class="use-cases">
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#e8f5e8;">✉️</div>
+        <div><h4>Email drafting</h4><p>Draft professional emails to partners, donors, and grantees from a brief description of what you need to say</p></div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#e8f0fb;">📝</div>
+        <div><h4>Document drafting</h4><p>Generate first drafts of reports, proposals, meeting agendas, and communication briefs in seconds</p></div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#e0f7f7;">🔍</div>
+        <div><h4>Research & summarisation</h4><p>Ask Gemini to explain concepts, summarise topics, or compare approaches relevant to CBF's conservation work</p></div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#fef7e0;">💡</div>
+        <div><h4>Brainstorming</h4><p>Generate ideas for communications campaigns, engagement strategies, workshop formats, or project approaches</p></div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon" style="background:#fde8db;">📊</div>
+        <div><h4>Data interpretation</h4><p>Ask Gemini in Sheets to explain patterns in your data, write formulas, or generate chart summaries</p></div>
+      </div>
+    </div>
+
+    <div class="facts-grid">
+      <div class="fact-card">
+        <div class="fact-label">Standalone access</div>
+        <div class="fact-value">gemini.google.com</div>
+      </div>
+      <div class="fact-card blue">
+        <div class="fact-label">In Workspace</div>
+        <div class="fact-value">Built into Gmail, Docs, Sheets, Slides, Drive</div>
+      </div>
+      <div class="fact-card teal">
+        <div class="fact-label">Knowledge</div>
+        <div class="fact-value">Broad world knowledge — not limited to your documents</div>
+      </div>
+      <div class="fact-card gold">
+        <div class="fact-label">Cost</div>
+        <div class="fact-value">Included with Google Workspace — no extra subscription</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ACCESS -->
+  <section id="access">
+    <div class="section-tag">Getting Started</div>
+    <h2 class="section-title">Accessing Gemini</h2>
+    <p class="section-lead">Gemini is available in two ways — as a standalone assistant at gemini.google.com and as an embedded feature within the Google Workspace apps you already use.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">1</div><div class="task-title">Access Gemini as a standalone assistant</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Go to <strong>gemini.google.com</strong> in any browser</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Sign in with your <strong>CBF Google account</strong> — use your <code>firstnameinitiallastname@caribbeanbiodiversityfund.org</code> address</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">The Gemini interface opens with a conversation window — type your request in plain language and press Enter</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Previous conversations are saved in the left sidebar — click any conversation to continue it or start a fresh one</div></li>
+        </ol>
+        <div class="note-box"><strong>Sign in with your CBF account:</strong> Using your CBF Google account gives Gemini access to your Google Workspace context — it can reference your Drive files and integrate with Gmail and Calendar when needed. Always use your CBF account for work-related Gemini sessions.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">2</div><div class="task-title">Access Gemini inside Google Workspace apps</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text"><strong>In Gmail:</strong> Click the <strong>Gemini star icon</strong> (✦) in the compose window or in the right sidebar to open Gemini — use it to draft, refine, or summarise emails</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text"><strong>In Google Docs:</strong> Click <strong>Ask Gemini</strong> (✦ icon, top right) or click the Gemini icon in the left margin next to any paragraph — use it to draft sections, improve text, or generate content</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text"><strong>In Google Sheets:</strong> Click the <strong>Gemini icon</strong> in the toolbar — use it to generate formulas, analyse data, or create charts from natural language descriptions</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text"><strong>In Google Slides:</strong> Click <strong>Ask Gemini</strong> in the toolbar — use it to generate slide content, rewrite text, or create speaker notes from bullet points</div></li>
+        </ol>
+        <div class="success-box"><strong>Gemini is always where you are:</strong> The most efficient way to use Gemini is directly inside the app you are already working in. You do not need to switch tabs — the Gemini panel opens alongside your document, email, or spreadsheet without interrupting your flow.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- GEMINI VS NOTEBOOKLM -->
+  <section id="gemini-vs-notebooklm">
+    <div class="section-tag">Knowing Which Tool to Use</div>
+    <h2 class="section-title">Gemini vs NotebookLM — when to use which</h2>
+    <p class="section-lead">Both are AI tools available to all CBF staff through your Google account. The key difference is what they draw on when answering. Understanding this distinction helps you choose the right tool for every task.</p>
+
+    <div class="vs-grid">
+      <div class="vs-card gemini">
+        <div class="vs-label">Use Gemini when</div>
+        <div class="vs-title">Gemini</div>
+        <div class="vs-item"><span class="vs-dot"></span><span>Writing or drafting from scratch — emails, reports, proposals, agendas</span></div>
+        <div class="vs-item"><span class="vs-dot"></span><span>Brainstorming ideas, frameworks, or approaches</span></div>
+        <div class="vs-item"><span class="vs-dot"></span><span>Explaining concepts or topics you want to understand better</span></div>
+        <div class="vs-item"><span class="vs-dot"></span><span>Improving or rewriting existing text</span></div>
+        <div class="vs-item"><span class="vs-dot"></span><span>Working inside Gmail, Docs, Sheets, or Slides</span></div>
+        <div class="vs-item"><span class="vs-dot"></span><span>Tasks that benefit from broad general knowledge</span></div>
+      </div>
+      <div class="vs-card notebooklm">
+        <div class="vs-label">Use NotebookLM when</div>
+        <div class="vs-title">NotebookLM</div>
+        <div class="vs-item"><span class="vs-dot"></span><span>Reviewing specific CBF documents — grantee reports, board papers, project files</span></div>
+        <div class="vs-item"><span class="vs-dot"></span><span>Asking questions that require answers grounded in specific source documents</span></div>
+        <div class="vs-item"><span class="vs-dot"></span><span>Comparing or synthesising multiple documents</span></div>
+        <div class="vs-item"><span class="vs-dot"></span><span>You need cited, traceable answers from known sources</span></div>
+        <div class="vs-item"><span class="vs-dot"></span><span>Working with documents in multiple languages</span></div>
+        <div class="vs-item"><span class="vs-dot"></span><span>Building a structured review or research record</span></div>
+      </div>
+    </div>
+
+    <div class="info-box"><strong>The simplest way to decide:</strong> If you are working with specific CBF documents and need accurate, cited answers from them — use NotebookLM. If you need help writing, thinking, or working within a Google app — use Gemini. Many workflows use both: Gemini to draft, NotebookLM to verify from sources.</div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- PROMPTING -->
+  <section id="prompting">
+    <div class="section-tag">Getting the Best Results</div>
+    <h2 class="section-title">How to write effective prompts</h2>
+    <p class="section-lead">The quality of what Gemini produces depends almost entirely on how clearly you describe what you need. These four principles will immediately improve your results.</p>
+
+    <div class="principles-grid">
+      <div class="principle-card">
+        <div class="principle-num">01</div>
+        <div class="principle-title">Give context</div>
+        <div class="principle-desc">Tell Gemini who you are, what CBF does, and what the output is for. Context shapes the tone, depth, and relevance of the response.</div>
+        <div class="principle-example">Instead of: "Write an email" — try: "Write a professional email from a Caribbean conservation fund to a grantee requesting their Q2 progress report"</div>
+      </div>
+      <div class="principle-card blue">
+        <div class="principle-num">02</div>
+        <div class="principle-title">Specify the format</div>
+        <div class="principle-desc">Tell Gemini exactly what you want back — a bullet list, a 3-paragraph summary, a table, a draft email, a 5-point agenda. Vague requests get generic outputs.</div>
+        <div class="principle-example">Instead of: "Summarise this" — try: "Summarise this in 4 bullet points, each under 20 words, suitable for a slide presentation"</div>
+      </div>
+      <div class="principle-card gold">
+        <div class="principle-num">03</div>
+        <div class="principle-title">Set the tone</div>
+        <div class="principle-desc">Specify whether the output should be formal, professional, concise, technical, or accessible. CBF communications typically require a professional but approachable tone.</div>
+        <div class="principle-example">Add: "Write in a professional, concise tone suitable for an international conservation organisation"</div>
+      </div>
+      <div class="principle-card teal">
+        <div class="principle-num">04</div>
+        <div class="principle-title">Iterate and refine</div>
+        <div class="principle-desc">Gemini remembers your conversation. If the first response is not quite right, follow up: ask it to make it shorter, more formal, or to add a specific point. You rarely need to start over.</div>
+        <div class="principle-example">Follow up with: "Make this more concise" or "Add a paragraph about CBF's Caribbean mandate" or "Rewrite the opening line"</div>
+      </div>
+    </div>
+
+    <div class="task-block" style="margin-top:24px;">
+      <div class="task-header"><div class="task-num">3</div><div class="task-title">CBF-specific prompt examples</div></div>
+      <div class="task-body">
+        <p style="font-size:14px;color:#555;line-height:1.6;margin-bottom:14px;">These prompts are tailored to CBF's day-to-day work. Adapt them with the specific details of your task:</p>
+        <div class="prompt-grid">
+          <div class="prompt-card">
+            <div class="prompt-category">Partner email</div>
+            <div class="prompt-text">Draft a professional email from CBF to a partner organisation inviting them to a virtual project review meeting. Tone: formal but warm. Include a request to confirm availability within 5 business days.</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-category">Meeting agenda</div>
+            <div class="prompt-text">Create a 60-minute meeting agenda for a CBF project review covering: progress update, budget review, risks and mitigation, next steps, and AOB. Include suggested time allocations.</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-category">Report section</div>
+            <div class="prompt-text">Write a 2-paragraph introduction for a Caribbean biodiversity conservation programme report. Highlight the importance of conservation finance for small island developing states. Professional tone.</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-category">Slide content</div>
+            <div class="prompt-text">Generate 5 bullet points for a slide titled "CBF's Impact in 2026" covering: countries supported, funds disbursed, species protected, communities engaged, and key partnerships. Concise, presentation-ready language.</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-category">Concept explanation</div>
+            <div class="prompt-text">Explain ecosystem-based adaptation in plain language suitable for a non-technical audience. Keep it under 150 words and include one Caribbean example.</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-category">Text improvement</div>
+            <div class="prompt-text">Rewrite the following paragraph to be more concise and professional, suitable for a donor report: [paste your text here]. Keep the key facts but reduce the length by 30%.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- USE CASES -->
+  <section id="usecases">
+    <div class="section-tag">Core Tasks</div>
+    <h2 class="section-title">Key tasks for CBF staff</h2>
+    <p class="section-lead">These are the most practical, time-saving Gemini tasks for CBF's daily work — ready to use immediately.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">4</div><div class="task-title">Draft and improve emails</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">In Gmail, open a new compose window → click the <strong>Gemini star icon ✦</strong> → select <strong>Help me write</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Describe what you need in plain language — for example: <em>"Write a follow-up email to a grantee who has not submitted their Q1 report. Professional but firm tone."</em></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Gemini generates a draft — review it, click <strong>Insert</strong> to add it to your compose window, then edit as needed before sending</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To improve an email you have already written: select the text → click the Gemini icon → choose <strong>Refine</strong> options such as Formalise, Shorten, or Elaborate</div></li>
+        </ol>
+        <div class="note-box"><strong>Always review before sending:</strong> Gemini drafts are a starting point, not a finished product. Always read the full draft, personalise it with specific names and details, and confirm the tone is appropriate for the recipient before sending any CBF communication.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">5</div><div class="task-title">Draft and improve documents in Google Docs</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open a Google Doc → click the <strong>Gemini ✦ icon</strong> in the top right or click <strong>Insert → Help me write</strong> to open the Gemini panel</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Type your request — for example: <em>"Write a 3-paragraph executive summary for a project progress report on coral reef restoration in the Eastern Caribbean"</em></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Gemini generates the content — click <strong>Insert</strong> to add it to your document at the cursor position</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To improve existing text: select a paragraph → click the Gemini icon that appears → choose from <strong>Shorten, Elaborate, Rephrase,</strong> or type a custom instruction</div></li>
+        </ol>
+        <div class="success-box"><strong>Use Gemini to break writer's block:</strong> When starting a new report or proposal feels daunting, ask Gemini to generate a rough first draft or an outline. Even an imperfect draft gives you something concrete to edit — which is always faster than writing from a blank page.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">6</div><div class="task-title">Work with data in Google Sheets</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open a Google Sheet → click the <strong>Gemini icon</strong> in the toolbar to open the Gemini panel</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Ask Gemini to <strong>create a formula</strong> in plain language — for example: <em>"Write a formula to sum all values in column D where column B says 'Active'"</em> — Gemini writes the SUMIF formula and explains it</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Ask Gemini to <strong>analyse your data</strong> — for example: <em>"What are the top 3 spending categories in this sheet?"</em> — Gemini reads the visible data and provides a plain-language summary</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Ask Gemini to <strong>create a table or tracker</strong> from scratch — for example: <em>"Create a project activity tracker with columns for activity name, responsible person, start date, due date, status, and notes"</em></div></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">7</div><div class="task-title">Generate slide content in Google Slides</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open a Google Slides presentation → click <strong>Ask Gemini ✦</strong> in the toolbar</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Ask Gemini to generate content for a specific slide — for example: <em>"Write concise bullet points for a slide titled 'Why Caribbean Biodiversity Matters' — 4 points, each under 12 words"</em></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Ask Gemini to <strong>generate speaker notes</strong> from your slide bullets — select the text on a slide and ask: <em>"Write 3 sentences of speaker notes expanding on these bullet points"</em></div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Ask Gemini to <strong>suggest a slide structure</strong> for a presentation — for example: <em>"Suggest a 10-slide structure for a donor briefing on CBF's reef resilience programme"</em></div></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">8</div><div class="task-title">Summarise emails and threads in Gmail</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open a long email thread in Gmail → click the <strong>Summarise this email</strong> button (Gemini ✦ icon at the top of the thread)</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Gemini generates a concise summary of the thread — the key points, decisions made, and any action items identified</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">This is particularly useful for catching up on long project threads after leave, or before jumping into a conversation that has been running for several days</div></li>
+        </ol>
+        <div class="info-box"><strong>Useful for onboarding:</strong> New CBF staff can use Gemini's email summarisation to quickly get up to speed on active project threads they have been added to — without reading every message in a long chain.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- IN WORKSPACE -->
+  <section id="workspace">
+    <div class="section-tag">Workspace Integration</div>
+    <h2 class="section-title">Gemini across Google Workspace</h2>
+    <p class="section-lead">Here is a quick reference for where to find Gemini in each Google Workspace app and what it can do there.</p>
+
+    <div class="integration-grid">
+      <div class="integration-card">
+        <div class="integration-icon">✉️</div>
+        <div class="integration-name">Gmail</div>
+        <div class="integration-desc">Draft emails, summarise threads, refine tone, generate replies</div>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon">📄</div>
+        <div class="integration-name">Docs</div>
+        <div class="integration-desc">Draft sections, improve text, generate outlines, summarise documents</div>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon">📊</div>
+        <div class="integration-name">Sheets</div>
+        <div class="integration-desc">Write formulas, analyse data, build trackers, explain patterns</div>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon">🖥️</div>
+        <div class="integration-name">Slides</div>
+        <div class="integration-desc">Generate slide content, write speaker notes, suggest structure</div>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon">📁</div>
+        <div class="integration-name">Drive</div>
+        <div class="integration-desc">Search files using natural language, get summaries of Drive documents</div>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon">🌐</div>
+        <div class="integration-name">Standalone</div>
+        <div class="integration-desc">Open-ended conversations, research, brainstorming — gemini.google.com</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- POLICIES -->
+  <section id="policies">
+    <div class="section-tag">CBF Policies</div>
+    <h2 class="section-title">Responsible use of Gemini at CBF</h2>
+    <p class="section-lead">Gemini is a powerful tool — and like all AI tools, it requires professional judgement. These rules protect CBF, its partners, and its data.</p>
+
+    <div class="policy-block">
+      <div class="policy-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c0000a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Non-negotiable rules
+      </div>
+      <div class="policy-rules">
+        <div class="policy-rule"><span class="icon">✕</span><span><strong>Never input confidential personal data into Gemini.</strong> Do not paste names, addresses, ID numbers, financial account details, or any personally identifiable information of CBF staff, grantees, or beneficiaries.</span></div>
+        <div class="policy-rule"><span class="icon">✕</span><span><strong>Never share confidential CBF strategy, financial, or legal documents with Gemini</strong> without checking with your manager first. Internal CBF documents that are not meant for public distribution should not be pasted into AI tools.</span></div>
+        <div class="policy-rule"><span class="icon">✕</span><span><strong>Never treat Gemini output as fact without verification.</strong> Gemini can generate plausible but incorrect information — especially for specific statistics, dates, or technical details. Always verify factual claims before including them in official CBF reports or communications.</span></div>
+        <div class="policy-rule"><span class="icon">✕</span><span><strong>Never send AI-generated content without reviewing and editing it.</strong> All CBF communications — emails, reports, proposals — must be reviewed and personalised by the staff member responsible. Unedited AI output does not meet CBF's professional standards.</span></div>
+        <div class="policy-rule"><span class="icon">✕</span><span><strong>Never use Gemini to make decisions.</strong> Gemini is a tool to support your thinking, not replace it. All project, financial, and strategic decisions remain the responsibility of CBF staff, not AI tools.</span></div>
+      </div>
+    </div>
+
+    <div class="alert-box"><strong>When in doubt, ask your manager.</strong> If you are unsure whether a particular use of Gemini is appropriate — especially involving sensitive documents or partner information — check with your manager before proceeding. CBF's data protection and confidentiality obligations apply to AI tools just as they do to any other system.</div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- TIPS -->
+  <section id="tips">
+    <div class="section-tag">Best Practices</div>
+    <h2 class="section-title">Tips for CBF staff</h2>
+    <p class="section-lead">Habits that make Gemini a genuinely useful working tool rather than a novelty.</p>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon green">✍️</div>
+        <h4>Use Gemini for first drafts</h4>
+        <p>Gemini excels at generating starting points — a rough draft, an outline, a list of ideas. Your job is then to edit, personalise, and improve. This is almost always faster than writing from scratch.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon blue">🔄</div>
+        <h4>Iterate — don't restart</h4>
+        <p>If the first response is not right, follow up in the same conversation. Ask it to be shorter, more formal, or to add a specific detail. You rarely need to start a new conversation from scratch.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon teal">🌍</div>
+        <h4>Add CBF context to every prompt</h4>
+        <p>Gemini does not know CBF unless you tell it. Including a brief context line — "CBF is a Caribbean conservation fund working across 14 countries" — significantly improves the relevance of every response.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon gold">✅</div>
+        <h4>Verify facts and figures</h4>
+        <p>Gemini can confidently state things that are incorrect. Any statistic, citation, or specific fact generated by Gemini should be independently verified before appearing in a CBF report or presentation.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon green">🔀</div>
+        <h4>Use Gemini + NotebookLM together</h4>
+        <p>A powerful combination: use NotebookLM to extract accurate findings from source documents, then use Gemini to help write those findings into polished report language. Each tool does what it does best.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon blue">📋</div>
+        <h4>Build a personal prompt library</h4>
+        <p>Keep a simple Google Doc with your most useful Gemini prompts — the ones that consistently produce good results for your role. Reusing and refining proven prompts is much faster than writing new ones every time.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="support">
+    <div class="section-tag">Need Help?</div>
+    <h2 class="section-title">Getting support</h2>
+    <p class="section-lead">For technical access issues with Gemini, contact the CBF System Administrator. The Google Help Center has detailed documentation on Gemini features across all Workspace apps.</p>
+    <div class="contact-card">
+      <div>
+        <h3>Contact & Resources</h3>
+        <p>Gemini is included in CBF's Google Workspace subscription and available to all staff. For access issues, contact the System Administrator. For guidance on responsible AI use, speak to your manager.</p>
+      </div>
+      <div class="contact-links">
+        <a href="#" class="contact-link">System Administrator</a>
+        <a href="https://support.google.com/gemini" target="_blank" class="contact-link">Gemini Help Center ↗</a>
+        <a href="https://gemini.google.com" target="_blank" class="contact-link">Open Gemini ↗</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  <svg class="wave-top" viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1350,15 1440,20 L1440,40 L0,40 Z" fill="#418344"/>
+  </svg>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Caribbean <span>Biodiversity</span> Fund</div>
+      <div class="footer-text">© 2026 Caribbean Biodiversity Fund. All rights reserved.</div>
+    </div>
+    <div class="footer-series">CBF Staff Training Series · <span>Google Workspace</span> · Gemini Guide</div>
+  </div>
+</footer>
+
+</body>
+</html>
