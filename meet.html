@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Meet – CBF Staff Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Outfit', sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: #0EBBB9; padding: 0; position: relative; overflow: hidden; }
+  .header-inner { padding: 36px 48px 0 48px; position: relative; z-index: 2; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+  .header-brand { display: flex; flex-direction: column; }
+  .header-org { color: #fff; font-size: 18px; font-weight: 800; line-height: 1.2; }
+  .header-org span { color: #F5BD29; }
+  .header-org-sub { color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .badge-app { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .header-title { color: #fff; font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
+  .header-title span { color: #F5BD29; }
+  .header-sub { color: rgba(255,255,255,0.88); font-size: 16px; font-weight: 400; max-width: 520px; line-height: 1.6; padding-bottom: 36px; }
+  .wave-footer { width: 100%; display: block; line-height: 0; }
+  .nav-strip { background: #fff; border-bottom: 1px solid #e0e6ef; padding: 0 48px; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+  .nav-strip a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; padding: 14px 18px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+  .nav-strip a:hover { color: #0EBBB9; border-bottom-color: #0EBBB9; }
+  .main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section-tag { display: inline-block; background: #e0f7f7; color: #0a8f8d; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+  .section-title { font-size: 26px; font-weight: 800; color: #0a8f8d; margin-bottom: 6px; }
+  .section-lead { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 28px; max-width: 640px; }
+  .section-divider { border: none; border-top: 1.5px solid #e0e6ef; margin: 48px 0; }
+  .overview-card { background: #0a8f8d; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; gap: 32px; align-items: flex-start; margin-bottom: 36px; }
+  .overview-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .overview-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .overview-text p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.88); }
+  .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .fact-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; border-left: 4px solid #0EBBB9; min-width: 0; }
+  .fact-card.green { border-left-color: #418344; }
+  .fact-card.blue { border-left-color: #1F4A94; }
+  .fact-card.gold { border-left-color: #F5BD29; }
+  .fact-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 6px; }
+  .fact-value { font-size: 14px; font-weight: 600; color: #0a8f8d; line-height: 1.45; word-break: break-word; }
+  .fact-card.green .fact-value { color: #418344; }
+  .fact-card.blue .fact-value { color: #1F4A94; }
+  .fact-card.gold .fact-value { color: #b88a1a; }
+  .task-block { background: #fff; border: 1px solid #e0e6ef; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+  .task-header { background: #e8fafa; padding: 18px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e0e6ef; }
+  .task-num { width: 32px; height: 32px; background: #0EBBB9; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .task-title { font-size: 16px; font-weight: 700; color: #1a1a1a; flex: 1; }
+  .task-body { padding: 24px; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .step-item { display: flex; gap: 14px; align-items: flex-start; }
+  .step-dot { width: 24px; height: 24px; background: #e0f7f7; color: #0a8f8d; font-size: 12px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; line-height: 1.6; color: #333; }
+  .step-text strong { color: #0a8f8d; font-weight: 600; }
+  .step-text code { background: #e0f7f7; color: #0a8f8d; font-family: monospace; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .note-box { background: #fffbea; border: 1px solid #f5bd29; border-left: 4px solid #F5BD29; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a5c00; line-height: 1.6; }
+  .note-box strong { color: #5a4300; }
+  .alert-box { background: #fff0f0; border: 1px solid #f5a0a0; border-left: 4px solid #e03c3c; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a1a1a; line-height: 1.6; }
+  .alert-box strong { color: #5a0000; }
+  .success-box { background: #f2f8f2; border: 1px solid #a0d5a0; border-left: 4px solid #418344; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #1a4a1a; line-height: 1.6; }
+  .info-box { background: #e0f7f7; border: 1px solid #a0d8d7; border-left: 4px solid #0EBBB9; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #0a5555; line-height: 1.6; }
+  .path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+  .path-step { background: #e0f7f7; color: #0a8f8d; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+  .path-arrow { color: #aaa; font-size: 14px; }
+
+  /* CONTROLS VISUAL REFERENCE */
+  .controls-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+  .control-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 16px; text-align: center; }
+  .control-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
+  .control-icon.teal { background: #e0f7f7; }
+  .control-icon.red { background: #fff0f0; }
+  .control-icon.blue { background: #e8f0fb; }
+  .control-icon.green { background: #e8f5e8; }
+  .control-icon.gold { background: #fef7e0; }
+  .control-name { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+  .control-desc { font-size: 11px; color: #666; line-height: 1.4; }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 12px; }
+  .tip-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; }
+  .tip-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .tip-icon.teal { background: #e0f7f7; }
+  .tip-icon.green { background: #e8f5e8; }
+  .tip-icon.blue { background: #e8f0fb; }
+  .tip-icon.gold { background: #fef7e0; }
+  .tip-card h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; color: #555; line-height: 1.6; }
+
+  /* ETIQUETTE */
+  .etiquette-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 12px; }
+  .etiquette-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 18px; }
+  .etiquette-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .etiquette-label.do { color: #418344; }
+  .etiquette-label.dont { color: #e03c3c; }
+  .etiquette-item { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: #444; line-height: 1.5; margin-bottom: 7px; }
+  .etiquette-item:last-child { margin-bottom: 0; }
+  .etiquette-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+
+  .contact-card { background: #0a8f8d; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .contact-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .contact-card p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.6; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link { background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.3); text-align: center; white-space: nowrap; }
+  .page-footer { background: #0a8f8d; padding: 0; margin-top: 80px; }
+  .wave-top { width: 100%; display: block; line-height: 0; }
+  .footer-inner { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { color: #fff; font-size: 15px; font-weight: 800; }
+  .footer-brand span { color: #F5BD29; }
+  .footer-text { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 3px; }
+  .footer-series { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500; }
+  .footer-series span { color: #F5BD29; }
+  @media (max-width: 640px) {
+    .header-inner { padding: 24px 20px 0; }
+    .header-title { font-size: 28px; }
+    .main { padding: 32px 16px 60px; }
+    .nav-strip { padding: 0 16px; }
+    .overview-card { flex-direction: column; padding: 24px; }
+    .footer-inner { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="header-org">Caribbean <span>Biodiversity</span> Fund</div>
+        <div class="header-org-sub">Staff Training Series</div>
+      </div>
+      <span class="badge-app">Google Workspace</span>
+    </div>
+    <div class="header-title">Google Meet <span>at CBF</span></div>
+    <div class="header-sub">Your complete guide to joining, hosting, and running video meetings at the Caribbean Biodiversity Fund — from your first call to managing large partner sessions.</div>
+  </div>
+  <svg class="wave-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,65 480,15 720,40 C960,65 1200,15 1440,40 L1440,60 L0,60 Z" fill="#f5f7fa"/>
+  </svg>
+</div>
+
+<nav class="nav-strip">
+  <a href="#overview">Overview</a>
+  <a href="#joining">Joining</a>
+  <a href="#controls">Controls</a>
+  <a href="#hosting">Hosting</a>
+  <a href="#screenshare">Screen Share</a>
+  <a href="#recording">Recording</a>
+  <a href="#chat">Chat & Q&A</a>
+  <a href="#etiquette">Etiquette</a>
+  <a href="#tips">Tips</a>
+  <a href="#support">Support</a>
+</nav>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <div class="section-tag">Overview</div>
+    <h2 class="section-title">What is Google Meet?</h2>
+    <p class="section-lead">Google Meet is CBF's primary video conferencing tool. It is built into Google Calendar and Gmail, making it the default platform for all internal meetings, partner calls, and virtual events.</p>
+
+    <div class="overview-card">
+      <div class="overview-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+      </div>
+      <div class="overview-text">
+        <h3>How CBF uses Google Meet</h3>
+        <p>Every meeting created in Google Calendar automatically includes a Meet link. CBF staff use Meet for internal check-ins, project team meetings, partner and donor calls, board meetings, and all-staff sessions. No separate app installation is required — Meet runs entirely in your browser, though a mobile app is also available.</p>
+      </div>
+    </div>
+
+    <div class="facts-grid">
+      <div class="fact-card">
+        <div class="fact-label">Platform</div>
+        <div class="fact-value">Google Meet (Workspace)</div>
+      </div>
+      <div class="fact-card green">
+        <div class="fact-label">Access</div>
+        <div class="fact-value">Browser (no install needed) + mobile app</div>
+      </div>
+      <div class="fact-card blue">
+        <div class="fact-label">Capacity</div>
+        <div class="fact-value">Up to 500 participants (Workspace)</div>
+      </div>
+      <div class="fact-card gold">
+        <div class="fact-label">Integration</div>
+        <div class="fact-value">Auto-linked in Calendar & Gmail invites</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- JOINING -->
+  <section id="joining">
+    <div class="section-tag">Getting Started</div>
+    <h2 class="section-title">Joining a meeting</h2>
+    <p class="section-lead">There are several ways to join a Google Meet — from your calendar, a Gmail invite, a direct link, or a meeting code. All routes lead to the same place.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">1</div><div class="task-title">Join from Google Calendar</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open <strong>Google Calendar</strong> and click on the meeting event</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click the <strong>Join with Google Meet</strong> button in the event pop-up — this opens Meet directly in your browser</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">On the preview screen, check your <strong>camera and microphone</strong> settings before joining. Toggle them on or off as needed</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Click <strong>Join now</strong> to enter the meeting</div></li>
+        </ol>
+        <div class="note-box"><strong>Tip:</strong> The preview screen shows how you appear to others before you join. Take a moment to check your background, lighting, and audio before entering.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">2</div><div class="task-title">Join from Gmail or a meeting link</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text"><strong>From Gmail:</strong> Open the meeting invitation email and click the <strong>Join with Google Meet</strong> button or the Meet link in the email body</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text"><strong>From a shared link:</strong> Click the link in any message or document — it opens Meet in your browser automatically</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text"><strong>From meet.google.com:</strong> Go to <strong>meet.google.com</strong>, click <strong>Enter a code or link</strong>, and paste the meeting code (format: <code>abc-defg-hij</code>)</div></li>
+        </ol>
+        <div class="info-box"><strong>External guests</strong> joining without a Google account will be placed in a waiting room. As the meeting host or a CBF participant, you will see a notification to admit them — always admit known participants promptly.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">3</div><div class="task-title">Join on mobile</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Download the <strong>Google Meet</strong> app from the App Store (iOS) or Google Play (Android)</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Sign in with your CBF Google account</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Upcoming meetings from your Calendar appear on the home screen — tap <strong>Join</strong> to enter, or tap the Meet link in your Calendar or Gmail app</div></li>
+        </ol>
+        <div class="success-box"><strong>For important meetings:</strong> Whenever possible, join from a laptop or desktop for the best experience — better screen real estate, easier screen sharing, and more stable audio. Use mobile as a backup when needed.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- CONTROLS -->
+  <section id="controls">
+    <div class="section-tag">In-Meeting Controls</div>
+    <h2 class="section-title">Meeting controls quick reference</h2>
+    <p class="section-lead">All main controls appear in the toolbar at the bottom of the Meet screen. Here is what each does.</p>
+
+    <div class="controls-grid">
+      <div class="control-card">
+        <div class="control-icon teal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a8f8d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </div>
+        <div class="control-name">Microphone</div>
+        <div class="control-desc">Mute / unmute. Keyboard shortcut: <strong>Ctrl+D</strong> (PC) or <strong>⌘+D</strong> (Mac)</div>
+      </div>
+      <div class="control-card">
+        <div class="control-icon teal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a8f8d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7L16 12 23 17V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <div class="control-name">Camera</div>
+        <div class="control-desc">Turn video on / off. Shortcut: <strong>Ctrl+E</strong> or <strong>⌘+E</strong></div>
+      </div>
+      <div class="control-card">
+        <div class="control-icon blue">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="control-name">Present</div>
+        <div class="control-desc">Share your screen, a window, or a tab with participants</div>
+      </div>
+      <div class="control-card">
+        <div class="control-icon green">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="control-name">Chat</div>
+        <div class="control-desc">Send text messages to all participants during the meeting</div>
+      </div>
+      <div class="control-card">
+        <div class="control-icon teal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a8f8d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="control-name">People</div>
+        <div class="control-desc">View participant list, admit waiting guests, mute others (host)</div>
+      </div>
+      <div class="control-card">
+        <div class="control-icon gold">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b88a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        </div>
+        <div class="control-name">More options</div>
+        <div class="control-desc">Access recording, noise cancellation, captions, layouts, and settings</div>
+      </div>
+      <div class="control-card">
+        <div class="control-icon teal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a8f8d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+        </div>
+        <div class="control-name">Raise hand</div>
+        <div class="control-desc">Signal you want to speak without interrupting — the host sees a notification</div>
+      </div>
+      <div class="control-card">
+        <div class="control-icon" style="background:#fff0f0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e03c3c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.68 13.31a16 16 0 003.41 2.6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7 2 2 0 011.72 2v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.42 19.42 0 013.43 9.19 19.79 19.79 0 01.36 10.56 2 2 0 012 8.38V5.5a2 2 0 011.72-2 12.84 12.84 0 002.81-.7 2 2 0 012.11.45l1.27 1.27A16 16 0 0013.31 7.68"/><line x1="23" y1="1" x2="1" y2="23"/></svg>
+        </div>
+        <div class="control-name">Leave call</div>
+        <div class="control-desc">Exit the meeting. Hosts: use "End call for all" to close the meeting for everyone</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- HOSTING -->
+  <section id="hosting">
+    <div class="section-tag">Host Controls</div>
+    <h2 class="section-title">Hosting a meeting</h2>
+    <p class="section-lead">As the meeting organiser or host at CBF, you have additional controls to manage the room, admit guests, and keep the session running smoothly.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">4</div><div class="task-title">Start and manage your meeting</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Join the meeting a few minutes early to set up — check audio, video, and any documents or slides you plan to share</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click the <strong>People</strong> icon to see who has joined and admit any participants waiting in the lobby</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To <strong>mute a disruptive participant</strong>: click their name in the People panel → click the microphone icon next to their name. Note: you cannot unmute others — only they can unmute themselves</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To <strong>remove a participant</strong>: click their name → click the three-dot menu → <strong>Remove from meeting</strong>. Use this sparingly and only when necessary</div></li>
+          <li class="step-item"><div class="step-dot">5</div><div class="step-text">When the meeting is over, click the red <strong>Leave call</strong> button → select <strong>End call for everyone</strong> to close the session for all participants</div></li>
+        </ol>
+        <div class="note-box"><strong>Host tip:</strong> Arrive 5 minutes early for external or partner meetings. This gives you time to test your setup and admit guests promptly as they arrive — it reflects well on CBF's professionalism.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">5</div><div class="task-title">Manage host controls & meeting security</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click the <strong>shield / lock icon</strong> at the bottom of the screen (or via More options → Host controls) to access security settings</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Toggle <strong>Quick access off</strong> for sensitive meetings — this places all new joiners in the waiting room for manual approval, even those with the link</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Toggle <strong>Share their screen off</strong> to prevent participants from screen sharing without permission — useful for large all-staff or partner presentations</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Toggle <strong>Send chat messages off</strong> to disable the in-meeting chat if it is becoming a distraction during formal sessions</div></li>
+        </ol>
+        <div class="alert-box"><strong>For board meetings or confidential sessions:</strong> Always disable Quick Access and enable the waiting room. Only admit participants you recognise. Do not share Meet links in public channels or on social media.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">6</div><div class="task-title">Use breakout rooms</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>Activities</strong> (grid icon in the bottom toolbar) → select <strong>Breakout rooms</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Set the number of rooms and choose to assign participants <strong>manually</strong> or let Meet assign them <strong>randomly</strong></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click <strong>Open rooms</strong> — participants receive a notification to join their assigned room</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To bring everyone back: click <strong>Close all rooms</strong> — a 60-second warning is sent to all breakout rooms before they are closed</div></li>
+        </ol>
+        <div class="info-box"><strong>When to use breakout rooms:</strong> Workshops, training sessions, or large team meetings where smaller group discussion is needed. Works well for up to 100 participants split across up to 100 rooms.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SCREEN SHARE -->
+  <section id="screenshare">
+    <div class="section-tag">Presenting</div>
+    <h2 class="section-title">Sharing your screen</h2>
+    <p class="section-lead">Screen sharing in Google Meet lets you present documents, slides, reports, or any content to all participants in real time.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">7</div><div class="task-title">Share your screen, a window, or a tab</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click the <strong>Present now</strong> button (screen icon) in the bottom toolbar</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Choose what to share:
+            <br>— <strong>Your entire screen</strong>: shows everything on your display
+            <br>— <strong>A window</strong>: shares only one specific application (recommended)
+            <br>— <strong>A tab</strong>: shares a single browser tab, with audio included (best for videos)</div>
+          </li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Select your choice and click <strong>Share</strong>. A red border appears around whatever is being shared</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To stop sharing: click <strong>Stop presenting</strong> in the Meet toolbar or in the notification bar at the bottom of your screen</div></li>
+        </ol>
+        <div class="note-box"><strong>Best practice — share a window, not your whole screen:</strong> Sharing a specific window prevents participants from accidentally seeing notifications, personal files, or other open tabs. Close unnecessary tabs and turn off notifications before presenting.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">8</div><div class="task-title">Present Google Slides directly in Meet</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open your Google Slides presentation in a browser tab before the meeting</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">In Meet, click <strong>Present now</strong> → <strong>A Tab</strong> → select the Slides tab</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Alternatively, in Google Slides click <strong>Slideshow</strong> → <strong>Present to a meeting</strong> — this connects directly to your active Meet session</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Use the arrow keys or on-screen controls to advance slides — participants see each slide in real time</div></li>
+        </ol>
+        <div class="success-box"><strong>Smooth presentations:</strong> Open your slides and run through them once before the meeting starts. Check that all embedded links, videos, and images load correctly before sharing your screen.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- RECORDING -->
+  <section id="recording">
+    <div class="section-tag">Recording</div>
+    <h2 class="section-title">Recording meetings</h2>
+    <p class="section-lead">Google Meet allows meetings to be recorded and saved to Google Drive. Recordings should only be made with participant consent.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">9</div><div class="task-title">Record a meeting</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click the <strong>three-dot menu</strong> (More options) in the bottom toolbar → select <strong>Record meeting</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">A notification is sent to all participants that the meeting is being recorded. A red recording indicator appears on screen</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To stop recording: click the three-dot menu again → <strong>Stop recording</strong>. Recording also stops automatically when everyone leaves the meeting</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">The recording is saved to the <strong>host's Google Drive</strong> under Meet Recordings, and a link is automatically sent to the host via Gmail. Share the Drive link with participants as needed</div></li>
+        </ol>
+        <div class="alert-box"><strong>Consent is required:</strong> Always inform and gain agreement from all participants before recording — especially for meetings with external guests, partners, or donors. Do not record without prior notice. This is both a professional and legal obligation.</div>
+        <div class="note-box"><strong>Storing recordings:</strong> Move recording files from your personal Drive to the relevant shared CBF project folder in Google Drive promptly after the meeting, so the team can access them.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- CHAT & TOOLS -->
+  <section id="chat">
+    <div class="section-tag">Collaboration Tools</div>
+    <h2 class="section-title">In-meeting chat, captions & Q&A</h2>
+    <p class="section-lead">Google Meet includes several built-in tools that improve communication and accessibility during meetings.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">10</div><div class="task-title">Use the in-meeting chat</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click the <strong>Chat</strong> bubble icon in the toolbar to open the chat panel on the right side of the screen</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Type your message and press <strong>Enter</strong> to send — all participants can see the chat</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Use chat to share links, resources, or questions without interrupting the speaker</div></li>
+        </ol>
+        <div class="info-box"><strong>Note:</strong> Chat messages are visible to all participants but are not saved after the meeting ends unless the meeting is recorded. Copy any important links or action items from chat before leaving.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">11</div><div class="task-title">Turn on live captions</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click the <strong>three-dot menu</strong> (More options) → select <strong>Turn on captions</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Real-time captions generated from speech appear at the bottom of the screen — captions are visible only to you unless all participants enable them individually</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To turn off: return to More options → <strong>Turn off captions</strong></div></li>
+        </ol>
+        <div class="success-box"><strong>Accessibility at CBF:</strong> Encourage all participants to turn on captions when meetings include colleagues or partners for whom English is a second language, or in noisy environments. It improves comprehension for everyone.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">12</div><div class="task-title">Use the Q&A feature (for large meetings)</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>Activities</strong> (grid icon) → select <strong>Q&A</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Participants can submit questions via the Q&A panel — questions can be upvoted by others so the most relevant ones rise to the top</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">The host or a moderator works through questions, marking them as answered</div></li>
+        </ol>
+        <div class="note-box"><strong>When to use Q&A:</strong> Best for all-staff meetings, partner webinars, or any session with 15+ participants where open chat would become overwhelming. For smaller meetings, the raise hand function is simpler.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ETIQUETTE -->
+  <section id="etiquette">
+    <div class="section-tag">CBF Meeting Culture</div>
+    <h2 class="section-title">Video meeting etiquette at CBF</h2>
+    <p class="section-lead">Professional conduct in virtual meetings reflects CBF's values — especially when partners, donors, or community members are present.</p>
+
+    <div class="etiquette-grid">
+      <div class="etiquette-card">
+        <div class="etiquette-label do">Do</div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#418344;">✓</span><span>Join on time — log in 2 minutes early for internal meetings, 5 minutes for external ones</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#418344;">✓</span><span>Mute yourself when not speaking to reduce background noise</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#418344;">✓</span><span>Use a neutral, professional background — physical or a clean virtual background</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#418344;">✓</span><span>Turn your camera on when possible — it improves engagement and connection</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#418344;">✓</span><span>Use raise hand to signal you want to speak rather than talking over others</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#418344;">✓</span><span>Inform the host in advance if you need to leave early</span></div>
+      </div>
+      <div class="etiquette-card">
+        <div class="etiquette-label dont">Don't</div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#e03c3c;">✕</span><span>Join from a noisy or public environment without muting — use headphones if necessary</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#e03c3c;">✕</span><span>Multitask visibly — avoid typing loudly or looking away repeatedly during discussions</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#e03c3c;">✕</span><span>Share confidential meeting content, links, or recordings without authorisation</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#e03c3c;">✕</span><span>Admit unknown participants from the waiting room without verifying their identity</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#e03c3c;">✕</span><span>Record a meeting without informing all participants first</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#e03c3c;">✕</span><span>Leave a meeting without saying goodbye in the chat — especially in small meetings</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- TIPS -->
+  <section id="tips">
+    <div class="section-tag">Best Practices</div>
+    <h2 class="section-title">Tips for CBF staff</h2>
+    <p class="section-lead">Small habits that make your virtual meetings more productive and professional.</p>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a8f8d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/></svg></div>
+        <h4>Use noise cancellation</h4>
+        <p>Go to More options → Settings → Audio → enable <strong>Noise cancellation</strong>. This filters out background sounds like fans, typing, and ambient noise automatically.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h4>Pin important speakers</h4>
+        <p>Right-click a participant's video tile and select <strong>Pin</strong> to keep their video on screen regardless of who is speaking. Useful for keeping the presenter always visible.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h4>Change your layout</h4>
+        <p>Go to More options → Change layout to switch between Tiled (see everyone), Spotlight (focus on presenter), or Sidebar. Choose what suits the meeting format.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b88a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h4>Take notes in Google Docs</h4>
+        <p>Open a shared Google Doc during the meeting for live note-taking. Assign someone to capture action items, decisions, and owners — share the doc with all participants after.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a8f8d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div>
+        <h4>Test before important calls</h4>
+        <p>Before partner or donor meetings, do a quick audio and video test. Go to meet.google.com and click <strong>Start an instant meeting</strong> — check your setup alone before your guests arrive.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <h4>Use keyboard shortcuts</h4>
+        <p>Speed up common actions — <strong>Ctrl+D / ⌘+D</strong> to mute/unmute, <strong>Ctrl+E / ⌘+E</strong> to toggle camera, and press <strong>?</strong> inside Meet to see all available shortcuts.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SUPPORT -->
+  <section id="support">
+    <div class="section-tag">Need Help?</div>
+    <h2 class="section-title">Getting support</h2>
+    <p class="section-lead">For technical issues with Google Meet — audio, video, access problems, or recording failures — contact the CBF System Administrator.</p>
+    <div class="contact-card">
+      <div>
+        <h3>Contact & Resources</h3>
+        <p>Reach out to the CBF System Administrator for any technical issues. The Google Meet Help Center also has comprehensive troubleshooting guides for audio, video, and connectivity problems.</p>
+      </div>
+      <div class="contact-links">
+        <a href="#" class="contact-link">System Administrator</a>
+        <a href="https://support.google.com/meet" target="_blank" class="contact-link">Google Meet Help Center ↗</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  <svg class="wave-top" viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1350,15 1440,20 L1440,40 L0,40 Z" fill="#0a8f8d"/>
+  </svg>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Caribbean <span>Biodiversity</span> Fund</div>
+      <div class="footer-text">© 2026 Caribbean Biodiversity Fund. All rights reserved.</div>
+    </div>
+    <div class="footer-series">CBF Staff Training Series · <span>Google Workspace</span> · Google Meet Guide</div>
+  </div>
+</footer>
+
+</body>
+</html>

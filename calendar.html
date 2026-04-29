@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Calendar – CBF Staff Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Outfit', sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: #418344; padding: 0; position: relative; overflow: hidden; }
+  .header-inner { padding: 36px 48px 0 48px; position: relative; z-index: 2; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+  .header-brand { display: flex; flex-direction: column; }
+  .header-org { color: #fff; font-size: 18px; font-weight: 800; line-height: 1.2; }
+  .header-org span { color: #F5BD29; }
+  .header-org-sub { color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .badge-app { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .header-title { color: #fff; font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
+  .header-title span { color: #F5BD29; }
+  .header-sub { color: rgba(255,255,255,0.8); font-size: 16px; font-weight: 400; max-width: 520px; line-height: 1.6; padding-bottom: 36px; }
+  .wave-footer { width: 100%; display: block; line-height: 0; }
+  .nav-strip { background: #fff; border-bottom: 1px solid #e0e6ef; padding: 0 48px; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+  .nav-strip a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; padding: 14px 18px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+  .nav-strip a:hover { color: #418344; border-bottom-color: #418344; }
+  .main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section-tag { display: inline-block; background: #e8f5e8; color: #418344; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+  .section-title { font-size: 26px; font-weight: 800; color: #418344; margin-bottom: 6px; }
+  .section-lead { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 28px; max-width: 640px; }
+  .section-divider { border: none; border-top: 1.5px solid #e0e6ef; margin: 48px 0; }
+  .overview-card { background: #418344; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; gap: 32px; align-items: flex-start; margin-bottom: 36px; }
+  .overview-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .overview-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .overview-text p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.88); }
+  .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .fact-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; border-left: 4px solid #418344; min-width: 0; }
+  .fact-card.blue { border-left-color: #1F4A94; }
+  .fact-card.teal { border-left-color: #0EBBB9; }
+  .fact-card.gold { border-left-color: #F5BD29; }
+  .fact-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 6px; }
+  .fact-value { font-size: 14px; font-weight: 600; color: #418344; line-height: 1.45; word-break: break-word; overflow-wrap: break-word; }
+  .fact-card.blue .fact-value { color: #1F4A94; }
+  .fact-card.teal .fact-value { color: #0a9997; }
+  .fact-card.gold .fact-value { color: #b88a1a; font-size: 13px; }
+  .task-block { background: #fff; border: 1px solid #e0e6ef; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+  .task-header { background: #f2f8f2; padding: 18px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e0e6ef; }
+  .task-num { width: 32px; height: 32px; background: #418344; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .task-title { font-size: 16px; font-weight: 700; color: #1a1a1a; flex: 1; }
+  .task-body { padding: 24px; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .step-item { display: flex; gap: 14px; align-items: flex-start; }
+  .step-dot { width: 24px; height: 24px; background: #e8f5e8; color: #418344; font-size: 12px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; line-height: 1.6; color: #333; }
+  .step-text strong { color: #418344; font-weight: 600; }
+  .step-text code { background: #f2f8f2; color: #418344; font-family: monospace; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .note-box { background: #fffbea; border: 1px solid #f5bd29; border-left: 4px solid #F5BD29; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a5c00; line-height: 1.6; }
+  .note-box strong { color: #5a4300; }
+  .alert-box { background: #fff0f0; border: 1px solid #f5a0a0; border-left: 4px solid #e03c3c; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a1a1a; line-height: 1.6; }
+  .alert-box strong { color: #5a0000; }
+  .success-box { background: #f2f8f2; border: 1px solid #a0d5a0; border-left: 4px solid #418344; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #1a4a1a; line-height: 1.6; }
+  .info-box { background: #e8f6f6; border: 1px solid #a0d8d7; border-left: 4px solid #0EBBB9; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #0a5555; line-height: 1.6; }
+  .path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+  .path-step { background: #e8f5e8; color: #418344; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+  .path-arrow { color: #aaa; font-size: 14px; }
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 12px; }
+  .tip-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; }
+  .tip-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .tip-icon.green { background: #e8f5e8; }
+  .tip-icon.blue { background: #e8f0fb; }
+  .tip-icon.gold { background: #fef7e0; }
+  .tip-icon.teal { background: #e0f7f7; }
+  .tip-card h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; color: #555; line-height: 1.6; }
+  .calendar-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px; }
+  .cal-type-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 18px; display: flex; gap: 14px; align-items: flex-start; }
+  .cal-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+  .cal-type-card h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+  .cal-type-card p { font-size: 12px; color: #666; line-height: 1.5; }
+  .etiquette-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 12px; }
+  .etiquette-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 18px; }
+  .etiquette-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .etiquette-label.do { color: #418344; }
+  .etiquette-label.dont { color: #e03c3c; }
+  .etiquette-item { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: #444; line-height: 1.5; margin-bottom: 7px; }
+  .etiquette-item:last-child { margin-bottom: 0; }
+  .etiquette-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  .contact-card { background: #418344; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .contact-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .contact-card p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.6; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link { background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.3); text-align: center; white-space: nowrap; }
+  .page-footer { background: #418344; padding: 0; margin-top: 80px; }
+  .wave-top { width: 100%; display: block; line-height: 0; }
+  .footer-inner { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { color: #fff; font-size: 15px; font-weight: 800; }
+  .footer-brand span { color: #F5BD29; }
+  .footer-text { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 3px; }
+  .footer-series { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500; }
+  .footer-series span { color: #F5BD29; }
+  @media (max-width: 640px) {
+    .header-inner { padding: 24px 20px 0; }
+    .header-title { font-size: 28px; }
+    .main { padding: 32px 16px 60px; }
+    .nav-strip { padding: 0 16px; }
+    .overview-card { flex-direction: column; padding: 24px; }
+    .footer-inner { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="header-org">Caribbean <span>Biodiversity</span> Fund</div>
+        <div class="header-org-sub">Staff Training Series</div>
+      </div>
+      <span class="badge-app">Google Workspace</span>
+    </div>
+    <div class="header-title">Google Calendar <span>at CBF</span></div>
+    <div class="header-sub">Your complete guide to scheduling, sharing, and coordinating time at the Caribbean Biodiversity Fund — from creating your first event to managing shared team calendars.</div>
+  </div>
+  <svg class="wave-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,65 480,15 720,40 C960,65 1200,15 1440,40 L1440,60 L0,60 Z" fill="#f5f7fa"/>
+  </svg>
+</div>
+
+<nav class="nav-strip">
+  <a href="#overview">Overview</a>
+  <a href="#access">Access</a>
+  <a href="#creating">Creating Events</a>
+  <a href="#inviting">Inviting Others</a>
+  <a href="#shared">Shared Calendars</a>
+  <a href="#scheduling">Scheduling Tools</a>
+  <a href="#working-hours">Working Hours</a>
+  <a href="#etiquette">Etiquette</a>
+  <a href="#tips">Tips</a>
+  <a href="#support">Support</a>
+</nav>
+
+<div class="main">
+
+  <section id="overview">
+    <div class="section-tag">Overview</div>
+    <h2 class="section-title">What is Google Calendar?</h2>
+    <p class="section-lead">Google Calendar is CBF's official scheduling platform. It keeps individual and team schedules visible and coordinated — from internal meetings and project deadlines to partner calls and organisation-wide events.</p>
+
+    <div class="overview-card">
+      <div class="overview-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div class="overview-text">
+        <h3>How CBF uses Google Calendar</h3>
+        <p>Every CBF staff member has a personal calendar connected to their CBF Google account. Shared team and organisation-wide calendars layer on top, giving everyone visibility into deadlines, meetings, and key events. Calendar is tightly integrated with Gmail and Google Meet — meeting invites, video links, and reminders all flow through a single system.</p>
+      </div>
+    </div>
+
+    <div class="facts-grid">
+      <div class="fact-card">
+        <div class="fact-label">Platform</div>
+        <div class="fact-value">Google Calendar (Workspace)</div>
+      </div>
+      <div class="fact-card blue">
+        <div class="fact-label">Access</div>
+        <div class="fact-value">Web, mobile app, Gmail sidebar</div>
+      </div>
+      <div class="fact-card teal">
+        <div class="fact-label">Integration</div>
+        <div class="fact-value">Gmail, Google Meet, Google Drive</div>
+      </div>
+      <div class="fact-card gold">
+        <div class="fact-label">Default view</div>
+        <div class="fact-value">Week view — customisable per user</div>
+      </div>
+    </div>
+
+    <div class="section-tag" style="margin-bottom:14px;">Types of calendars at CBF</div>
+    <div class="calendar-types">
+      <div class="cal-type-card">
+        <div class="cal-dot" style="background:#1F4A94;"></div>
+        <div>
+          <h4>Personal calendar</h4>
+          <p>Your individual CBF calendar. Visible only to you unless you choose to share it.</p>
+        </div>
+      </div>
+      <div class="cal-type-card">
+        <div class="cal-dot" style="background:#418344;"></div>
+        <div>
+          <h4>Team calendars</h4>
+          <p>Shared within departments or project teams. Used for team meetings, deadlines, and milestones.</p>
+        </div>
+      </div>
+      <div class="cal-type-card">
+        <div class="cal-dot" style="background:#0EBBB9;"></div>
+        <div>
+          <h4>Organisation calendar</h4>
+          <p>CBF-wide events — all-staff meetings, public holidays, institutional deadlines. Managed by administration.</p>
+        </div>
+      </div>
+      <div class="cal-type-card">
+        <div class="cal-dot" style="background:#F5BD29;"></div>
+        <div>
+          <h4>Other people's calendars</h4>
+          <p>You can view colleague's free/busy status to schedule without conflicts. Access depends on their sharing settings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="access">
+    <div class="section-tag">Getting Started</div>
+    <h2 class="section-title">Accessing Google Calendar</h2>
+    <p class="section-lead">Calendar is available via browser, mobile app, and directly from Gmail. Use your CBF Google account to sign in.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">1</div><div class="task-title">Open Google Calendar on the web</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Go to <strong>calendar.google.com</strong> in any browser — or click the <strong>grid icon</strong> (Google apps waffle) in Gmail and select Calendar</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Sign in with your CBF Google account if prompted</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Your personal calendar loads by default. Shared CBF calendars you have access to will appear in the <strong>Other calendars</strong> section in the left sidebar</div></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">2</div><div class="task-title">Set up the Google Calendar mobile app</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Download <strong>Google Calendar</strong> from the App Store (iOS) or Google Play (Android)</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Sign in with your CBF Google account — all your calendars and shared calendars sync automatically</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Tap the <strong>three-line menu</strong> to toggle which calendars are visible on your mobile view</div></li>
+        </ol>
+        <div class="note-box"><strong>Tip:</strong> Enable notifications on mobile so you receive meeting reminders even when away from your desk. Go to the app Settings → tap your account → Notifications to customise.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="creating">
+    <div class="section-tag">Core Tasks</div>
+    <h2 class="section-title">Creating events</h2>
+    <p class="section-lead">Events are the building block of Google Calendar. Whether it's a quick internal check-in or a multi-day partner workshop, the process is the same.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">3</div><div class="task-title">Create a new event</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>+ Create</strong> (top-left) or click directly on any time slot in the calendar grid to open a new event</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Enter a clear, descriptive <strong>title</strong> — include the topic and any key context (e.g. <code>CBF Q3 Budget Review – Finance Team</code>)</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Set the <strong>date and time</strong>. For recurring events, click <strong>Does not repeat</strong> and choose the frequency (daily, weekly, monthly, custom)</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Add a <strong>location</strong> — either a physical address or a Google Meet link (see Scheduling Tools section). For hybrid meetings, include both</div></li>
+          <li class="step-item"><div class="step-dot">5</div><div class="step-text">Add a <strong>description</strong> — include the agenda, any prep required, and links to relevant documents in Google Drive</div></li>
+          <li class="step-item"><div class="step-dot">6</div><div class="step-text">Click <strong>Save</strong> to add the event to your calendar, or <strong>More options</strong> to access advanced settings before saving</div></li>
+        </ol>
+        <div class="note-box"><strong>Event titles matter:</strong> Other CBF staff who can see your calendar will only see the event title. Make it informative enough to avoid confusion — avoid vague titles like "Meeting" or "Call".</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">4</div><div class="task-title">Create an all-day or multi-day event</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click on the date at the top of the calendar grid (the date header area, not a time slot) — this opens a new <strong>all-day event</strong> by default</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Alternatively, click <strong>+ Create</strong> → toggle on <strong>All day</strong> in the event form</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">For multi-day events (e.g. a workshop, conference, or leave period), set the end date by clicking the end date field and selecting the last day</div></li>
+        </ol>
+        <div class="info-box"><strong>For annual leave:</strong> Create an all-day event on your personal calendar for the duration of your leave. Mark yourself as <strong>Out of office</strong> using the event type selector — Google will automatically decline meetings sent to you during this period.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="inviting">
+    <div class="section-tag">Core Tasks</div>
+    <h2 class="section-title">Inviting others & managing RSVPs</h2>
+    <p class="section-lead">Google Calendar makes it easy to invite colleagues and external partners, check availability before scheduling, and track who has accepted.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">5</div><div class="task-title">Add guests to an event</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">In the event creation form, click the <strong>Add guests</strong> field and start typing a name or email address — CBF contacts appear as suggestions from the directory</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">For external guests (partners, donors, consultants), type their full email address</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click <strong>Guest permissions</strong> to control whether guests can: modify the event, invite others, or see the guest list. Adjust as needed</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Save the event — each guest automatically receives an email invitation with the event details and an Accept / Decline / Maybe option</div></li>
+        </ol>
+        <div class="note-box"><strong>Tracking RSVPs:</strong> Open the event and look at the guest list — you will see a green tick (accepted), red X (declined), or question mark (awaiting response) next to each guest's name.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">6</div><div class="task-title">Check availability before scheduling</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">When adding guests to an event, click <strong>View schedules</strong> (or the grid icon next to the guest list) — this opens the <strong>Find a time</strong> view</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Each guest's calendar appears as a colour band. White gaps indicate everyone is free — click a gap to set the event time</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Alternatively, use the <strong>Suggested times</strong> feature — Calendar will automatically propose slots when all guests are available</div></li>
+        </ol>
+        <div class="success-box"><strong>Best practice:</strong> Always check availability before sending an invite rather than sending and hoping. This shows respect for colleagues' time and reduces the back-and-forth of rescheduling.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">7</div><div class="task-title">Respond to a meeting invitation</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Meeting invitations arrive in your <strong>Gmail inbox</strong> with Accept / Maybe / Decline buttons — click one directly from the email</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">You can also respond directly from Google Calendar — click the event on your calendar and select your response from the RSVP options</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">If declining or marking as Maybe, add a brief note to the organiser explaining why — this is good professional practice at CBF</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To <strong>propose a new time</strong>: click <strong>More options</strong> in the invitation → select <strong>Propose a new time</strong> and suggest an alternative slot</div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="shared">
+    <div class="section-tag">Shared Calendars</div>
+    <h2 class="section-title">Shared & team calendars</h2>
+    <p class="section-lead">CBF uses shared calendars to keep teams aligned. Understanding how to subscribe to and use these calendars is essential for staying informed about team-wide and organisation-wide events.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">8</div><div class="task-title">Subscribe to a shared CBF calendar</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">In the left sidebar under <strong>Other calendars</strong>, click the <strong>+</strong> icon → select <strong>Subscribe to calendar</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Type the name or email address of the shared calendar (your manager or IT will provide the calendar address)</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click the calendar name once subscribed to customise its display colour — use a colour that helps distinguish it from your personal calendar</div></li>
+        </ol>
+        <div class="info-box"><strong>New starters:</strong> Your manager will share the relevant team and organisation calendars with you during onboarding. If you are missing a calendar you need, contact your manager or the System Administrator.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">9</div><div class="task-title">Share your own calendar with a colleague</div></div>
+      <div class="task-body">
+        <div class="path-flow">
+          <span class="path-step">Settings ⚙</span><span class="path-arrow">→</span>
+          <span class="path-step">Settings for my calendars</span><span class="path-arrow">→</span>
+          <span class="path-step">Select your calendar</span><span class="path-arrow">→</span>
+          <span class="path-step">Share with specific people</span>
+        </div>
+        <ol class="steps-list" style="margin-top:14px;">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>+ Add people</strong> and enter the colleague's CBF email address</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Choose the permission level: <strong>See only free/busy</strong> (recommended for most colleagues), <strong>See all event details</strong>, or <strong>Make changes to events</strong></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click <strong>Send</strong> — the colleague will receive an email to add your calendar to their view</div></li>
+        </ol>
+        <div class="note-box"><strong>CBF default:</strong> Sharing free/busy status with all CBF colleagues makes scheduling significantly easier across the organisation. Consider enabling this as your default sharing setting.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="scheduling">
+    <div class="section-tag">Scheduling Tools</div>
+    <h2 class="section-title">Scheduling tools & Google Meet</h2>
+    <p class="section-lead">Google Calendar integrates directly with Google Meet to generate video conference links automatically, and includes tools to streamline how meetings are booked.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">10</div><div class="task-title">Add a Google Meet link to an event</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">In the event creation form, click <strong>Add Google Meet video conferencing</strong> — a unique Meet link is generated automatically and added to the event</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">The Meet link appears in the event details and in every guest's calendar invitation — no separate link sharing is needed</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To join a meeting: click the event in your calendar and click <strong>Join with Google Meet</strong> — or open the link directly from your Gmail invitation</div></li>
+        </ol>
+        <div class="success-box"><strong>Standard practice at CBF:</strong> Add a Google Meet link to all internal meetings, even if the meeting may be held in person. This ensures remote or travelling colleagues can always join.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">11</div><div class="task-title">Use appointment scheduling (for external bookings)</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>+ Create</strong> → select <strong>Appointment schedule</strong> from the event type options</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Set your availability window and slot duration (e.g. 30-minute slots, Monday–Friday 9am–12pm)</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">A <strong>booking page link</strong> is generated — share this with external partners or consultants so they can self-schedule without email back-and-forth</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">When someone books a slot, it automatically blocks your calendar and sends both parties a confirmation with a Meet link</div></li>
+        </ol>
+        <div class="note-box"><strong>When to use this:</strong> Ideal for consultation slots, onboarding calls with new partners, or any scenario where external stakeholders need to book time with a CBF staff member.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="working-hours">
+    <div class="section-tag">Personal Settings</div>
+    <h2 class="section-title">Setting working hours & time zone</h2>
+    <p class="section-lead">CBF operates across multiple Caribbean time zones. Setting your working hours and time zone accurately helps colleagues schedule meetings at appropriate times.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">12</div><div class="task-title">Set your working hours</div></div>
+      <div class="task-body">
+        <div class="path-flow">
+          <span class="path-step">Settings ⚙</span><span class="path-arrow">→</span>
+          <span class="path-step">General</span><span class="path-arrow">→</span>
+          <span class="path-step">Working hours & location</span>
+        </div>
+        <ol class="steps-list" style="margin-top:14px;">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Toggle on <strong>Enable working hours</strong> and set your start and end times for each working day</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Uncheck any non-working days (e.g. Saturday and Sunday)</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click <strong>Save</strong> — colleagues will now see a notification if they try to schedule a meeting outside your working hours</div></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">13</div><div class="task-title">Set your primary time zone</div></div>
+      <div class="task-body">
+        <div class="path-flow">
+          <span class="path-step">Settings ⚙</span><span class="path-arrow">→</span>
+          <span class="path-step">General</span><span class="path-arrow">→</span>
+          <span class="path-step">Time zone</span>
+        </div>
+        <ol class="steps-list" style="margin-top:14px;">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Under <strong>Primary time zone</strong>, select your local time zone (e.g. America/Jamaica for AST)</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">If you frequently work with colleagues in a different time zone, enable <strong>Display secondary time zone</strong> and add their zone — both times show on your calendar grid</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click <strong>Save</strong></div></li>
+        </ol>
+        <div class="alert-box"><strong>Important for CBF:</strong> Always confirm which time zone is shown when scheduling meetings that include colleagues from different Caribbean territories. Specify the time zone explicitly in the event description when inviting across regions.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="etiquette">
+    <div class="section-tag">CBF Calendar Culture</div>
+    <h2 class="section-title">Calendar etiquette at CBF</h2>
+    <p class="section-lead">How you manage your calendar reflects your professionalism and consideration for your colleagues. These expectations apply to all CBF staff.</p>
+
+    <div class="etiquette-grid">
+      <div class="etiquette-card">
+        <div class="etiquette-label do">Do</div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#418344;">✓</span><span>Keep your calendar up to date so colleagues can see your accurate availability</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#418344;">✓</span><span>Include a clear agenda or description in every meeting invite</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#418344;">✓</span><span>Respond to invitations promptly — accept, decline, or propose a new time</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#418344;">✓</span><span>Block focus time on your calendar so colleagues know when you are unavailable for meetings</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#418344;">✓</span><span>Set your Out of Office status on Calendar when on leave — this auto-declines new invites</span></div>
+      </div>
+      <div class="etiquette-card">
+        <div class="etiquette-label dont">Don't</div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#e03c3c;">✕</span><span>Schedule meetings without checking guests' availability first</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#e03c3c;">✕</span><span>Send invites with no description or agenda — especially for external meetings</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#e03c3c;">✕</span><span>Leave invitations without a response — unanswered invites create uncertainty for organisers</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#e03c3c;">✕</span><span>Schedule meetings during colleagues' marked-out focus or personal time without asking first</span></div>
+        <div class="etiquette-item"><span class="etiquette-icon" style="color:#e03c3c;">✕</span><span>Send last-minute meeting invites (under 24 hours notice) except in genuine emergencies</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="tips">
+    <div class="section-tag">Best Practices</div>
+    <h2 class="section-title">Tips for CBF staff</h2>
+    <p class="section-lead">Small habits that keep your calendar — and your team's — running smoothly.</p>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <h4>Use colour coding</h4>
+        <p>Assign different colours to different calendars or event types (e.g. green for project meetings, blue for partner calls). This makes your week readable at a glance.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h4>Block focus time</h4>
+        <p>Create "Focus Time" events on your calendar for deep work. Mark them as Busy so colleagues know not to schedule meetings during those slots.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a9997" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h4>Add documents to events</h4>
+        <p>Attach relevant Google Drive files directly to the meeting invite. Guests can review materials before the meeting without hunting for links in email threads.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b88a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+        <h4>Set smart reminders</h4>
+        <p>Add a 10-minute reminder for internal meetings and a 30-minute reminder for external calls — gives you time to prepare without being overwhelmed by alerts.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h4>End meetings 5 minutes early</h4>
+        <p>When creating recurring meetings, set them to end 5 minutes before the hour (e.g. 9:00–9:55 AM). This gives everyone transition time between back-to-back meetings.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <h4>Search past events</h4>
+        <p>Use the search bar in Google Calendar to find past meetings, notes, and attendees — useful for locating recurring event details or confirming when something was last discussed.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="support">
+    <div class="section-tag">Need Help?</div>
+    <h2 class="section-title">Getting support</h2>
+    <p class="section-lead">For technical issues with Google Calendar — such as shared calendars not showing or sync problems — contact the CBF System Administrator.</p>
+    <div class="contact-card">
+      <div>
+        <h3>Contact & Resources</h3>
+        <p>For access issues, shared calendar setup, or any technical problems, reach out to the CBF System Administrator. For general Calendar guidance, the Google Help Center is a comprehensive resource.</p>
+      </div>
+      <div class="contact-links">
+        <a href="#" class="contact-link">System Administrator</a>
+        <a href="https://support.google.com/calendar" target="_blank" class="contact-link">Google Calendar Help Center ↗</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  <svg class="wave-top" viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1350,15 1440,20 L1440,40 L0,40 Z" fill="#418344"/>
+  </svg>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Caribbean <span>Biodiversity</span> Fund</div>
+      <div class="footer-text">© 2026 Caribbean Biodiversity Fund. All rights reserved.</div>
+    </div>
+    <div class="footer-series">CBF Staff Training Series · <span>Google Workspace</span> · Google Calendar Guide</div>
+  </div>
+</footer>
+
+</body>
+</html>

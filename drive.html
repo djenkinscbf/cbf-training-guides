@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Drive – CBF Staff Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Outfit', sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: #F45C02; padding: 0; position: relative; overflow: hidden; }
+  .header-inner { padding: 36px 48px 0 48px; position: relative; z-index: 2; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+  .header-brand { display: flex; flex-direction: column; }
+  .header-org { color: #fff; font-size: 18px; font-weight: 800; line-height: 1.2; }
+  .header-org span { color: #F5BD29; }
+  .header-org-sub { color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .badge-app { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .header-title { color: #fff; font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
+  .header-title span { color: #F5BD29; }
+  .header-sub { color: rgba(255,255,255,0.88); font-size: 16px; font-weight: 400; max-width: 520px; line-height: 1.6; padding-bottom: 36px; }
+  .wave-footer { width: 100%; display: block; line-height: 0; }
+  .nav-strip { background: #fff; border-bottom: 1px solid #e0e6ef; padding: 0 48px; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+  .nav-strip a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; padding: 14px 18px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+  .nav-strip a:hover { color: #c04800; border-bottom-color: #c04800; }
+  .main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section-tag { display: inline-block; background: #fde8db; color: #c04800; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+  .section-title { font-size: 26px; font-weight: 800; color: #c04800; margin-bottom: 6px; }
+  .section-lead { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 28px; max-width: 640px; }
+  .section-divider { border: none; border-top: 1.5px solid #e0e6ef; margin: 48px 0; }
+
+  /* OVERVIEW */
+  .overview-card { background: #c04800; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; gap: 32px; align-items: flex-start; margin-bottom: 24px; }
+  .overview-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .overview-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .overview-text p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.88); }
+
+  /* DRIVE vs WORKDRIVE CALLOUT */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 36px; }
+  .drive-role-card { border-radius: 14px; padding: 22px 24px; }
+  .drive-role-card.gdrive { background: #fde8db; border: 2px solid #F45C02; }
+  .drive-role-card.workdrive { background: #e8f0fb; border: 2px solid #1F4A94; }
+  .drive-role-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .drive-role-card.gdrive .drive-role-label { color: #c04800; }
+  .drive-role-card.workdrive .drive-role-label { color: #1F4A94; }
+  .drive-role-title { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+  .drive-role-card.gdrive .drive-role-title { color: #c04800; }
+  .drive-role-card.workdrive .drive-role-title { color: #1F4A94; }
+  .drive-role-desc { font-size: 13px; line-height: 1.6; color: #444; }
+  .drive-role-items { margin-top: 10px; display: flex; flex-direction: column; gap: 5px; }
+  .drive-role-item { font-size: 12px; color: #555; display: flex; gap: 7px; align-items: flex-start; }
+  .drive-role-item span.dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .drive-role-card.gdrive .dot { background: #F45C02; }
+  .drive-role-card.workdrive .dot { background: #1F4A94; }
+
+  /* FACTS */
+  .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .fact-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; border-left: 4px solid #F45C02; min-width: 0; }
+  .fact-card.green { border-left-color: #418344; }
+  .fact-card.blue { border-left-color: #1F4A94; }
+  .fact-card.gold { border-left-color: #F5BD29; }
+  .fact-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 6px; }
+  .fact-value { font-size: 14px; font-weight: 600; color: #c04800; line-height: 1.45; word-break: break-word; }
+  .fact-card.green .fact-value { color: #418344; }
+  .fact-card.blue .fact-value { color: #1F4A94; }
+  .fact-card.gold .fact-value { color: #b88a1a; }
+
+  /* TASKS */
+  .task-block { background: #fff; border: 1px solid #e0e6ef; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+  .task-header { background: #fdf3ee; padding: 18px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e0e6ef; }
+  .task-num { width: 32px; height: 32px; background: #F45C02; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .task-title { font-size: 16px; font-weight: 700; color: #1a1a1a; flex: 1; }
+  .task-body { padding: 24px; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .step-item { display: flex; gap: 14px; align-items: flex-start; }
+  .step-dot { width: 24px; height: 24px; background: #fde8db; color: #c04800; font-size: 12px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; line-height: 1.6; color: #333; }
+  .step-text strong { color: #c04800; font-weight: 600; }
+  .step-text code { background: #fde8db; color: #c04800; font-family: monospace; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+
+  /* CALLOUT BOXES */
+  .note-box { background: #fffbea; border: 1px solid #f5bd29; border-left: 4px solid #F5BD29; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a5c00; line-height: 1.6; }
+  .note-box strong { color: #5a4300; }
+  .alert-box { background: #fff0f0; border: 1px solid #f5a0a0; border-left: 4px solid #e03c3c; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a1a1a; line-height: 1.6; }
+  .alert-box strong { color: #5a0000; }
+  .success-box { background: #f2f8f2; border: 1px solid #a0d5a0; border-left: 4px solid #418344; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #1a4a1a; line-height: 1.6; }
+  .info-box { background: #e8f0fb; border: 1px solid #a0bce0; border-left: 4px solid #1F4A94; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #0a2255; line-height: 1.6; }
+  .workdrive-box { background: #e8f0fb; border: 2px solid #1F4A94; border-radius: 10px; padding: 14px 18px; margin-top: 16px; font-size: 13px; color: #0a2255; line-height: 1.6; display: flex; gap: 12px; align-items: flex-start; }
+  .workdrive-box-icon { font-size: 20px; flex-shrink: 0; }
+  .workdrive-box strong { color: #1F4A94; display: block; margin-bottom: 4px; font-size: 14px; }
+
+  /* PATH FLOW */
+  .path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+  .path-step { background: #fde8db; color: #c04800; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+  .path-arrow { color: #aaa; font-size: 14px; }
+
+  /* PERMISSIONS TABLE */
+  .perm-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+  .perm-table th { background: #fdf3ee; color: #c04800; font-weight: 700; padding: 10px 14px; text-align: left; border-bottom: 2px solid #f5c4a8; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .perm-table td { padding: 10px 14px; border-bottom: 1px solid #f0e8e0; color: #333; vertical-align: top; line-height: 1.5; }
+  .perm-table tr:last-child td { border-bottom: none; }
+  .perm-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 10px; }
+  .perm-badge.viewer { background: #e8f5e8; color: #418344; }
+  .perm-badge.commenter { background: #fef7e0; color: #b88a1a; }
+  .perm-badge.editor { background: #fde8db; color: #c04800; }
+  .perm-badge.organiser { background: #e8f0fb; color: #1F4A94; }
+  .perm-badge.manager { background: #f0e8fb; color: #6a1aa0; }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 12px; }
+  .tip-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; }
+  .tip-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .tip-icon.orange { background: #fde8db; }
+  .tip-icon.green { background: #e8f5e8; }
+  .tip-icon.blue { background: #e8f0fb; }
+  .tip-icon.gold { background: #fef7e0; }
+  .tip-card h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; color: #555; line-height: 1.6; }
+
+  /* CONTACT */
+  .contact-card { background: #c04800; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .contact-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .contact-card p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.6; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link { background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.3); text-align: center; white-space: nowrap; }
+
+  /* FOOTER */
+  .page-footer { background: #c04800; padding: 0; margin-top: 80px; }
+  .wave-top { width: 100%; display: block; line-height: 0; }
+  .footer-inner { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { color: #fff; font-size: 15px; font-weight: 800; }
+  .footer-brand span { color: #F5BD29; }
+  .footer-text { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 3px; }
+  .footer-series { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500; }
+  .footer-series span { color: #F5BD29; }
+
+  @media (max-width: 640px) {
+    .header-inner { padding: 24px 20px 0; }
+    .header-title { font-size: 28px; }
+    .main { padding: 32px 16px 60px; }
+    .nav-strip { padding: 0 16px; }
+    .overview-card { flex-direction: column; padding: 24px; }
+    .two-col { grid-template-columns: 1fr; }
+    .footer-inner { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="header-org">Caribbean <span>Biodiversity</span> Fund</div>
+        <div class="header-org-sub">Staff Training Series</div>
+      </div>
+      <span class="badge-app">Google Workspace</span>
+    </div>
+    <div class="header-title">Google Drive <span>at CBF</span></div>
+    <div class="header-sub">Your complete guide to storing, organising, and sharing files at CBF — and understanding how Google Drive works alongside Zoho WorkDrive as CBF's final document repository.</div>
+  </div>
+  <svg class="wave-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,65 480,15 720,40 C960,65 1200,15 1440,40 L1440,60 L0,60 Z" fill="#f5f7fa"/>
+  </svg>
+</div>
+
+<nav class="nav-strip">
+  <a href="#overview">Overview</a>
+  <a href="#access">Access</a>
+  <a href="#organising">Organising</a>
+  <a href="#uploading">Uploading</a>
+  <a href="#sharing">Sharing</a>
+  <a href="#permissions">Permissions</a>
+  <a href="#shared-drives">Shared Drives</a>
+  <a href="#workdrive">Drive vs WorkDrive</a>
+  <a href="#tips">Tips</a>
+  <a href="#support">Support</a>
+</nav>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <div class="section-tag">Overview</div>
+    <h2 class="section-title">What is Google Drive?</h2>
+    <p class="section-lead">Google Drive is CBF's active working file system — the place where documents are created, collaborated on, and shared during their lifecycle. It is not the final home for completed work. Once a document is finished and approved, it is archived to Zoho WorkDrive, CBF's official document repository.</p>
+
+    <div class="overview-card">
+      <div class="overview-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+      </div>
+      <div class="overview-text">
+        <h3>Drive's role in CBF's workflow</h3>
+        <p>Think of Google Drive as your active workspace — the place where drafts are written, reports are built, and files are shared with colleagues in real time. It integrates directly with Google Docs, Sheets, Slides, Gmail, and Meet. Once work reaches its final, approved state, it moves to Zoho WorkDrive for long-term, structured storage.</p>
+      </div>
+    </div>
+
+    <!-- DRIVE vs WORKDRIVE SIDE BY SIDE -->
+    <div class="two-col">
+      <div class="drive-role-card gdrive">
+        <div class="drive-role-label">Active workspace</div>
+        <div class="drive-role-title">Google Drive</div>
+        <div class="drive-role-desc">For files that are in progress, actively shared, or being collaborated on.</div>
+        <div class="drive-role-items">
+          <div class="drive-role-item"><span class="dot"></span><span>Draft reports and documents</span></div>
+          <div class="drive-role-item"><span class="dot"></span><span>Working versions of presentations</span></div>
+          <div class="drive-role-item"><span class="dot"></span><span>Meeting notes and agendas</span></div>
+          <div class="drive-role-item"><span class="dot"></span><span>Files shared with colleagues for review</span></div>
+          <div class="drive-role-item"><span class="dot"></span><span>Templates and reference materials in use</span></div>
+        </div>
+      </div>
+      <div class="drive-role-card workdrive">
+        <div class="drive-role-label">Final repository</div>
+        <div class="drive-role-title">Zoho WorkDrive</div>
+        <div class="drive-role-desc">For completed, approved documents that form part of CBF's official record.</div>
+        <div class="drive-role-items">
+          <div class="drive-role-item"><span class="dot"></span><span>Final approved reports and deliverables</span></div>
+          <div class="drive-role-item"><span class="dot"></span><span>Signed contracts and agreements</span></div>
+          <div class="drive-role-item"><span class="dot"></span><span>Official policies and procedures</span></div>
+          <div class="drive-role-item"><span class="dot"></span><span>Completed project documentation</span></div>
+          <div class="drive-role-item"><span class="dot"></span><span>Archived communications and records</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="facts-grid">
+      <div class="fact-card">
+        <div class="fact-label">Platform</div>
+        <div class="fact-value">Google Drive (Workspace)</div>
+      </div>
+      <div class="fact-card green">
+        <div class="fact-label">Storage</div>
+        <div class="fact-value">1 TB (1,000 GB) pooled across Workspace</div>
+      </div>
+      <div class="fact-card blue">
+        <div class="fact-label">Access</div>
+        <div class="fact-value">Web, desktop app, mobile app</div>
+      </div>
+      <div class="fact-card gold">
+        <div class="fact-label">Integration</div>
+        <div class="fact-value">Docs, Sheets, Slides, Gmail, Meet</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ACCESS -->
+  <section id="access">
+    <div class="section-tag">Getting Started</div>
+    <h2 class="section-title">Accessing Google Drive</h2>
+    <p class="section-lead">Drive is available via browser, desktop app, and mobile. All files are stored in the cloud and accessible from any device signed into your CBF Google account.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">1</div><div class="task-title">Open Drive on the web</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Go to <strong>drive.google.com</strong> in any browser, or click the <strong>Google apps waffle</strong> in Gmail and select Drive</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Sign in with your CBF Google account. Your <strong>My Drive</strong> is your personal workspace — files here are private unless you share them</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text"><strong>Shared drives</strong> (left sidebar) are team spaces where files belong to CBF, not to any individual — these are used for team and department files</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text"><strong>Shared with me</strong> shows files other people have shared with you but that live in their own Drive</div></li>
+        </ol>
+        <div class="note-box"><strong>Key distinction:</strong> Files in <strong>My Drive</strong> are owned by you — if your account is deactivated, those files may be lost. Files in <strong>Shared Drives</strong> are owned by CBF and remain accessible to the team regardless of staff changes. Always store team files in Shared Drives.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">2</div><div class="task-title">Install the Drive desktop app</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Download <strong>Google Drive for Desktop</strong> from <strong>drive.google.com/drive/apps</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Sign in with your CBF Google account — Drive appears as a folder in your file explorer (Windows) or Finder (Mac)</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Files sync automatically between your computer and the cloud — changes made offline sync when you reconnect to the internet</div></li>
+        </ol>
+        <div class="info-box"><strong>Useful for:</strong> Working on files without a browser open, accessing Drive files from desktop applications, and ensuring you always have the latest version of shared files without manually downloading them.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ORGANISING -->
+  <section id="organising">
+    <div class="section-tag">File Organisation</div>
+    <h2 class="section-title">Organising your files and folders</h2>
+    <p class="section-lead">A well-organised Drive makes it easy for the whole team to find what they need. Follow CBF's naming and folder conventions consistently.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">3</div><div class="task-title">Create and name folders</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>+ New</strong> (top-left) → <strong>New folder</strong>. Give the folder a clear, descriptive name</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Use a consistent naming format — include the year, project name, or department where relevant. Example: <code>2026_ReefResilience_Reports</code> or <code>Finance_2026_Q1</code></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To move a file into a folder: right-click the file → <strong>Move to</strong> → select the destination folder</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To colour-code a folder: right-click it → <strong>Change colour</strong> — use colours to distinguish project folders, teams, or priority levels at a glance</div></li>
+        </ol>
+        <div class="note-box"><strong>CBF naming conventions:</strong> Use underscores instead of spaces, include the year at the start of folder names, and avoid vague names like "Misc" or "New folder". Consistent naming makes search and handovers much easier.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">4</div><div class="task-title">Search and filter files</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Use the <strong>search bar</strong> at the top of Drive — search by file name, content within files, or the name of a person who shared the file</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click the <strong>search filter icon</strong> (right side of the search bar) to filter by file type, owner, modification date, or location</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Use <strong>Recent</strong> in the left sidebar to quickly find files you have opened or edited recently</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Star important files: right-click → <strong>Add to Starred</strong>. Starred files appear in the <strong>Starred</strong> section for fast access</div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- UPLOADING -->
+  <section id="uploading">
+    <div class="section-tag">Core Tasks</div>
+    <h2 class="section-title">Uploading and creating files</h2>
+    <p class="section-lead">Files can be uploaded from your computer or created directly in Drive using Google Docs, Sheets, or Slides. Creating files natively in Google format is preferred for collaboration.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">5</div><div class="task-title">Upload files and folders</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>+ New</strong> → <strong>File upload</strong> or <strong>Folder upload</strong> to upload from your computer</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Alternatively, <strong>drag and drop</strong> files directly into the Drive browser window — they upload automatically to the folder you are currently viewing</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Uploaded Word, Excel, and PowerPoint files can be <strong>converted to Google format</strong> — right-click the file → <strong>Open with</strong> → select the relevant Google app. This enables real-time collaboration</div></li>
+        </ol>
+        <div class="note-box"><strong>File format tip:</strong> When working on documents with external partners who use Microsoft Office, keep files in their original format (.docx, .xlsx, .pptx). For internal CBF work, use Google Docs, Sheets, and Slides to take full advantage of collaboration features.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">6</div><div class="task-title">Create new Google files directly in Drive</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>+ New</strong> → choose <strong>Google Docs</strong>, <strong>Google Sheets</strong>, or <strong>Google Slides</strong> to create a new file</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">The file opens immediately in a new browser tab and is saved automatically in real time — there is no "Save" button needed</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Rename the file by clicking <strong>Untitled document</strong> at the top and typing your chosen name</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">The file is created in the folder you were viewing in Drive — check the location shown at the top of the document and move it if needed</div></li>
+        </ol>
+        <div class="success-box"><strong>Auto-save:</strong> Google files save every few seconds automatically. There is no risk of losing work due to a missed save — but always ensure you have internet connectivity when working on shared files.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SHARING -->
+  <section id="sharing">
+    <div class="section-tag">Sharing Files</div>
+    <h2 class="section-title">Sharing files and folders</h2>
+    <p class="section-lead">Sharing is one of Drive's most powerful features — and one that requires the most care. Always share with the minimum level of access needed.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">7</div><div class="task-title">Share a file with specific people</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Right-click a file → <strong>Share</strong> → <strong>Share</strong> again to open the sharing panel (or open the file and click the <strong>Share</strong> button top-right)</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">In the <strong>Add people and groups</strong> field, type the person's name or CBF email address</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Select the appropriate permission level from the dropdown — <strong>Viewer</strong>, <strong>Commenter</strong>, or <strong>Editor</strong> (see Permissions section below)</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Add an optional message explaining why you are sharing, then click <strong>Send</strong></div></li>
+        </ol>
+        <div class="alert-box"><strong>Before sharing externally:</strong> Check with your manager before sharing CBF files with anyone outside the organisation. Never share files containing financial data, personal information, or confidential project details with external parties without authorisation.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">8</div><div class="task-title">Share via link</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open the sharing panel → click <strong>Change</strong> under General access (or <strong>Copy link</strong>)</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Choose who can access the link:
+            <br>— <strong>Restricted</strong>: only people explicitly added can open it (recommended for most CBF files)
+            <br>— <strong>Anyone with the link</strong>: anyone who receives the link can open it (use only for public resources)</div>
+          </li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Set the permission level for link access (Viewer, Commenter, or Editor), then click <strong>Copy link</strong> and paste it where needed</div></li>
+        </ol>
+        <div class="note-box"><strong>Default to Restricted:</strong> Always use Restricted link sharing for internal CBF documents. "Anyone with the link" means anyone on the internet — only use this for intentionally public content such as published reports or outreach materials.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">9</div><div class="task-title">Remove or change sharing access</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open the sharing panel for the file → find the person whose access you want to change</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click the permission dropdown next to their name → select a new level or click <strong>Remove access</strong></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click <strong>Save</strong> — the person is notified if you choose to send a notification, but not by default</div></li>
+        </ol>
+        <div class="success-box"><strong>Good practice:</strong> Periodically review who has access to your shared files — especially for sensitive documents. Remove access for colleagues who have moved to a different project or left CBF.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- PERMISSIONS -->
+  <section id="permissions">
+    <div class="section-tag">Access Control</div>
+    <h2 class="section-title">Understanding permissions</h2>
+    <p class="section-lead">Google Drive has five permission levels. Choosing the right one protects CBF's files while enabling effective collaboration.</p>
+
+    <table class="perm-table">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>What they can do</th>
+          <th>When to use at CBF</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="perm-badge viewer">Viewer</span></td>
+          <td>Read the file only. Cannot edit, comment, or download (unless download is enabled)</td>
+          <td>Sharing final documents for reference. Sharing reports with external stakeholders</td>
+        </tr>
+        <tr>
+          <td><span class="perm-badge commenter">Commenter</span></td>
+          <td>Add comments and suggestions but cannot directly edit the content</td>
+          <td>Sending a document for review or feedback without allowing direct edits</td>
+        </tr>
+        <tr>
+          <td><span class="perm-badge editor">Editor</span></td>
+          <td>View, edit, comment, and share the file. Can also change sharing settings</td>
+          <td>Active collaborators working on a document together. Use within the CBF team</td>
+        </tr>
+        <tr>
+          <td><span class="perm-badge organiser">Organiser</span></td>
+          <td>In Shared Drives — can add/remove members and reorganise the drive structure</td>
+          <td>Team leads or project managers responsible for a Shared Drive</td>
+        </tr>
+        <tr>
+          <td><span class="perm-badge manager">Manager</span></td>
+          <td>Full control of a Shared Drive — can delete the drive, manage all members and content</td>
+          <td>System Administrator or senior staff only. Assigned by IT</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert-box" style="margin-top:16px;"><strong>Principle of least privilege:</strong> Always grant the minimum level of access needed. If someone only needs to read a document, give them Viewer access — not Editor. This reduces the risk of accidental changes or data exposure.</div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SHARED DRIVES -->
+  <section id="shared-drives">
+    <div class="section-tag">Team Spaces</div>
+    <h2 class="section-title">Shared Drives</h2>
+    <p class="section-lead">Shared Drives are team-owned spaces within Google Drive. Unlike My Drive, files here belong to CBF — not to individual staff members. All team and project files should live here.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">10</div><div class="task-title">Access and use a Shared Drive</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">In the left sidebar of Drive, click <strong>Shared drives</strong> to see all Shared Drives you have been given access to</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Navigate into the relevant Shared Drive and follow the folder structure established by your team or manager</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Create files and folders within the Shared Drive the same way as in My Drive — the key difference is that ownership belongs to CBF, not you personally</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">If you cannot find a Shared Drive you need access to, contact your manager or the System Administrator</div></li>
+        </ol>
+        <div class="info-box"><strong>Why Shared Drives matter:</strong> If a staff member leaves CBF and files are only in their My Drive, those files may become inaccessible. Keeping team files in Shared Drives ensures continuity regardless of staff changes.</div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">11</div><div class="task-title">Version history — recover earlier versions of a file</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open the file → click <strong>File</strong> in the top menu → <strong>Version history</strong> → <strong>See version history</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">A panel appears on the right showing all saved versions with timestamps and the name of who made each change</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click any version to preview it — then click <strong>Restore this version</strong> to roll back to that state</div></li>
+        </ol>
+        <div class="success-box"><strong>Never lose work:</strong> Google Drive keeps version history automatically for all Google files. If a colleague accidentally deletes content or overwrites something important, version history lets you recover it without contacting IT.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- DRIVE vs WORKDRIVE -->
+  <section id="workdrive">
+    <div class="section-tag">CBF File Lifecycle</div>
+    <h2 class="section-title">Google Drive vs Zoho WorkDrive</h2>
+    <p class="section-lead">Understanding when to use each platform is essential for keeping CBF's records organised and accessible long-term. The two platforms serve different stages of a document's life.</p>
+
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">12</div><div class="task-title">The CBF document lifecycle</div></div>
+      <div class="task-body">
+        <div style="display:flex; flex-direction:column; gap:0; margin-bottom:16px;">
+
+          <div style="display:flex; gap:16px; align-items:flex-start; padding:16px; background:#fdf3ee; border-radius:10px 10px 0 0; border:1px solid #f5c4a8;">
+            <div style="width:32px;height:32px;background:#F45C02;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0;">1</div>
+            <div>
+              <div style="font-weight:700;color:#c04800;font-size:14px;margin-bottom:3px;">Create & Collaborate — Google Drive</div>
+              <div style="font-size:13px;color:#555;line-height:1.5;">Draft the document in Google Docs, Sheets, or Slides. Share with colleagues for input and review using comments and suggestions. Iterate until the content is ready for approval.</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:16px; align-items:flex-start; padding:16px; background:#fffbea; border:1px solid #f5e080; border-top:none;">
+            <div style="width:32px;height:32px;background:#F5BD29;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0;">2</div>
+            <div>
+              <div style="font-weight:700;color:#b88a1a;font-size:14px;margin-bottom:3px;">Review & Approve — Google Drive</div>
+              <div style="font-size:13px;color:#555;line-height:1.5;">Share the document for formal review via comment access. Address feedback, apply final edits, and gain sign-off from the relevant manager or team lead. The document is now finalised.</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:16px; align-items:flex-start; padding:16px; background:#e8f0fb; border-radius:0 0 10px 10px; border:1px solid #a0bce0; border-top:none;">
+            <div style="width:32px;height:32px;background:#1F4A94;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0;">3</div>
+            <div>
+              <div style="font-weight:700;color:#1F4A94;font-size:14px;margin-bottom:3px;">Archive — Zoho WorkDrive</div>
+              <div style="font-size:13px;color:#555;line-height:1.5;">Export the final document (PDF or original format as appropriate) and upload it to the correct folder in Zoho WorkDrive. This is CBF's permanent, structured record. The file in Google Drive may be retained for reference but WorkDrive is the authoritative copy.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="workdrive-box">
+          <div class="workdrive-box-icon">📁</div>
+          <div>
+            <strong>Zoho WorkDrive is the system of record at CBF</strong>
+            When a document is complete and approved, it belongs in WorkDrive — not just in Google Drive. This ensures CBF's institutional knowledge is preserved, organised, and accessible to all authorised staff, even as team members change over time. See the Zoho WorkDrive training guide for full instructions on how to upload and organise files there.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- TIPS -->
+  <section id="tips">
+    <div class="section-tag">Best Practices</div>
+    <h2 class="section-title">Tips for CBF staff</h2>
+    <p class="section-lead">Habits that keep Google Drive clean, collaborative, and useful for the whole team.</p>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon orange"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c04800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div>
+        <h4>Store team files in Shared Drives</h4>
+        <p>Never keep team documents in My Drive only. Shared Drives are owned by CBF — files remain accessible even if a staff member's account changes.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h4>Use Suggested Edits, not tracked changes</h4>
+        <p>In Google Docs, switch to Suggesting mode before editing a shared document. Changes appear as suggestions that the owner can accept or reject — preserving the original content.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <h4>Name files clearly from the start</h4>
+        <p>Rename files before sharing them. "Copy of Untitled" or "Document 3" wastes everyone's time when searching. Include the date, topic, and version in the file name.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b88a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Review sharing settings regularly</h4>
+        <p>Right-click a file → Manage access to see who has access. Remove people who no longer need it. This is especially important for files containing financial or personal data.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon orange"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c04800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <h4>Archive to WorkDrive on completion</h4>
+        <p>Once a document is final and approved, upload it to Zoho WorkDrive promptly. Do not leave finalised documents sitting only in Google Drive where they may be accidentally edited.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h4>Use shortcut links, not copies</h4>
+        <p>Instead of duplicating a file into multiple folders, create a <strong>shortcut</strong>: right-click a file → Add shortcut to Drive. The file lives in one place, accessible from many locations.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SUPPORT -->
+  <section id="support">
+    <div class="section-tag">Need Help?</div>
+    <h2 class="section-title">Getting support</h2>
+    <p class="section-lead">For access issues, Shared Drive setup, storage concerns, or any technical problems with Google Drive, contact the CBF System Administrator.</p>
+    <div class="contact-card">
+      <div>
+        <h3>Contact & Resources</h3>
+        <p>The CBF System Administrator manages Shared Drive access and permissions. For file organisation questions or WorkDrive archiving guidance, speak to your manager or team lead.</p>
+      </div>
+      <div class="contact-links">
+        <a href="#" class="contact-link">System Administrator</a>
+        <a href="https://support.google.com/drive" target="_blank" class="contact-link">Google Drive Help Center ↗</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  <svg class="wave-top" viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1350,15 1440,20 L1440,40 L0,40 Z" fill="#c04800"/>
+  </svg>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Caribbean <span>Biodiversity</span> Fund</div>
+      <div class="footer-text">© 2026 Caribbean Biodiversity Fund. All rights reserved.</div>
+    </div>
+    <div class="footer-series">CBF Staff Training Series · <span>Google Workspace</span> · Google Drive Guide</div>
+  </div>
+</footer>
+
+</body>
+</html>
