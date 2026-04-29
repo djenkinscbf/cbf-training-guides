@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Google Docs – CBF Staff Guide</title>
+<title>Gmail – CBF Staff Guide</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,13 +12,13 @@
   .header-inner { padding: 36px 48px 0 48px; position: relative; z-index: 2; }
   .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
   .header-brand { display: flex; flex-direction: column; }
-  .header-org { color: #fff; font-size: 18px; font-weight: 800; line-height: 1.2; }
+  .header-org { color: #fff; font-size: 18px; font-weight: 800; letter-spacing: 0.01em; line-height: 1.2; }
   .header-org span { color: #F5BD29; }
   .header-org-sub { color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
   .badge-app { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
   .header-title { color: #fff; font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
   .header-title span { color: #F5BD29; }
-  .header-sub { color: rgba(255,255,255,0.82); font-size: 16px; font-weight: 400; max-width: 520px; line-height: 1.6; padding-bottom: 36px; }
+  .header-sub { color: rgba(255,255,255,0.75); font-size: 16px; font-weight: 400; max-width: 520px; line-height: 1.6; padding-bottom: 36px; }
   .wave-footer { width: 100%; display: block; line-height: 0; }
   .nav-strip { background: #fff; border-bottom: 1px solid #e0e6ef; padding: 0 48px; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
   .nav-strip a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; padding: 14px 18px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
@@ -31,17 +31,21 @@
   .overview-card { background: #1F4A94; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; gap: 32px; align-items: flex-start; margin-bottom: 36px; }
   .overview-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .overview-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-  .overview-text p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.88); }
+  .overview-text p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.85); }
+
+  /* FACT CARDS — fixed overflow */
   .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 40px; }
   .fact-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; border-left: 4px solid #1F4A94; min-width: 0; }
   .fact-card.green { border-left-color: #418344; }
   .fact-card.teal { border-left-color: #0EBBB9; }
   .fact-card.gold { border-left-color: #F5BD29; }
   .fact-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 6px; }
-  .fact-value { font-size: 14px; font-weight: 600; color: #1F4A94; line-height: 1.45; word-break: break-word; }
+  .fact-value { font-size: 14px; font-weight: 600; color: #1F4A94; line-height: 1.45; word-break: break-word; overflow-wrap: break-word; }
   .fact-card.green .fact-value { color: #418344; }
   .fact-card.teal .fact-value { color: #0a9997; }
-  .fact-card.gold .fact-value { color: #b88a1a; }
+  .fact-card.gold .fact-value { color: #b88a1a; font-size: 13px; }
+  .fact-domain { display: block; font-size: 11px; font-weight: 500; color: #aaa; margin-top: 3px; word-break: break-all; }
+
   .task-block { background: #fff; border: 1px solid #e0e6ef; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
   .task-header { background: #f0f4fb; padding: 18px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e0e6ef; }
   .task-num { width: 32px; height: 32px; background: #1F4A94; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -52,45 +56,16 @@
   .step-dot { width: 24px; height: 24px; background: #e8f0fb; color: #1F4A94; font-size: 12px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
   .step-text { font-size: 14px; line-height: 1.6; color: #333; }
   .step-text strong { color: #1F4A94; font-weight: 600; }
-  .step-text code { background: #e8f0fb; color: #1F4A94; font-family: monospace; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .step-text code { background: #f0f4fb; color: #1F4A94; font-family: monospace; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
   .note-box { background: #fffbea; border: 1px solid #f5bd29; border-left: 4px solid #F5BD29; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a5c00; line-height: 1.6; }
   .note-box strong { color: #5a4300; }
   .alert-box { background: #fff0f0; border: 1px solid #f5a0a0; border-left: 4px solid #e03c3c; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a1a1a; line-height: 1.6; }
   .alert-box strong { color: #5a0000; }
-  .success-box { background: #f2f8f2; border: 1px solid #a0d5a0; border-left: 4px solid #418344; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #1a4a1a; line-height: 1.6; }
-  .info-box { background: #e8f0fb; border: 1px solid #a0bce0; border-left: 4px solid #1F4A94; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #0a2255; line-height: 1.6; }
+  .success-box { background: #f0fbf0; border: 1px solid #a0d5a0; border-left: 4px solid #418344; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #1a4a1a; line-height: 1.6; }
+  .info-box { background: #e8f6f6; border: 1px solid #a0d8d7; border-left: 4px solid #0EBBB9; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #0a5555; line-height: 1.6; }
   .path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
   .path-step { background: #e8f0fb; color: #1F4A94; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
   .path-arrow { color: #aaa; font-size: 14px; }
-
-  /* MODE CARDS */
-  .modes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
-  .mode-card { border-radius: 12px; padding: 18px; text-align: center; border: 2px solid transparent; }
-  .mode-card.editing { background: #e8f0fb; border-color: #1F4A94; }
-  .mode-card.suggesting { background: #f2f8f2; border-color: #418344; }
-  .mode-card.viewing { background: #fef7e0; border-color: #F5BD29; }
-  .mode-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
-  .mode-card.editing .mode-icon { background: #1F4A94; }
-  .mode-card.suggesting .mode-icon { background: #418344; }
-  .mode-card.viewing .mode-icon { background: #F5BD29; }
-  .mode-name { font-size: 14px; font-weight: 800; margin-bottom: 5px; }
-  .mode-card.editing .mode-name { color: #1F4A94; }
-  .mode-card.suggesting .mode-name { color: #418344; }
-  .mode-card.viewing .mode-name { color: #b88a1a; }
-  .mode-desc { font-size: 12px; color: #555; line-height: 1.5; }
-  .mode-when { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 8px; }
-  .mode-card.editing .mode-when { color: #1F4A94; }
-  .mode-card.suggesting .mode-when { color: #418344; }
-  .mode-card.viewing .mode-when { color: #b88a1a; }
-
-  /* SHORTCUTS */
-  .shortcuts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 14px; }
-  .shortcut-item { background: #fff; border: 1px solid #e0e6ef; border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  .shortcut-action { font-size: 13px; color: #333; }
-  .shortcut-keys { display: flex; gap: 4px; flex-shrink: 0; }
-  .kbd { background: #f0f4fb; border: 1px solid #c8d5ea; border-bottom: 2px solid #b0c0d8; color: #1F4A94; font-family: monospace; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
-
-  /* TIPS */
   .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 12px; }
   .tip-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; }
   .tip-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
@@ -100,22 +75,14 @@
   .tip-icon.teal { background: #e0f7f7; }
   .tip-card h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
   .tip-card p { font-size: 13px; color: #555; line-height: 1.6; }
-
-  /* EXPORT TABLE */
-  .export-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
-  .export-table th { background: #f0f4fb; color: #1F4A94; font-weight: 700; padding: 10px 14px; text-align: left; border-bottom: 2px solid #c8d5ea; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
-  .export-table td { padding: 10px 14px; border-bottom: 1px solid #e8f0fb; color: #333; vertical-align: top; line-height: 1.5; }
-  .export-table tr:last-child td { border-bottom: none; }
-  .format-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 10px; font-family: monospace; }
-  .format-badge.pdf { background: #fff0f0; color: #c0000a; }
-  .format-badge.docx { background: #e8f0fb; color: #1F4A94; }
-  .format-badge.odt { background: #f2f8f2; color: #418344; }
-  .format-badge.txt { background: #fef7e0; color: #b88a1a; }
-  .format-badge.html { background: #e0f7f7; color: #0a8f8d; }
-
+  .policy-block { background: #fff; border: 2px solid #e03c3c; border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; }
+  .policy-title { font-size: 18px; font-weight: 800; color: #c0000a; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .policy-rules { display: flex; flex-direction: column; gap: 10px; }
+  .policy-rule { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: #333; line-height: 1.6; }
+  .policy-rule .icon { color: #e03c3c; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
   .contact-card { background: #1F4A94; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
   .contact-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
-  .contact-card p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.6; }
+  .contact-card p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6; }
   .contact-links { display: flex; flex-direction: column; gap: 10px; }
   .contact-link { background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.3); text-align: center; white-space: nowrap; }
   .page-footer { background: #1F4A94; padding: 0; margin-top: 80px; }
@@ -132,7 +99,6 @@
     .main { padding: 32px 16px 60px; }
     .nav-strip { padding: 0 16px; }
     .overview-card { flex-direction: column; padding: 24px; }
-    .modes-grid { grid-template-columns: 1fr; }
     .footer-inner { padding: 24px 20px; }
   }
 </style>
@@ -148,8 +114,8 @@
       </div>
       <span class="badge-app">Google Workspace</span>
     </div>
-    <div class="header-title">Google Docs <span>at CBF</span></div>
-    <div class="header-sub">Your complete guide to creating, editing, and collaborating on documents at the Caribbean Biodiversity Fund — from drafting reports to reviewing with colleagues.</div>
+    <div class="header-title">Gmail at <span>CBF</span></div>
+    <div class="header-sub">Your complete guide to using Gmail within the Caribbean Biodiversity Fund — from composing your first email to managing your inbox like a pro.</div>
   </div>
   <svg class="wave-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M0,40 C240,65 480,15 720,40 C960,65 1200,15 1440,40 L1440,60 L0,60 Z" fill="#f5f7fa"/>
@@ -158,454 +124,315 @@
 
 <nav class="nav-strip">
   <a href="#overview">Overview</a>
-  <a href="#creating">Creating</a>
-  <a href="#formatting">Formatting</a>
-  <a href="#modes">Editing Modes</a>
-  <a href="#comments">Comments</a>
-  <a href="#collaboration">Collaboration</a>
-  <a href="#structure">Structure</a>
-  <a href="#exporting">Exporting</a>
-  <a href="#shortcuts">Shortcuts</a>
+  <a href="#access">Access</a>
+  <a href="#composing">Composing</a>
+  <a href="#organising">Organising</a>
+  <a href="#signature">Signature</a>
+  <a href="#delegation">Delegation</a>
+  <a href="#policies">Policies</a>
   <a href="#tips">Tips</a>
   <a href="#support">Support</a>
 </nav>
 
 <div class="main">
 
-  <!-- OVERVIEW -->
   <section id="overview">
     <div class="section-tag">Overview</div>
-    <h2 class="section-title">What is Google Docs?</h2>
-    <p class="section-lead">Google Docs is CBF's primary tool for creating and collaborating on written documents — reports, proposals, meeting notes, policies, and more. It works entirely in the browser, saves automatically, and lets multiple people work on the same document at the same time.</p>
-
+    <h2 class="section-title">What is Gmail?</h2>
+    <p class="section-lead">Gmail is CBF's official email platform, part of Google Workspace. All staff communicate internally and externally through their CBF Gmail account — it is your primary professional communication channel.</p>
     <div class="overview-card">
       <div class="overview-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 6L12 13L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <div class="overview-text">
-        <h3>How CBF uses Google Docs</h3>
-        <p>Google Docs is used for drafting and reviewing project reports, writing meeting notes, developing policies and procedures, and creating any document that requires input from more than one person. Because it saves every change automatically, there is no risk of losing work — and every version is accessible through version history.</p>
+        <h3>Your CBF email address</h3>
+        <p>Your CBF Gmail address follows the format <strong>firstnameinitiallastname@caribbeanbiodiversityfund.org</strong>. For example, David Brown would be <strong>dbrown@caribbeanbiodiversityfund.org</strong>. This address is used for all CBF business — project communications, partner correspondence, and internal coordination.</p>
       </div>
     </div>
-
     <div class="facts-grid">
       <div class="fact-card">
         <div class="fact-label">Platform</div>
-        <div class="fact-value">Google Docs (Workspace)</div>
+        <div class="fact-value">Google Workspace (Gmail)</div>
       </div>
       <div class="fact-card green">
-        <div class="fact-label">Saving</div>
-        <div class="fact-value">Automatic — no manual save needed</div>
+        <div class="fact-label">Access</div>
+        <div class="fact-value">Web browser + mobile app</div>
       </div>
       <div class="fact-card teal">
-        <div class="fact-label">Collaboration</div>
-        <div class="fact-value">Real-time, multiple editors at once</div>
+        <div class="fact-label">Storage</div>
+        <div class="fact-value">1 TB (1,000 GB) pooled across Google Workspace</div>
       </div>
       <div class="fact-card gold">
-        <div class="fact-label">Formats</div>
-        <div class="fact-value">Export as PDF, Word, ODT, and more</div>
+        <div class="fact-label">Email Format</div>
+        <div class="fact-value">
+          firstnameinitiallastname
+          <span class="fact-domain">@caribbeanbiodiversityfund.org</span>
+        </div>
       </div>
     </div>
   </section>
 
   <hr class="section-divider">
 
-  <!-- CREATING -->
-  <section id="creating">
+  <section id="access">
     <div class="section-tag">Getting Started</div>
-    <h2 class="section-title">Creating and opening documents</h2>
-    <p class="section-lead">You can create a new document from Google Drive, from docs.google.com, or directly from Gmail. Opening an existing document is as simple as clicking it in Drive.</p>
-
+    <h2 class="section-title">Accessing your Gmail</h2>
+    <p class="section-lead">You can access CBF Gmail from any web browser or via the Gmail mobile app. Sign in with your CBF credentials — never use a personal Google account for CBF business.</p>
     <div class="task-block">
-      <div class="task-header"><div class="task-num">1</div><div class="task-title">Create a new document</div></div>
+      <div class="task-header"><div class="task-num">1</div><div class="task-title">Sign in via web browser</div></div>
       <div class="task-body">
         <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Go to <strong>docs.google.com</strong> and click the <strong>blank document</strong> thumbnail, or click <strong>+ New → Google Docs</strong> from inside Google Drive</div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click <strong>Untitled document</strong> at the top-left and type a clear, descriptive name. Example: <code>2026_Q2_MarineConservation_Report_DRAFT</code></div></li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">The document is saved automatically in <strong>My Drive</strong> by default — move it to the correct Shared Drive folder straight away so it is accessible to your team</div></li>
-          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To move it: click the <strong>folder icon</strong> next to the document title at the top → navigate to the correct Shared Drive location → click <strong>Move</strong></div></li>
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open any browser and go to <strong>mail.google.com</strong> or <strong>gmail.com</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Enter your CBF email: <code>firstnameinitiallastname@caribbeanbiodiversityfund.org</code> — for example, <code>dbrown@caribbeanbiodiversityfund.org</code></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Enter your password. If this is your first login, use the temporary password provided by IT and <strong>change it immediately</strong></div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Complete any two-factor authentication (2FA) steps if prompted</div></li>
         </ol>
-        <div class="note-box"><strong>Name before you share:</strong> Always rename a document before sharing it. Collaborators seeing "Untitled document" have no idea what they are looking at. Include the year, topic, and status (DRAFT / FINAL) in the name.</div>
+        <div class="alert-box"><strong>Important:</strong> Always sign out of Gmail when using a shared or public computer. Never check "Keep me signed in" on devices that aren't yours.</div>
       </div>
     </div>
-
     <div class="task-block">
-      <div class="task-header"><div class="task-num">2</div><div class="task-title">Create from a template</div></div>
+      <div class="task-header"><div class="task-num">2</div><div class="task-title">Set up the Gmail mobile app</div></div>
       <div class="task-body">
         <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Go to <strong>docs.google.com</strong> → click <strong>Template gallery</strong> (top-right of the homepage) to browse available templates</div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">CBF templates — such as meeting note formats, report structures, or letter templates — may be stored in your team's Shared Drive. Check there before creating from scratch</div></li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To use a template from Drive: open the template file → click <strong>File → Make a copy</strong>. This creates a new editable version and leaves the original template intact</div></li>
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Download the <strong>Gmail</strong> app from the App Store (iOS) or Google Play (Android)</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Tap <strong>Add an email address</strong> → Select <strong>Google</strong></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Enter your CBF email and password to sign in</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">If you also have a personal Gmail, always confirm you are sending from your <strong>CBF account</strong> — check the "From" field before sending</div></li>
         </ol>
-        <div class="info-box"><strong>Always copy, never edit the original:</strong> When using a shared template, always make a copy first. Editing the original template affects everyone who uses it.</div>
+        <div class="note-box"><strong>Tip:</strong> On mobile, tap your profile icon (top right) to switch between accounts. Always confirm you're on your CBF account before composing work emails.</div>
       </div>
     </div>
   </section>
 
   <hr class="section-divider">
 
-  <!-- FORMATTING -->
-  <section id="formatting">
-    <div class="section-tag">Document Formatting</div>
-    <h2 class="section-title">Formatting your document</h2>
-    <p class="section-lead">Well-formatted documents are easier to read and reflect CBF's professional standards. Use the built-in heading styles and formatting tools — avoid manual formatting with bold text and font size changes alone.</p>
-
+  <section id="composing">
+    <div class="section-tag">Core Tasks</div>
+    <h2 class="section-title">Composing & sending emails</h2>
+    <p class="section-lead">Learn to compose, reply, forward, and send emails efficiently — including formatting, attachments, and scheduling.</p>
     <div class="task-block">
-      <div class="task-header"><div class="task-num">3</div><div class="task-title">Apply heading styles</div></div>
+      <div class="task-header"><div class="task-num">3</div><div class="task-title">Compose a new email</div></div>
       <div class="task-body">
         <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click on the text you want to format as a heading. In the toolbar, click the style dropdown that says <strong>Normal text</strong></div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Select the appropriate heading level:
-            <br>— <strong>Heading 1</strong>: main section titles (used once or twice per document)
-            <br>— <strong>Heading 2</strong>: subsection titles
-            <br>— <strong>Heading 3</strong>: sub-subsections or minor headings</div>
-          </li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Using heading styles (not just bold text) enables the <strong>Document Outline</strong> panel, allows automatic Table of Contents generation, and makes the document accessible to screen readers</div></li>
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click the <strong>Compose</strong> button (bottom-left, pencil icon) to open a new message window</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">In the <strong>To</strong> field, start typing a name — Gmail will suggest CBF contacts from the directory automatically</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Use <strong>Cc</strong> to include others who need to be informed, and <strong>Bcc</strong> when recipients should not see each other's addresses (e.g. bulk announcements)</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Write a clear, descriptive <strong>Subject</strong> line — keep it under 60 characters and flag the action needed where relevant (e.g. <code>ACTION NEEDED: Q2 Report Review by May 15</code>)</div></li>
+          <li class="step-item"><div class="step-dot">5</div><div class="step-text">Write your message, then click the blue <strong>Send</strong> button — or use the arrow next to it to <strong>Schedule send</strong> for a specific date and time</div></li>
         </ol>
-        <div class="success-box"><strong>Why this matters at CBF:</strong> Consistent heading use means anyone can navigate long reports instantly using the outline panel. It also ensures documents are accessible to colleagues using assistive technologies.</div>
+        <div class="note-box"><strong>Good subject line habits:</strong> Use prefixes like ACTION NEEDED, FYI, DECISION REQUIRED, or RESPONSE BY [DATE] at the start of your subject when relevant. This helps recipients prioritise.</div>
       </div>
     </div>
-
     <div class="task-block">
-      <div class="task-header"><div class="task-num">4</div><div class="task-title">Set page layout and document settings</div></div>
+      <div class="task-header"><div class="task-num">4</div><div class="task-title">Reply and forward emails</div></div>
       <div class="task-body">
         <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Go to <strong>File → Page setup</strong> to set paper size (A4 for CBF documents), orientation, and margins</div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">To set the default font: format any text in your chosen font → Format → Paragraph styles → Normal text → <strong>Update 'Normal text' to match</strong></div></li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">CBF documents should use <strong>Outfit</strong> or <strong>Arial</strong> as the body font, in keeping with the CBF Brand Toolkit typography guidelines</div></li>
-          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To add page numbers: <strong>Insert → Headers & footers → Page numbers</strong> — choose position (top or bottom) and alignment</div></li>
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Open an email and click <strong>Reply</strong> (arrow icon at the bottom) to respond only to the sender</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click <strong>Reply All</strong> (two arrows) to respond to all recipients — use this thoughtfully to avoid unnecessary inbox clutter for others</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click <strong>Forward</strong> to send the thread to someone new — always add context at the top explaining why you are forwarding</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To undo a sent email: click <strong>Undo</strong> in the notification bar at the bottom — you have up to 30 seconds depending on your settings</div></li>
         </ol>
-        <div class="note-box"><strong>CBF font guidance:</strong> The official CBF typeface is Outfit. If Outfit is not available, Arial is the recommended substitute. Avoid decorative or non-standard fonts in official CBF documents.</div>
+        <div class="info-box"><strong>Extend your undo window:</strong> Go to Settings → General → Undo Send → set the cancellation period to 30 seconds for maximum time to catch mistakes.</div>
       </div>
     </div>
-
     <div class="task-block">
-      <div class="task-header"><div class="task-num">5</div><div class="task-title">Insert a table of contents</div></div>
+      <div class="task-header"><div class="task-num">5</div><div class="task-title">Attach files and insert links</div></div>
       <div class="task-body">
         <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Place your cursor where you want the table of contents to appear (typically after the title page or introduction)</div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click <strong>Insert → Table of contents</strong> → choose a style (with page numbers, or with blue links)</div></li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">The table of contents is generated automatically from your Heading styles. If you add or move sections, click the <strong>refresh icon</strong> on the table to update it</div></li>
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">To attach a file from your computer: click the <strong>paperclip icon</strong> at the bottom of the compose window and select the file</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">To share a Google Drive file: click the <strong>Drive icon</strong> (triangle) in the compose toolbar — this inserts a shareable link rather than a copy, preferable for large or frequently updated files</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To insert a hyperlink: select the text, click the <strong>chain/link icon</strong> in the formatting toolbar, and paste the URL</div></li>
         </ol>
-        <div class="info-box"><strong>For long reports:</strong> Always include a table of contents in documents longer than 5 pages. It saves readers significant time navigating CBF reports, proposals, and policy documents.</div>
+        <div class="note-box"><strong>Best practice:</strong> For documents shared widely or updated regularly, always share via Google Drive link. This ensures recipients always see the latest version.</div>
       </div>
     </div>
   </section>
 
   <hr class="section-divider">
 
-  <!-- EDITING MODES -->
-  <section id="modes">
-    <div class="section-tag">Editing Modes</div>
-    <h2 class="section-title">The three editing modes</h2>
-    <p class="section-lead">Google Docs has three modes that control how your changes appear. Understanding when to use each one is essential for clean collaboration at CBF.</p>
-
-    <div class="modes-grid">
-      <div class="mode-card editing">
-        <div class="mode-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        </div>
-        <div class="mode-name">Editing</div>
-        <div class="mode-desc">Your changes apply directly and immediately to the document</div>
-        <div class="mode-when">Use when: you own the document or have been given direct editing authority</div>
-      </div>
-      <div class="mode-card suggesting">
-        <div class="mode-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        </div>
-        <div class="mode-name">Suggesting</div>
-        <div class="mode-desc">Your changes appear as tracked suggestions for the owner to accept or reject</div>
-        <div class="mode-when">Use when: reviewing or contributing to someone else's document</div>
-      </div>
-      <div class="mode-card viewing">
-        <div class="mode-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        <div class="mode-name">Viewing</div>
-        <div class="mode-desc">Read-only mode — no changes can be made to the document content</div>
-        <div class="mode-when">Use when: reading a final document or reviewing without any intent to edit</div>
-      </div>
-    </div>
-
-    <div class="task-block" style="margin-top:24px;">
-      <div class="task-header"><div class="task-num">6</div><div class="task-title">Switch between editing modes</div></div>
-      <div class="task-body">
-        <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click the <strong>pencil icon</strong> in the top-right area of the document (next to the Share button) — this shows your current mode</div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click it to open the mode dropdown and select <strong>Editing</strong>, <strong>Suggesting</strong>, or <strong>Viewing</strong></div></li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">In <strong>Suggesting mode</strong>, your additions appear in green underlined text and deletions appear as strikethrough — each suggestion has an Accept ✓ or Reject ✗ button for the document owner</div></li>
-        </ol>
-        <div class="alert-box"><strong>CBF default when reviewing:</strong> Always switch to Suggesting mode before editing a document you did not create. Making direct edits to someone else's draft without using suggestions can overwrite their work without a trace.</div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- COMMENTS -->
-  <section id="comments">
-    <div class="section-tag">Feedback & Review</div>
-    <h2 class="section-title">Comments and suggestions</h2>
-    <p class="section-lead">Comments let you leave feedback, ask questions, and tag colleagues on specific parts of a document — without altering the document content itself.</p>
-
+  <section id="organising">
+    <div class="section-tag">Inbox Management</div>
+    <h2 class="section-title">Organising your inbox</h2>
+    <p class="section-lead">A well-organised inbox helps you stay on top of CBF's fast-moving workload. Use labels, stars, and filters to keep things manageable.</p>
     <div class="task-block">
-      <div class="task-header"><div class="task-num">7</div><div class="task-title">Add a comment</div></div>
+      <div class="task-header"><div class="task-num">6</div><div class="task-title">Using labels to organise email</div></div>
       <div class="task-body">
+        <p style="font-size:14px;color:#555;margin-bottom:14px;">Labels in Gmail work like folders but are more powerful — an email can have multiple labels at once.</p>
         <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Highlight the text you want to comment on, then click the <strong>comment bubble icon</strong> that appears in the right margin — or press <code>Ctrl+Alt+M</code> (PC) / <code>⌘+Option+M</code> (Mac)</div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Type your comment in the box. To tag a specific colleague, type <strong>@</strong> followed by their name — they receive an email notification with a direct link to the comment</div></li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click <strong>Comment</strong> to post. Your comment appears in the margin anchored to the highlighted text</div></li>
-          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To reply to an existing comment: click the comment → type in the <strong>Reply</strong> field. This creates a thread, keeping the discussion together</div></li>
-        </ol>
-        <div class="success-box"><strong>Use @mentions for action items:</strong> When a comment requires a specific person to act, always @mention them. This ensures they receive a notification and the responsibility is clearly assigned within the document itself.</div>
-      </div>
-    </div>
-
-    <div class="task-block">
-      <div class="task-header"><div class="task-num">8</div><div class="task-title">Resolve and manage comments</div></div>
-      <div class="task-body">
-        <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Once a comment has been addressed, click <strong>Resolve</strong> (the tick icon on the comment) — the comment disappears from the main view but is preserved in the comment history</div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">To view all comments including resolved ones: click <strong>Open comment history</strong> (the speech bubble icon top-right of the document)</div></li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To reopen a resolved comment: find it in comment history and click <strong>Re-open</strong></div></li>
-        </ol>
-        <div class="note-box"><strong>Before finalising a document:</strong> Resolve all open comments. A document shared externally or archived to Zoho WorkDrive should have no unresolved comments — they signal that the document is not yet complete.</div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- COLLABORATION -->
-  <section id="collaboration">
-    <div class="section-tag">Working Together</div>
-    <h2 class="section-title">Real-time collaboration</h2>
-    <p class="section-lead">Multiple CBF staff can work in the same document simultaneously. Here is how to collaborate effectively without creating confusion.</p>
-
-    <div class="task-block">
-      <div class="task-header"><div class="task-num">9</div><div class="task-title">Collaborate in real time</div></div>
-      <div class="task-body">
-        <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">1</div><div class="step-text">When multiple people have the document open, you will see their <strong>coloured cursors</strong> moving through the document in real time — each person's name appears beside their cursor</div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">To avoid confusion when multiple people are editing simultaneously, use the <strong>document chat</strong>: click the chat bubble icon (top-right) to message collaborators currently in the document without leaving it</div></li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">If you need to work on the same section as someone else, coordinate via chat or comments first — simultaneous edits to the same paragraph can sometimes result in conflicts</div></li>
-        </ol>
-        <div class="info-box"><strong>Version history is your safety net:</strong> If real-time collaboration creates errors, go to <strong>File → Version history → See version history</strong> to find a clean earlier version and restore it. Google Docs saves a version every few minutes automatically.</div>
-      </div>
-    </div>
-
-    <div class="task-block">
-      <div class="task-header"><div class="task-num">10</div><div class="task-title">Accept and reject suggestions</div></div>
-      <div class="task-body">
-        <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">1</div><div class="step-text">When a colleague has made suggestions (in Suggesting mode), they appear as green highlighted changes in the document</div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click the <strong>tick ✓</strong> on a suggestion to <strong>accept</strong> it — the change is incorporated into the document text</div></li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Click the <strong>X</strong> on a suggestion to <strong>reject</strong> it — the original text is restored</div></li>
-          <li class="step-item"><div class="step-dot">4</div><div class="step-text">To accept or reject all suggestions at once: click <strong>Tools → Review suggested edits → Accept all</strong> or <strong>Reject all</strong></div></li>
-        </ol>
-        <div class="note-box"><strong>Review before accepting all:</strong> Always read through suggestions individually before using "Accept all" — especially on important CBF reports or policy documents where a single misplaced word can change meaning significantly.</div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- STRUCTURE -->
-  <section id="structure">
-    <div class="section-tag">Document Structure</div>
-    <h2 class="section-title">Using the outline, bookmarks & links</h2>
-    <p class="section-lead">For longer CBF documents — project reports, annual reviews, grant proposals — these tools keep navigation clean and professional.</p>
-
-    <div class="task-block">
-      <div class="task-header"><div class="task-num">11</div><div class="task-title">Use the document outline panel</div></div>
-      <div class="task-body">
-        <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>View → Show outline</strong> to open the outline panel on the left side of the screen</div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">The outline displays all Heading 1, 2, and 3 text as a clickable navigation tree — click any heading to jump directly to that section</div></li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">This is especially useful when reviewing long reports — share the document with the outline open by default so reviewers can navigate without scrolling</div></li>
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">In the left sidebar, scroll down and click <strong>+ Create new label</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Name your label (e.g. <code>Projects/Reef Resilience</code>, <code>Finance</code>, <code>Partners</code>) — use forward slashes to create nested sub-labels</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To apply a label to an email: open the email, click the <strong>label icon</strong> at the top, and select the relevant label(s)</div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Right-click a label in the sidebar to <strong>change its colour</strong> for quick visual identification</div></li>
         </ol>
       </div>
     </div>
-
     <div class="task-block">
-      <div class="task-header"><div class="task-num">12</div><div class="task-title">Insert links and cross-references</div></div>
-      <div class="task-body">
-        <ol class="steps-list">
-          <li class="step-item"><div class="step-dot">1</div><div class="step-text">To insert a hyperlink: highlight text → press <code>Ctrl+K</code> (PC) / <code>⌘+K</code> (Mac) → paste a URL or search for a heading within the document to link to</div></li>
-          <li class="step-item"><div class="step-dot">2</div><div class="step-text">To link to another section within the same document: click <strong>Insert → Bookmark</strong> to place a bookmark, then use <code>Ctrl+K</code> and select the bookmark as the link destination</div></li>
-          <li class="step-item"><div class="step-dot">3</div><div class="step-text">To link to a Google Drive file: paste the Drive file URL, or use <code>Ctrl+K</code> → type the file name — Docs will find it automatically if you have access</div></li>
-        </ol>
-        <div class="success-box"><strong>Link to Drive files, not attachments:</strong> When referencing supporting documents in a report, link to the Google Drive file rather than attaching a copy. This keeps everything up to date and reduces duplication.</div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- EXPORTING -->
-  <section id="exporting">
-    <div class="section-tag">Exporting</div>
-    <h2 class="section-title">Exporting and downloading documents</h2>
-    <p class="section-lead">When a document is complete and ready to be shared externally, submitted, or archived to Zoho WorkDrive, export it to the appropriate format.</p>
-
-    <div class="task-block">
-      <div class="task-header"><div class="task-num">13</div><div class="task-title">Export a document</div></div>
+      <div class="task-header"><div class="task-num">7</div><div class="task-title">Creating filters to auto-organise email</div></div>
       <div class="task-body">
         <div class="path-flow">
-          <span class="path-step">File</span><span class="path-arrow">→</span>
-          <span class="path-step">Download</span><span class="path-arrow">→</span>
-          <span class="path-step">Select format</span>
+          <span class="path-step">Settings ⚙</span><span class="path-arrow">→</span>
+          <span class="path-step">See all settings</span><span class="path-arrow">→</span>
+          <span class="path-step">Filters and Blocked Addresses</span><span class="path-arrow">→</span>
+          <span class="path-step">Create a new filter</span>
         </div>
-        <table class="export-table" style="margin-top:16px;">
-          <thead>
-            <tr><th>Format</th><th>Use at CBF</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="format-badge pdf">.pdf</span></td>
-              <td>Final versions for external sharing, submission, or archiving to Zoho WorkDrive. Layout is locked and cannot be edited by recipients</td>
-            </tr>
-            <tr>
-              <td><span class="format-badge docx">.docx</span></td>
-              <td>When sharing with external partners, donors, or consultants who use Microsoft Word</td>
-            </tr>
-            <tr>
-              <td><span class="format-badge odt">.odt</span></td>
-              <td>Open-format alternative to Word — use when a partner specifically requests an open document format</td>
-            </tr>
-            <tr>
-              <td><span class="format-badge txt">.txt</span></td>
-              <td>Plain text only — use when content needs to be pasted into another system without any formatting</td>
-            </tr>
-            <tr>
-              <td><span class="format-badge html">.html</span></td>
-              <td>For web publishing — use only when content is being added directly to a website or Google Sites</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="alert-box" style="margin-top:16px;"><strong>Archive as PDF to WorkDrive:</strong> When a document is finalised and approved, export as PDF and upload to the correct folder in Zoho WorkDrive. PDF preserves the layout exactly and cannot be accidentally edited after archiving.</div>
+        <ol class="steps-list" style="margin-top:14px;">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Enter criteria: sender address, subject keywords, or recipient. Click <strong>Create filter</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Choose an action: <strong>Apply label</strong>, <strong>Skip Inbox</strong> (archive), <strong>Mark as read</strong>, or <strong>Star it</strong></div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Check <strong>Also apply filter to matching conversations</strong> to apply retroactively, then click <strong>Create filter</strong></div></li>
+        </ol>
+        <div class="success-box"><strong>Example:</strong> Filter all emails from @caribbeanbiodiversityfund.org → apply label "Internal" so internal emails are always visually distinct from external correspondence.</div>
+      </div>
+    </div>
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">8</div><div class="task-title">Using stars and snooze to manage follow-ups</div></div>
+      <div class="task-body">
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text"><strong>Star an email</strong> by clicking the star icon next to it — starred emails appear in the <strong>Starred</strong> folder in the left sidebar</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text"><strong>Snooze an email</strong> by hovering over it and clicking the clock icon — choose when it should reappear at the top of your inbox</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Use <strong>Google Tasks integration</strong>: open an email and click <strong>Add to Tasks</strong> (tick icon in the right panel) to turn it into an action item with a due date</div></li>
+        </ol>
       </div>
     </div>
   </section>
 
   <hr class="section-divider">
 
-  <!-- SHORTCUTS -->
-  <section id="shortcuts">
-    <div class="section-tag">Keyboard Shortcuts</div>
-    <h2 class="section-title">Useful keyboard shortcuts</h2>
-    <p class="section-lead">These shortcuts save time on the most common tasks in Google Docs. Mac users replace Ctrl with ⌘.</p>
-
-    <div class="shortcuts-grid">
-      <div class="shortcut-item">
-        <span class="shortcut-action">Bold text</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">B</span></div>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-action">Italic text</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">I</span></div>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-action">Underline</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">U</span></div>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-action">Insert link</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">K</span></div>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-action">Add comment</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">M</span></div>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-action">Find & replace</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">H</span></div>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-action">Undo</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Z</span></div>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-action">Redo</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Y</span></div>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-action">Word count</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Shift</span><span class="kbd">C</span></div>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-action">Heading 1</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">1</span></div>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-action">Heading 2</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">2</span></div>
-      </div>
-      <div class="shortcut-item">
-        <span class="shortcut-action">Normal text</span>
-        <div class="shortcut-keys"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">0</span></div>
+  <section id="signature">
+    <div class="section-tag">Professional Identity</div>
+    <h2 class="section-title">Setting up your email signature</h2>
+    <p class="section-lead">Your CBF email signature should be set up when you join and kept current. You can update it at any time directly in Gmail Settings to reflect changes to your name, title, phone number, or other details.</p>
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">9</div><div class="task-title">Adding or updating your signature</div></div>
+      <div class="task-body">
+        <div class="path-flow">
+          <span class="path-step">Settings ⚙</span><span class="path-arrow">→</span>
+          <span class="path-step">See all settings</span><span class="path-arrow">→</span>
+          <span class="path-step">General tab</span><span class="path-arrow">→</span>
+          <span class="path-step">Signature section</span>
+        </div>
+        <ol class="steps-list" style="margin-top:14px;">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Scroll down to the <strong>Signature</strong> section and click <strong>+ Create new</strong> (or click an existing signature name to edit it)</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Name it <code>CBF Official</code>. Enter your details — your name, job title, department, phone number, and the CBF website. Use the formatting toolbar to apply consistent styling</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Under <strong>Signature defaults</strong>, set this signature to appear on both <strong>New emails</strong> and <strong>Replies/forwards</strong></div></li>
+          <li class="step-item"><div class="step-dot">4</div><div class="step-text">Scroll to the bottom and click <strong>Save Changes</strong>. Your signature will now automatically appear in all outgoing emails</div></li>
+        </ol>
+        <div class="note-box"><strong>Keeping it current:</strong> If your title, phone number, or team changes, update your signature directly in Settings at any time. Keep it professional and consistent with CBF's communication standards.</div>
       </div>
     </div>
-    <div class="info-box" style="margin-top:16px;">Press <strong>Ctrl+/</strong> (or <strong>⌘+/</strong> on Mac) inside any Google Doc to see the full list of available keyboard shortcuts.</div>
   </section>
 
   <hr class="section-divider">
 
-  <!-- TIPS -->
+  <section id="delegation">
+    <div class="section-tag">Shared Access</div>
+    <h2 class="section-title">Delegated access & shared inboxes</h2>
+    <p class="section-lead">Some CBF roles involve managing shared inboxes (e.g. info@, secretariat@). Delegation allows you to read and send from these inboxes without sharing passwords — shared inbox access is managed by your direct manager.</p>
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">10</div><div class="task-title">Accessing a delegated inbox</div></div>
+      <div class="task-body">
+        <p style="font-size:14px;color:#555;margin-bottom:14px;">Delegation is set up by your manager. Once granted, you can access the shared inbox directly from your own account — no separate login required.</p>
+        <ol class="steps-list">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Click your <strong>profile icon</strong> (top-right corner of Gmail). If delegation has been granted, the shared inbox name will appear in the dropdown</div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Click the shared inbox name to switch to it — you are now viewing and managing that inbox on behalf of the account</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Emails sent from a delegated inbox display the <strong>shared address</strong> as the sender, maintaining a professional appearance</div></li>
+        </ol>
+        <div class="alert-box"><strong>Never share your password</strong> to give someone inbox access. Delegation is the correct and secure method. Contact your manager to set up delegation properly.</div>
+      </div>
+    </div>
+    <div class="task-block">
+      <div class="task-header"><div class="task-num">11</div><div class="task-title">Setting up an out-of-office (vacation responder)</div></div>
+      <div class="task-body">
+        <div class="path-flow">
+          <span class="path-step">Settings ⚙</span><span class="path-arrow">→</span>
+          <span class="path-step">See all settings</span><span class="path-arrow">→</span>
+          <span class="path-step">General tab</span><span class="path-arrow">→</span>
+          <span class="path-step">Vacation responder</span>
+        </div>
+        <ol class="steps-list" style="margin-top:14px;">
+          <li class="step-item"><div class="step-dot">1</div><div class="step-text">Toggle <strong>Vacation responder on</strong> and set your <strong>First day</strong> and <strong>Last day</strong></div></li>
+          <li class="step-item"><div class="step-dot">2</div><div class="step-text">Write a professional message that includes: your return date, who to contact in your absence (with their email), and whether you have limited email access</div></li>
+          <li class="step-item"><div class="step-dot">3</div><div class="step-text">Check <strong>Only send a response to people in my Contacts</strong> to avoid auto-replying to newsletters or spam. Click <strong>Save Changes</strong></div></li>
+        </ol>
+        <div class="success-box"><strong>Best practice:</strong> Set your out-of-office at least one business day before leave. Inform your supervisor and active project contacts directly, in addition to the auto-reply.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section id="policies">
+    <div class="section-tag">CBF Policies</div>
+    <h2 class="section-title">Important policies & security rules</h2>
+    <p class="section-lead">These rules protect CBF's communications, data, and reputation. All staff are expected to follow them without exception.</p>
+    <div class="policy-block">
+      <div class="policy-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c0000a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Non-negotiable rules
+      </div>
+      <div class="policy-rules">
+        <div class="policy-rule"><span class="icon">✕</span><span><strong>Never share your password.</strong> Not with colleagues, managers, or IT support. If someone needs inbox access, request delegated access through your manager.</span></div>
+        <div class="policy-rule"><span class="icon">✕</span><span><strong>Never use your CBF email for personal purposes.</strong> Your CBF account is for CBF business only — do not subscribe to personal mailing lists, sign up for personal services, or use it as a recovery email for personal accounts.</span></div>
+        <div class="policy-rule"><span class="icon">✕</span><span><strong>Never forward confidential CBF communications to personal email accounts.</strong> If you need remote access, sign into Gmail via browser using your CBF account.</span></div>
+        <div class="policy-rule"><span class="icon">✕</span><span><strong>Never click suspicious links or download unexpected attachments.</strong> If an email looks unusual — even from a known CBF contact — verify with the sender before clicking.</span></div>
+        <div class="policy-rule"><span class="icon">✕</span><span><strong>Never send sensitive personal data</strong> (IDs, financial information, passwords) via email unless through an encrypted channel approved by your manager.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
   <section id="tips">
     <div class="section-tag">Best Practices</div>
     <h2 class="section-title">Tips for CBF staff</h2>
-    <p class="section-lead">Habits that make your Google Docs cleaner, more professional, and easier for the whole team to work with.</p>
-
+    <p class="section-lead">Small habits that make a big difference in keeping CBF's communications clear, professional, and efficient.</p>
     <div class="tips-grid">
       <div class="tip-card">
-        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
-        <h4>Use Suggesting mode by default</h4>
-        <p>When opening a shared document to review it, switch to Suggesting mode immediately. This protects the original content and creates a clear review trail.</p>
+        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h4>Keep emails concise</h4>
+        <p>Aim for emails under 200 words. If the topic is complex, schedule a Google Meet instead. Use bullet points rather than long paragraphs.</p>
       </div>
       <div class="tip-card">
-        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-        <h4>Include a document header</h4>
-        <p>Start every formal CBF document with a header block: document title, date, author name, version number (v0.1 for draft, v1.0 for final), and status (DRAFT / FOR REVIEW / FINAL).</p>
+        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h4>Respond within 24 hours</h4>
+        <p>Even if just to acknowledge receipt and give a timeline. Silence is unprofessional and can stall project work.</p>
       </div>
       <div class="tip-card">
-        <div class="tip-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a9997" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></div>
-        <h4>Tag people, not just mention them</h4>
-        <p>In comments, use @name to tag a specific colleague rather than writing their name in plain text. This sends them a direct notification and keeps accountability clear.</p>
+        <div class="tip-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b88a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <h4>Use threads, not new emails</h4>
+        <p>Reply within an existing thread rather than starting a new email on the same topic. This keeps context together and is easier to search later.</p>
       </div>
       <div class="tip-card">
-        <div class="tip-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b88a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
-        <h4>Clear comments before archiving</h4>
-        <p>Before exporting a final document to PDF and uploading to Zoho WorkDrive, resolve all comments and accept or reject all suggestions. A clean document signals it is truly final.</p>
+        <div class="tip-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a9997" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <h4>Search before you scroll</h4>
+        <p>Use Gmail's search bar with operators like <code>from:</code>, <code>subject:</code>, and <code>has:attachment</code> to find emails instantly.</p>
       </div>
       <div class="tip-card">
-        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-        <h4>Use Find & Replace for consistency</h4>
-        <p>Press Ctrl+H to open Find & Replace — useful for updating project names, correcting repeated errors, or standardising terminology across a long document quickly.</p>
+        <div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Enable 2-factor authentication</h4>
+        <p>If not already enforced by IT, enable 2FA under My Account → Security. It is your strongest protection against account compromise.</p>
       </div>
       <div class="tip-card">
-        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-        <h4>Keep one document per topic</h4>
-        <p>Avoid cramming multiple unrelated topics into one document. Separate documents are easier to share, version, and archive. Link related documents to each other instead of combining them.</p>
+        <div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h4>Use @mentions in Docs, not email</h4>
+        <p>For quick back-and-forth on a specific document, use @mention in Google Docs comments rather than sending separate emails about it.</p>
       </div>
     </div>
   </section>
 
   <hr class="section-divider">
 
-  <!-- SUPPORT -->
   <section id="support">
     <div class="section-tag">Need Help?</div>
     <h2 class="section-title">Getting support</h2>
-    <p class="section-lead">For technical issues with Google Docs — such as access errors, formatting problems, or lost content — contact the CBF System Administrator or consult the Google Help Center.</p>
+    <p class="section-lead">For all account access issues, technical problems, or IT-related questions about your Gmail account, contact the CBF System Administrator.</p>
     <div class="contact-card">
       <div>
         <h3>Contact & Resources</h3>
-        <p>The CBF System Administrator handles access and technical issues. The Google Docs Help Center has detailed guidance on formatting, collaboration, and advanced features.</p>
+        <p>Reach out to the CBF System Administrator for account access, password resets, delegation setup, and any technical issues with your Gmail account.</p>
       </div>
       <div class="contact-links">
         <a href="#" class="contact-link">System Administrator</a>
-        <a href="https://support.google.com/docs" target="_blank" class="contact-link">Google Docs Help Center ↗</a>
+        <a href="https://workspace.google.com/learning-center/products/gmail/" target="_blank" class="contact-link">Google Gmail Help Center ↗</a>
       </div>
     </div>
   </section>
@@ -621,7 +448,7 @@
       <div class="footer-brand">Caribbean <span>Biodiversity</span> Fund</div>
       <div class="footer-text">© 2026 Caribbean Biodiversity Fund. All rights reserved.</div>
     </div>
-    <div class="footer-series">CBF Staff Training Series · <span>Google Workspace</span> · Google Docs Guide</div>
+    <div class="footer-series">CBF Staff Training Series · <span>Google Workspace</span> · Gmail Guide</div>
   </div>
 </footer>
 
