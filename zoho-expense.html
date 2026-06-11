@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoho Expense – CBF Staff Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Outfit', sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: #1F4A94; padding: 0; position: relative; overflow: hidden; }
+  .header-inner { padding: 36px 48px 0 48px; position: relative; z-index: 2; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+  .header-brand { display: flex; flex-direction: column; }
+  .header-org { color: #fff; font-size: 18px; font-weight: 800; letter-spacing: 0.01em; line-height: 1.2; }
+  .header-org span { color: #F5BD29; }
+  .header-org-sub { color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .badge-app { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .header-title { color: #fff; font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
+  .header-title span { color: #F5BD29; }
+  .header-sub { color: rgba(255,255,255,0.75); font-size: 16px; font-weight: 400; max-width: 520px; line-height: 1.6; padding-bottom: 36px; }
+  .wave-footer { width: 100%; display: block; line-height: 0; }
+  .nav-strip { background: #fff; border-bottom: 1px solid #e0e6ef; padding: 0 48px; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+  .nav-strip a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; padding: 14px 18px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+  .nav-strip a:hover { color: #1F4A94; border-bottom-color: #1F4A94; }
+  .main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section-tag { display: inline-block; background: #e8f0fb; color: #1F4A94; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+  .section-title { font-size: 26px; font-weight: 800; color: #1F4A94; margin-bottom: 6px; }
+  .section-lead { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 28px; max-width: 640px; }
+  .section-divider { border: none; border-top: 1.5px solid #e0e6ef; margin: 48px 0; }
+  .overview-card { background: #1F4A94; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; gap: 32px; align-items: flex-start; margin-bottom: 36px; }
+  .overview-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .overview-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .overview-text p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.85); }
+
+  /* FACT CARDS — fixed overflow */
+  .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .fact-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; border-left: 4px solid #1F4A94; min-width: 0; }
+  .fact-card.green { border-left-color: #418344; }
+  .fact-card.teal { border-left-color: #0EBBB9; }
+  .fact-card.gold { border-left-color: #F5BD29; }
+  .fact-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 6px; }
+  .fact-value { font-size: 14px; font-weight: 600; color: #1F4A94; line-height: 1.45; word-break: break-word; overflow-wrap: break-word; }
+  .fact-card.green .fact-value { color: #418344; }
+  .fact-card.teal .fact-value { color: #0a9997; }
+  .fact-card.gold .fact-value { color: #b88a1a; font-size: 13px; }
+  .fact-domain { display: block; font-size: 11px; font-weight: 500; color: #aaa; margin-top: 3px; word-break: break-all; }
+
+  .task-block { background: #fff; border: 1px solid #e0e6ef; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+  .task-header { background: #f0f4fb; padding: 18px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e0e6ef; }
+  .task-num { width: 32px; height: 32px; background: #1F4A94; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .task-title { font-size: 16px; font-weight: 700; color: #1a1a1a; flex: 1; }
+  .task-body { padding: 24px; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .step-item { display: flex; gap: 14px; align-items: flex-start; }
+  .step-dot { width: 24px; height: 24px; background: #e8f0fb; color: #1F4A94; font-size: 12px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; line-height: 1.6; color: #333; }
+  .step-text strong { color: #1F4A94; font-weight: 600; }
+  .step-text code { background: #f0f4fb; color: #1F4A94; font-family: monospace; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .note-box { background: #fffbea; border: 1px solid #f5bd29; border-left: 4px solid #F5BD29; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a5c00; line-height: 1.6; }
+  .note-box strong { color: #5a4300; }
+  .alert-box { background: #fff0f0; border: 1px solid #f5a0a0; border-left: 4px solid #e03c3c; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a1a1a; line-height: 1.6; }
+  .alert-box strong { color: #5a0000; }
+  .success-box { background: #f0fbf0; border: 1px solid #a0d5a0; border-left: 4px solid #418344; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #1a4a1a; line-height: 1.6; }
+  .info-box { background: #e8f6f6; border: 1px solid #a0d8d7; border-left: 4px solid #0EBBB9; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #0a5555; line-height: 1.6; }
+  .path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+  .path-step { background: #e8f0fb; color: #1F4A94; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+  .path-arrow { color: #aaa; font-size: 14px; }
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 12px; }
+  .tip-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; }
+  .tip-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .tip-icon.blue { background: #e8f0fb; }
+  .tip-icon.green { background: #e8f5e8; }
+  .tip-icon.gold { background: #fef7e0; }
+  .tip-icon.teal { background: #e0f7f7; }
+  .tip-card h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; color: #555; line-height: 1.6; }
+  .policy-block { background: #fff; border: 2px solid #e03c3c; border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; }
+  .policy-title { font-size: 18px; font-weight: 800; color: #c0000a; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .policy-rules { display: flex; flex-direction: column; gap: 10px; }
+  .policy-rule { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: #333; line-height: 1.6; }
+  .policy-rule .icon { color: #e03c3c; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .contact-card { background: #1F4A94; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .contact-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .contact-card p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link { background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.3); text-align: center; white-space: nowrap; }
+  .page-footer { background: #1F4A94; padding: 0; margin-top: 80px; }
+  .wave-top { width: 100%; display: block; line-height: 0; }
+  .footer-inner { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { color: #fff; font-size: 15px; font-weight: 800; }
+  .footer-brand span { color: #F5BD29; }
+  .footer-text { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 3px; }
+  .footer-series { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500; }
+  .footer-series span { color: #F5BD29; }
+  @media (max-width: 640px) {
+    .header-inner { padding: 24px 20px 0; }
+    .header-title { font-size: 28px; }
+    .main { padding: 32px 16px 60px; }
+    .nav-strip { padding: 0 16px; }
+    .overview-card { flex-direction: column; padding: 24px; }
+    .footer-inner { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="header-org">Caribbean <span>Biodiversity</span> Fund</div>
+        <div class="header-org-sub">Staff Training Series</div>
+      </div>
+      <span class="badge-app">Zoho One</span>
+    </div>
+    <div class="header-title">Zoho <span>Expense</span> at CBF</div>
+    <div class="header-sub">Record, submit, and track business expenses, trips, and reimbursements — without spreadsheets — within Zoho One.</div>
+  </div>
+  <svg class="wave-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,65 480,15 720,40 C960,65 1200,15 1440,40 L1440,60 L0,60 Z" fill="#f5f7fa"/>
+  </svg>
+</div>
+<nav class="nav-strip"><a href="#overview">Overview</a><a href="#access">Access</a><a href="#record">Record</a><a href="#reports">Reports</a><a href="#trips">Travel</a><a href="#features">Useful Features</a><a href="#support">Support</a></nav>
+<div class="main">
+<section id="overview"><div class="section-tag">Overview</div><h2 class="section-title">What is Zoho Expense?</h2><p class="section-lead">Zoho Expense is CBF’s expense and travel management tool, part of Zoho One. It replaces manual spreadsheets for recording spend, submitting reports, and getting reimbursed.</p><div class="overview-card"><div class="overview-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg></div><div class="overview-text"><h3>How CBF uses it</h3><p>Staff use Zoho Expense to record business expenses, attach receipts, submit them in reports for approval, and track reimbursement. It also handles trip requests and advances, with policy checks applied automatically.</p></div></div><div class="facts-grid"><div class="fact-card"><div class="fact-label">Platform</div><div class="fact-value">Zoho One (Expense)</div></div><div class="fact-card green"><div class="fact-label">Access</div><div class="fact-value">expense.zoho.com · browser and mobile app</div></div><div class="fact-card teal"><div class="fact-label">Core flow</div><div class="fact-value">Record → report → approve → reimburse</div></div><div class="fact-card gold"><div class="fact-label">Integrations</div><div class="fact-value">Zoho People, Zoho Books, and more</div></div></div></section><hr class="section-divider"><section id="access"><div class="section-tag">Getting Started</div><h2 class="section-title">Accessing Zoho Expense</h2><p class="section-lead">Open Zoho Expense in a browser. The dashboard gives you an overview of expenses, reports, trips, and pending approvals.</p><div class="task-block"><div class="task-header"><div class="task-num">1</div><div class="task-title">Sign in to Zoho Expense</div></div><div class="task-body"><ol class="steps-list"><li class="step-item"><div class="step-dot">1</div><div class="step-text">Go to <strong>expense.zoho.com</strong></div></li><li class="step-item"><div class="step-dot">2</div><div class="step-text">Click <strong>Sign In</strong> and authenticate with your CBF account</div></li><li class="step-item"><div class="step-dot">3</div><div class="step-text">The dashboard shows your expenses, reports, trips, and approvals</div></li></ol><div class="info-box"><strong>Signing in at CBF:</strong> CBF accesses Zoho through Zoho One using single sign-on. Use your CBF account and complete two-factor authentication if prompted. Do not use a personal Zoho account for CBF work.</div></div></div></section><hr class="section-divider"><section id="record"><div class="section-tag">Record</div><h2 class="section-title">Recording expenses</h2><p class="section-lead">Add expenses manually, or let auto-scan read a receipt and fill in the details for you.</p><div class="task-block"><div class="task-header"><div class="task-num">2</div><div class="task-title">Add an expense</div></div><div class="task-body"><ol class="steps-list"><li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>Add Expense</strong></div></li><li class="step-item"><div class="step-dot">2</div><div class="step-text">Choose a <strong>category</strong> (for example, meals, fuel, travel)</div></li><li class="step-item"><div class="step-dot">3</div><div class="step-text">Upload the receipt and enter the <strong>amount</strong>, <strong>date</strong>, and notes</div></li><li class="step-item"><div class="step-dot">4</div><div class="step-text">Assign it to an existing report or create a new one</div></li></ol><div class="info-box"><strong>Auto-scan:</strong> Upload a receipt image or PDF and Auto-scan reads the merchant, amount, and date, then fills the fields for you to confirm.</div></div></div></section><hr class="section-divider"><section id="reports"><div class="section-tag">Reports</div><h2 class="section-title">Creating and submitting reports</h2><p class="section-lead">Group related expenses into a report and submit it for approval, then follow it through to reimbursement.</p><div class="task-block"><div class="task-header"><div class="task-num">3</div><div class="task-title">Submit an expense report</div></div><div class="task-body"><ol class="steps-list"><li class="step-item"><div class="step-dot">1</div><div class="step-text">Go to <strong>Reports</strong> and click <strong>Create Report</strong></div></li><li class="step-item"><div class="step-dot">2</div><div class="step-text">Add the relevant expenses and any trip information</div></li><li class="step-item"><div class="step-dot">3</div><div class="step-text">Submit to your assigned <strong>approver</strong></div></li><li class="step-item"><div class="step-dot">4</div><div class="step-text">Track the status: <strong>Submitted</strong>, <strong>Approved</strong>, <strong>Reimbursed</strong></div></li></ol></div></div></section><hr class="section-divider"><section id="trips"><div class="section-tag">Travel</div><h2 class="section-title">Trip requests and advances</h2><p class="section-lead">Plan business travel and request money up front when needed.</p><div class="task-block"><div class="task-header"><div class="task-num">4</div><div class="task-title">Request a trip or advance</div></div><div class="task-body"><ol class="steps-list"><li class="step-item"><div class="step-dot">1</div><div class="step-text">Open <strong>Trips</strong> to request travel approval in advance</div></li><li class="step-item"><div class="step-dot">2</div><div class="step-text">Include the itinerary, estimated costs, and travel class</div></li><li class="step-item"><div class="step-dot">3</div><div class="step-text">Request an <strong>advance</strong> for expected expenses where appropriate</div></li><li class="step-item"><div class="step-dot">4</div><div class="step-text">Submit for manager and finance review</div></li></ol></div></div></section><hr class="section-divider"><section id="features"><div class="section-tag">Useful Features</div><h2 class="section-title">Features worth knowing</h2><p class="section-lead">Recent Zoho Expense capabilities, including ones that suit a distributed team.</p><div class="tips-grid"><div class="tip-card"><div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><h4>Real-time card feeds</h4><p>Connected corporate cards can pull transactions the moment a payment is made, so reconciliation is faster and more accurate.</p></div><div class="tip-card"><div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 012-2h2"/><path d="M17 3h2a2 2 0 012 2v2"/><path d="M21 17v2a2 2 0 01-2 2h-2"/><path d="M7 21H5a2 2 0 01-2-2v-2"/><line x1="6" y1="12" x2="18" y2="12"/></svg></div><h4>Auto-scan receipts</h4><p>Snap or upload a receipt and let OCR capture the merchant, amount, and date automatically.</p></div><div class="tip-card"><div class="tip-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b88a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 010 20 15 15 0 010-20z"/></svg></div><h4>Multi-currency and per diem</h4><p>Record spend in different currencies with per-diem support, useful for a team and partners spread across regions.</p></div><div class="tip-card"><div class="tip-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a9997" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><h4>Policy checks</h4><p>Expenses that break a configured policy are flagged at submission, so issues are caught early.</p></div><div class="tip-card"><div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h4>Trip Expense Summary</h4><p>An analytics report that summarises the spend tied to a trip in one view.</p></div><div class="tip-card"><div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div><h4>Mobile capture</h4><p>Record expenses and scan receipts on the go from the Zoho Expense mobile app.</p></div></div></section><hr class="section-divider"><section id="support"><div class="section-tag">Need Help?</div><h2 class="section-title">Getting support</h2><p class="section-lead">For reimbursement questions, policy queries, or access issues with Zoho Expense, contact the CBF System Administrator or Finance.</p><div class="contact-card"><div><h3>Contact &amp; Resources</h3><p>Reach out to the CBF System Administrator for access, account, and configuration questions about Zoho Expense.</p></div><div class="contact-links"><a href="#" class="contact-link">System Administrator</a><a href="https://help.zoho.com/portal/en/kb/expense" target="_blank" class="contact-link">Zoho Expense Help ↗</a></div></div></section>
+</div>
+<footer class="page-footer">
+  <svg class="wave-top" viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1350,15 1440,20 L1440,40 L0,40 Z" fill="#1F4A94"/>
+  </svg>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Caribbean <span>Biodiversity</span> Fund</div>
+      <div class="footer-text">© 2026 Caribbean Biodiversity Fund. All rights reserved.</div>
+    </div>
+    <div class="footer-series">CBF Staff Training Series · <span>Zoho One</span> · Zoho Expense Guide</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoho Forms – CBF Staff Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Outfit', sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: #1F4A94; padding: 0; position: relative; overflow: hidden; }
+  .header-inner { padding: 36px 48px 0 48px; position: relative; z-index: 2; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+  .header-brand { display: flex; flex-direction: column; }
+  .header-org { color: #fff; font-size: 18px; font-weight: 800; letter-spacing: 0.01em; line-height: 1.2; }
+  .header-org span { color: #F5BD29; }
+  .header-org-sub { color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .badge-app { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .header-title { color: #fff; font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
+  .header-title span { color: #F5BD29; }
+  .header-sub { color: rgba(255,255,255,0.75); font-size: 16px; font-weight: 400; max-width: 520px; line-height: 1.6; padding-bottom: 36px; }
+  .wave-footer { width: 100%; display: block; line-height: 0; }
+  .nav-strip { background: #fff; border-bottom: 1px solid #e0e6ef; padding: 0 48px; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+  .nav-strip a { text-decoration: none; color: #555; font-size: 13px; font-weight: 500; padding: 14px 18px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+  .nav-strip a:hover { color: #1F4A94; border-bottom-color: #1F4A94; }
+  .main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section-tag { display: inline-block; background: #e8f0fb; color: #1F4A94; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+  .section-title { font-size: 26px; font-weight: 800; color: #1F4A94; margin-bottom: 6px; }
+  .section-lead { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 28px; max-width: 640px; }
+  .section-divider { border: none; border-top: 1.5px solid #e0e6ef; margin: 48px 0; }
+  .overview-card { background: #1F4A94; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; gap: 32px; align-items: flex-start; margin-bottom: 36px; }
+  .overview-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .overview-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .overview-text p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.85); }
+
+  /* FACT CARDS — fixed overflow */
+  .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .fact-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; border-left: 4px solid #1F4A94; min-width: 0; }
+  .fact-card.green { border-left-color: #418344; }
+  .fact-card.teal { border-left-color: #0EBBB9; }
+  .fact-card.gold { border-left-color: #F5BD29; }
+  .fact-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 6px; }
+  .fact-value { font-size: 14px; font-weight: 600; color: #1F4A94; line-height: 1.45; word-break: break-word; overflow-wrap: break-word; }
+  .fact-card.green .fact-value { color: #418344; }
+  .fact-card.teal .fact-value { color: #0a9997; }
+  .fact-card.gold .fact-value { color: #b88a1a; font-size: 13px; }
+  .fact-domain { display: block; font-size: 11px; font-weight: 500; color: #aaa; margin-top: 3px; word-break: break-all; }
+
+  .task-block { background: #fff; border: 1px solid #e0e6ef; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+  .task-header { background: #f0f4fb; padding: 18px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e0e6ef; }
+  .task-num { width: 32px; height: 32px; background: #1F4A94; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .task-title { font-size: 16px; font-weight: 700; color: #1a1a1a; flex: 1; }
+  .task-body { padding: 24px; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .step-item { display: flex; gap: 14px; align-items: flex-start; }
+  .step-dot { width: 24px; height: 24px; background: #e8f0fb; color: #1F4A94; font-size: 12px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; line-height: 1.6; color: #333; }
+  .step-text strong { color: #1F4A94; font-weight: 600; }
+  .step-text code { background: #f0f4fb; color: #1F4A94; font-family: monospace; font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .note-box { background: #fffbea; border: 1px solid #f5bd29; border-left: 4px solid #F5BD29; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a5c00; line-height: 1.6; }
+  .note-box strong { color: #5a4300; }
+  .alert-box { background: #fff0f0; border: 1px solid #f5a0a0; border-left: 4px solid #e03c3c; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #7a1a1a; line-height: 1.6; }
+  .alert-box strong { color: #5a0000; }
+  .success-box { background: #f0fbf0; border: 1px solid #a0d5a0; border-left: 4px solid #418344; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #1a4a1a; line-height: 1.6; }
+  .info-box { background: #e8f6f6; border: 1px solid #a0d8d7; border-left: 4px solid #0EBBB9; border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: #0a5555; line-height: 1.6; }
+  .path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+  .path-step { background: #e8f0fb; color: #1F4A94; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+  .path-arrow { color: #aaa; font-size: 14px; }
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 12px; }
+  .tip-card { background: #fff; border: 1px solid #e0e6ef; border-radius: 12px; padding: 20px; }
+  .tip-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .tip-icon.blue { background: #e8f0fb; }
+  .tip-icon.green { background: #e8f5e8; }
+  .tip-icon.gold { background: #fef7e0; }
+  .tip-icon.teal { background: #e0f7f7; }
+  .tip-card h4 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; color: #555; line-height: 1.6; }
+  .policy-block { background: #fff; border: 2px solid #e03c3c; border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; }
+  .policy-title { font-size: 18px; font-weight: 800; color: #c0000a; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .policy-rules { display: flex; flex-direction: column; gap: 10px; }
+  .policy-rule { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: #333; line-height: 1.6; }
+  .policy-rule .icon { color: #e03c3c; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .contact-card { background: #1F4A94; border-radius: 16px; padding: 32px 36px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .contact-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .contact-card p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link { background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.3); text-align: center; white-space: nowrap; }
+  .page-footer { background: #1F4A94; padding: 0; margin-top: 80px; }
+  .wave-top { width: 100%; display: block; line-height: 0; }
+  .footer-inner { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { color: #fff; font-size: 15px; font-weight: 800; }
+  .footer-brand span { color: #F5BD29; }
+  .footer-text { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 3px; }
+  .footer-series { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500; }
+  .footer-series span { color: #F5BD29; }
+  @media (max-width: 640px) {
+    .header-inner { padding: 24px 20px 0; }
+    .header-title { font-size: 28px; }
+    .main { padding: 32px 16px 60px; }
+    .nav-strip { padding: 0 16px; }
+    .overview-card { flex-direction: column; padding: 24px; }
+    .footer-inner { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="header-org">Caribbean <span>Biodiversity</span> Fund</div>
+        <div class="header-org-sub">Staff Training Series</div>
+      </div>
+      <span class="badge-app">Zoho One</span>
+    </div>
+    <div class="header-title">Zoho <span>Forms</span> at CBF</div>
+    <div class="header-sub">Build, share, and analyse online forms for surveys, feedback, registrations, and internal approvals — all within Zoho One.</div>
+  </div>
+  <svg class="wave-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,65 480,15 720,40 C960,65 1200,15 1440,40 L1440,60 L0,60 Z" fill="#f5f7fa"/>
+  </svg>
+</div>
+<nav class="nav-strip"><a href="#overview">Overview</a><a href="#access">Access</a><a href="#create">Create</a><a href="#logic">Logic</a><a href="#share">Share</a><a href="#responses">Responses</a><a href="#features">Useful Features</a><a href="#support">Support</a></nav>
+<div class="main">
+<section id="overview"><div class="section-tag">Overview</div><h2 class="section-title">What is Zoho Forms?</h2><p class="section-lead">Zoho Forms is CBF’s cloud-based form builder, part of Zoho One. It lets you create online forms to collect information, then route, store, and analyse the responses without spreadsheets or manual chasing.</p><div class="overview-card"><div class="overview-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div><div class="overview-text"><h3>How CBF uses it</h3><p>At CBF, Zoho Forms is used for surveys, feedback collection, event and training registrations, and internal approval requests. You build a form once, share a link, and responses flow into one place where they can be filtered, exported, and acted on.</p></div></div><div class="facts-grid"><div class="fact-card"><div class="fact-label">Platform</div><div class="fact-value">Zoho One (Forms)</div></div><div class="fact-card green"><div class="fact-label">Access</div><div class="fact-value">forms.zoho.com · browser and mobile app</div></div><div class="fact-card teal"><div class="fact-label">Builder</div><div class="fact-value">Drag and drop, 30+ field types</div></div><div class="fact-card gold"><div class="fact-label">Outputs</div><div class="fact-value">Responses, reports, CSV / PDF / Zoho Sheet</div></div></div></section><hr class="section-divider"><section id="access"><div class="section-tag">Getting Started</div><h2 class="section-title">Accessing Zoho Forms</h2><p class="section-lead">Open Zoho Forms in any browser. The dashboard shows the forms you own or collaborate on, along with ready-made templates.</p><div class="task-block"><div class="task-header"><div class="task-num">1</div><div class="task-title">Sign in to Zoho Forms</div></div><div class="task-body"><ol class="steps-list"><li class="step-item"><div class="step-dot">1</div><div class="step-text">Go to <strong>forms.zoho.com</strong></div></li><li class="step-item"><div class="step-dot">2</div><div class="step-text">Click <strong>Sign In</strong> and authenticate with your CBF account</div></li><li class="step-item"><div class="step-dot">3</div><div class="step-text">The dashboard opens, showing your existing forms and template gallery</div></li></ol><div class="info-box"><strong>Signing in at CBF:</strong> CBF accesses Zoho through Zoho One using single sign-on. Use your CBF account and complete two-factor authentication if prompted. Do not use a personal Zoho account for CBF work.</div></div></div></section><hr class="section-divider"><section id="create"><div class="section-tag">Build</div><h2 class="section-title">Creating a new form</h2><p class="section-lead">Start from a blank form, a template, or by importing an existing form, then build it visually by dragging fields onto the canvas.</p><div class="task-block"><div class="task-header"><div class="task-num">2</div><div class="task-title">Create and structure a form</div></div><div class="task-body"><ol class="steps-list"><li class="step-item"><div class="step-dot">1</div><div class="step-text">From the dashboard, click <strong>Create Form</strong></div></li><li class="step-item"><div class="step-dot">2</div><div class="step-text">Choose <strong>Blank Form</strong>, a <strong>Template</strong>, or <strong>Import</strong></div></li><li class="step-item"><div class="step-dot">3</div><div class="step-text">Enter a clear <strong>name</strong> and <strong>description</strong></div></li><li class="step-item"><div class="step-dot">4</div><div class="step-text">Drag fields from the left panel onto the canvas in the order you want them</div></li></ol><div class="note-box"><strong>Field tips:</strong> Use Single Line, Dropdown, Email, and Phone for everyday data. Use File Upload, Image, or Signature for richer inputs, and Formula fields to calculate values automatically.</div></div></div></section><hr class="section-divider"><section id="logic"><div class="section-tag">Logic</div><h2 class="section-title">Adding fields and rules</h2><p class="section-lead">Fields can be configured individually, and rules let the form respond to what people enter so respondents only see what is relevant to them.</p><div class="task-block"><div class="task-header"><div class="task-num">3</div><div class="task-title">Configure fields and logic</div></div><div class="task-body"><ol class="steps-list"><li class="step-item"><div class="step-dot">1</div><div class="step-text">Click any field to set its <strong>label</strong>, placeholder, default value, and validation</div></li><li class="step-item"><div class="step-dot">2</div><div class="step-text">Use <strong>Field Rules</strong> to show or hide fields based on earlier answers</div></li><li class="step-item"><div class="step-dot">3</div><div class="step-text">Use <strong>Form Rules</strong> to trigger emails, tasks, or redirects after submission</div></li><li class="step-item"><div class="step-dot">4</div><div class="step-text">Use <strong>Page Rules</strong> on multi-page forms to branch based on responses</div></li></ol></div></div></section><hr class="section-divider"><section id="share"><div class="section-tag">Share</div><h2 class="section-title">Sharing, embedding, and collaboration</h2><p class="section-lead">Publish a form for respondents, control who can access it, and bring colleagues in to build or manage it with you.</p><div class="task-block"><div class="task-header"><div class="task-num">4</div><div class="task-title">Share your form</div></div><div class="task-body"><ol class="steps-list"><li class="step-item"><div class="step-dot">1</div><div class="step-text">Click <strong>Share</strong> and choose a <strong>Public URL</strong> (customisable), <strong>QR Code</strong>, or tracked <strong>Email Invitation</strong></div></li><li class="step-item"><div class="step-dot">2</div><div class="step-text">Under <strong>Embed</strong>, get an iframe, JavaScript, or pop-up snippet for a web page</div></li><li class="step-item"><div class="step-dot">3</div><div class="step-text">Set access to <strong>Public</strong>, <strong>Login-based</strong> (Zoho users only), or <strong>Domain-restricted</strong></div></li></ol><div class="success-box"><strong>Collaborate:</strong> Click <strong>Collaborate</strong> in the top-right of the builder, add colleagues by email, and assign View, Edit, or Admin access so they can help manage the form and its responses.</div></div></div></section><hr class="section-divider"><section id="responses"><div class="section-tag">Responses</div><h2 class="section-title">Managing responses and reports</h2><p class="section-lead">Every submission lands in one place where it can be reviewed, filtered, exported, and turned into visual reports.</p><div class="task-block"><div class="task-header"><div class="task-num">5</div><div class="task-title">Work with submitted data</div></div><div class="task-body"><ol class="steps-list"><li class="step-item"><div class="step-dot">1</div><div class="step-text">Open the <strong>All Entries</strong> tab to view submissions</div></li><li class="step-item"><div class="step-dot">2</div><div class="step-text">Filter and sort by field values or date</div></li><li class="step-item"><div class="step-dot">3</div><div class="step-text">Export to <strong>CSV</strong>, <strong>PDF</strong>, or <strong>Zoho Sheet</strong></div></li><li class="step-item"><div class="step-dot">4</div><div class="step-text">Open <strong>Reports</strong> for visual summaries, then save custom report views</div></li></ol></div></div></section><hr class="section-divider"><section id="features"><div class="section-tag">Useful Features</div><h2 class="section-title">Features worth knowing</h2><p class="section-lead">Recent additions to Zoho Forms that are useful for CBF’s surveys, approvals, and feedback workflows.</p><div class="tips-grid"><div class="tip-card"><div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div><h4>In-form signatures</h4><p>A built-in Zoho Sign field lets respondents add a legally binding signature inside the form, useful for approvals and acknowledgements.</p></div><div class="tip-card"><div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 012-2h2"/><path d="M17 3h2a2 2 0 012 2v2"/><path d="M21 17v2a2 2 0 01-2 2h-2"/><path d="M7 21H5a2 2 0 01-2-2v-2"/><line x1="6" y1="12" x2="18" y2="12"/></svg></div><h4>Smart Scan (OCR)</h4><p>The Smart Scan field extracts and auto-fills data from an uploaded image, so people can capture details from a document instead of typing them.</p></div><div class="tip-card"><div class="tip-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b88a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h4>Barcode and QR input</h4><p>Scanner Input reads barcodes and QR codes directly in the browser and fills the field automatically.</p></div><div class="tip-card"><div class="tip-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a9997" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><h4>Spotlight Forms</h4><p>A focused, one-field-at-a-time layout that guides respondents smoothly through longer forms.</p></div><div class="tip-card"><div class="tip-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4A94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a4 4 0 100-8 4 4 0 000 8z"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="18" cy="8" r="2"/></svg></div><h4>Auto-prefill for staff</h4><p>Signed-in CBF users can have their name and email filled in automatically, saving time on internal forms.</p></div><div class="tip-card"><div class="tip-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#418344" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><h4>Approval workflows</h4><p>Build multi-level approvals for things like leave or expense sign-offs, with conditions and real-time status tracking, no separate tool needed.</p></div></div></section><hr class="section-divider"><section id="support"><div class="section-tag">Need Help?</div><h2 class="section-title">Getting support</h2><p class="section-lead">For access, account, or configuration questions about Zoho Forms, contact the CBF System Administrator.</p><div class="contact-card"><div><h3>Contact &amp; Resources</h3><p>Reach out to the CBF System Administrator for access, account, and configuration questions about Zoho Forms.</p></div><div class="contact-links"><a href="#" class="contact-link">System Administrator</a><a href="https://help.zoho.com/portal/en/kb/forms" target="_blank" class="contact-link">Zoho Forms Help ↗</a></div></div></section>
+</div>
+<footer class="page-footer">
+  <svg class="wave-top" viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1350,15 1440,20 L1440,40 L0,40 Z" fill="#1F4A94"/>
+  </svg>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Caribbean <span>Biodiversity</span> Fund</div>
+      <div class="footer-text">© 2026 Caribbean Biodiversity Fund. All rights reserved.</div>
+    </div>
+    <div class="footer-series">CBF Staff Training Series · <span>Zoho One</span> · Zoho Forms Guide</div>
+  </div>
+</footer>
+</body>
+</html>
